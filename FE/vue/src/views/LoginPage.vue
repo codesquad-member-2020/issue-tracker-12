@@ -1,7 +1,5 @@
 <template>
-  <div id="app">
-    <router-view></router-view>
-  </div>
+  <div>로그인 페이지</div>
 </template>
 
 <script>

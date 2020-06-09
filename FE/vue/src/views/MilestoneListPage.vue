@@ -1,7 +1,5 @@
 <template>
-  <div id="app">
-    <router-view></router-view>
-  </div>
+  <div>마일스톤 목록 페이지</div>
 </template>
 
 <script>

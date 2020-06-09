@@ -1,7 +1,5 @@
 <template>
-  <div id="app">
-    <router-view></router-view>
-  </div>
+  <div>이슈 생성 페이지</div>
 </template>
 
 <script>
