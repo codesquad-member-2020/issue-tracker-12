@@ -1,9 +1,9 @@
 ---
-name: "FE Huey 피쳐 개발 이슈 템플릿"
+name: FE Huey 피쳐 개발 이슈 템플릿
 about: FE Huey 피쳐 개발 이슈 템플릿
-title: '[FE] Title'
-labels: 'FE'
-assignees: 'Hu2y'
+title: "[Vue] Title"
+labels: Vue
+assignees: Hu2y
 
 ---
 
