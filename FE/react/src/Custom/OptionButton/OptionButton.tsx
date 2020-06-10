@@ -1,20 +1,15 @@
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core';
-import { useRef, useState, ReactNode } from 'react';
+import { useRef, useState } from 'react';
 import useFocusOut from '@Util/customHooks/useFocusOut';
 import Icon from '@Icon/Icon';
 import Flex from '@Custom/Flex/Flex';
-import Button, { ButtonFontSize, ButtonTheme } from '@Custom/Button/Button';
 
-type FilterButtonProp = {
+type OptionButtonProp = {
   /** 필터할 대상(카테고리)를 적어줍니다 */
   category: string;
-  /** 필터링 버튼의 테마를 정합니다 */
-  theme: ButtonTheme;
-  /** 필터링 버튼의 글자 크기를 정합니다 */
-  fontSize: ButtonFontSize;
   /** 필터링 버튼의 가로 크기를 정합니다 */
-  width?: string;
+  width?: number | string;
   /** 선택창의 주제를 정할 수 있습니다 */
   subject: string;
   /** 선택창의 필터링 기준을 나열할 수 있습니다 */
@@ -24,23 +19,21 @@ type FilterButtonProp = {
 };
 
 /**
- * 프로젝트 내에서 필터링 버튼 컴포넌트를 활용해야할 때, FilterButton 컴포넌트를 사용하세요.
+ * 프로젝트 내에서 필터링 버튼 컴포넌트를 활용해야할 때, OptionButton 컴포넌트를 사용하세요.
  *
  * - 내부적으로 Button 컴포넌트를 활용합니다. theme와 fontSize를 통해 Button의 테마와 글자 크기를 설정합니다.
  */
 
-const FilterButton = ({ category, theme, fontSize, subject, filters, width, contentsBoxSize }: FilterButtonProp) => {
+const OptionButton = ({ category, subject, filters, width, contentsBoxSize }: OptionButtonProp) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [focus, setFocus] = useState(false);
   useFocusOut(wrapperRef, setFocus);
   return (
     <div css={[styled, { width }]}>
-      <Button theme={theme} fontSize={fontSize} onClick={() => setFocus(true)} noPadding={true}>
-        <Flex alignItemCenter={true}>
-          <p css={bold}>{category}</p>
-          <Icon icon="arrow" size={'15px'} />
-        </Flex>
-      </Button>
+      <Flex alignItemCenter={true} width={'100%'} align="spaceBetween">
+        <p css={bold}>{category}</p>
+        <Icon icon="option" size={'15px'} onClick={() => setFocus(true)} />
+      </Flex>
       {focus && (
         <div css={[contentsStyle, { width: contentsBoxSize }]} ref={wrapperRef}>
           <div css={subjectStyle}>{subject}</div>
@@ -57,13 +50,14 @@ const FilterButton = ({ category, theme, fontSize, subject, filters, width, cont
   );
 };
 
-FilterButton.defaultProps = {
+OptionButton.defaultProps = {
   theme: 'nocolor',
   fontSize: 'medium'
 };
 
 const styled = css`
   position: relative;
+  width: 100%;
 `;
 
 const bold = css`
@@ -72,11 +66,12 @@ const bold = css`
 `;
 
 const contentsStyle = css`
-  width: 400px;
+  width: 200px;
   background-color: #ffffff;
   border: 1px solid #eeeeee;
   position: absolute;
   top: calc(100% + 10px);
+  right: 0;
   box-shadow: 0px 0px 10px rgba(173, 173, 173, 0.3);
 `;
 
@@ -95,4 +90,4 @@ const borderTopWithChild = css({
   }
 });
 
-export default FilterButton;
+export default OptionButton;

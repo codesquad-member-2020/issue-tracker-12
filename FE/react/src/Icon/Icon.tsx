@@ -10,11 +10,18 @@ export type IconProps = {
   color?: string;
   size?: string | number;
   className?: string;
+  onClick?: () => void;
 };
 
-const Icon = ({ icon, color, size, className }: IconProps) => {
+const Icon = ({ icon, color, size, className, onClick }: IconProps) => {
   const SVGIcon = icons[icon];
-  return <SVGIcon css={{ fill: color || 'currentColor', width: size, height: 'auto' }} className={className} />;
+  return (
+    <SVGIcon
+      css={{ fill: color || 'currentColor', width: size, height: 'auto' }}
+      className={className}
+      onClick={onClick}
+    />
+  );
 };
 
 export default Icon;

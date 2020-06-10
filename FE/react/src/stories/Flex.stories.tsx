@@ -13,7 +13,7 @@ export default {
   }
 };
 
-export const flex = () => {
+export const example = () => {
   return (
     <Flex gap={10}>
       <div>1</div>

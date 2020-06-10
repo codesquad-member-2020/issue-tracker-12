@@ -1,14 +1,13 @@
 import React from 'react';
-import FilterButton from '@Custom/FilterButton/FilterButton';
-import { withKnobs, text, boolean, select } from '@storybook/addon-knobs';
-import { action } from '@storybook/addon-actions';
+import OptionButton from '@Custom/OptionButton/OptionButton';
+import { withKnobs, text, select } from '@storybook/addon-knobs';
 
 export default {
-  title: 'components|FilterButton',
-  component: FilterButton,
+  title: 'components|OptionButton',
+  component: OptionButton,
   decorators: [withKnobs],
   parameters: {
-    componentSubtitle: 'Issue Tracker에서 사용할 필터링 버튼 컴포넌트'
+    componentSubtitle: 'Issue Tracker에서 사용할 옵션 버튼 컴포넌트'
   }
 };
 
@@ -22,15 +21,19 @@ const exampleFilters = [
 
 export const example = () => {
   return (
-    <FilterButton
-      category="Author"
-      subject="Filter Issues"
-      filters={exampleFilters}
-      contentsBoxSize={'100%'}></FilterButton>
+    <div style={{ width: '500px' }}>
+      <OptionButton
+        contentsBoxSize={'100%'}
+        category="Author"
+        subject="Filter Issues"
+        width={'100%'}
+        filters={exampleFilters}
+      />
+    </div>
   );
 };
 
-export const filterButton = () => {
+export const optionButton = () => {
   const category = text('category', 'Author');
   const contentsBoxSize = text('width', '100%');
   const fontSize = select('fontSize', ['small', 'medium', 'big'], 'medium');
@@ -39,17 +42,18 @@ export const filterButton = () => {
   const width = text('width', '100%');
 
   return (
-    <FilterButton
+    <OptionButton
       category={category}
       contentsBoxSize={contentsBoxSize}
       subject={subject}
       fontSize={fontSize}
       theme={theme}
       width={width}
-      filters={exampleFilters}></FilterButton>
+      filters={exampleFilters}
+    />
   );
 };
 
-filterButton.story = {
+optionButton.story = {
   name: 'Default'
 };

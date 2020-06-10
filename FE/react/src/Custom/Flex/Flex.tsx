@@ -78,7 +78,7 @@ const getAlignStyleName = (align: Align) => {
       return 'flex-end';
     case 'left':
       return 'flex-start';
-    case 'spaceBetween':
+    case 'spaceAround':
       return 'space-around';
     default:
       return 'space-between';
