@@ -35,7 +35,6 @@ public class Milestone {
     @ColumnDefault("true")
     private boolean status;
 
-    @NotNull
     @CreationTimestamp
     private LocalDate dueDate;
 
