@@ -22,7 +22,7 @@ import lombok.ToString;
 
 @Entity
 @Getter
-@ToString(exclude = {"users", "user"})
+@ToString(exclude = {"users", "user", "milestone"})
 @NoArgsConstructor
 public class Issue {
 
@@ -56,4 +56,9 @@ public class Issue {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
+
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "milestone_id")
+    private Milestone milestone;
 }
