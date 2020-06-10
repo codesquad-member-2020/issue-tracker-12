@@ -60,7 +60,7 @@ export const withIconDisabled = () => {
 export const button = () => {
   const label = text('children', 'BUTTON');
   const fontSize = select('fontSize', ['small', 'medium', 'big'], 'medium');
-  const theme = select('theme', ['primary', 'secondary', 'nooutline'], 'primary');
+  const theme = select('theme', ['primary', 'secondary', 'nooutline', 'nocolor', 'subtle'], 'primary');
   const disabled = boolean('disabled', false);
   const width = text('width', '100%');
   const noPadding = boolean('noPadding', false);

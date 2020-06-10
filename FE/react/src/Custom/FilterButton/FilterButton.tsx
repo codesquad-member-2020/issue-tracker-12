@@ -29,8 +29,8 @@ const FilterButton = ({ category, theme, fontSize, subject, filters }: FilterBut
     <div css={styled}>
       <Button theme={theme} fontSize={fontSize} onClick={() => setFocus(true)} noPadding={true}>
         <Flex alignItemCenter={true}>
-          <p>{category}</p>
-          <Icon icon="arrow" size={'20px'} />
+          <p css={bold}>{category}</p>
+          <Icon icon="arrow" size={'15px'} />
         </Flex>
       </Button>
       {focus && (
@@ -56,6 +56,11 @@ FilterButton.defaultProps = {
 
 const styled = css`
   position: relative;
+`;
+
+const bold = css`
+  font-weight: 900;
+  margin-right: 0.3rem;
 `;
 
 const contentsStyle = css`

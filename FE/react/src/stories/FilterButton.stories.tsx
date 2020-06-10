@@ -20,6 +20,28 @@ const exampleFilters = [
   'Closed Issues'
 ];
 
-export const filterButton = () => {
+export const example = () => {
   return <FilterButton category="Author" subject="Filter Issues" filters={exampleFilters}></FilterButton>;
+};
+
+export const filterButton = () => {
+  const category = text('category', 'Author');
+  const fontSize = select('fontSize', ['small', 'medium', 'big'], 'medium');
+  const subject = text('subject', 'Filter Issues');
+  const theme = select('theme', ['primary', 'secondary', 'nooutline', 'nocolor', 'subtle'], 'primary');
+  const width = text('width', '100%');
+
+  return (
+    <FilterButton
+      category={category}
+      subject={subject}
+      fontSize={fontSize}
+      theme={theme}
+      width={width}
+      filters={exampleFilters}></FilterButton>
+  );
+};
+
+filterButton.story = {
+  name: 'Default'
 };
