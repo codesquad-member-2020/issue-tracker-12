@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
-import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -22,6 +21,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -47,7 +47,6 @@ public class Issue {
     @ColumnDefault("true")
     private boolean status;
 
-    @NotNull
     @CreationTimestamp
     private LocalDate create_time;
 
@@ -74,4 +73,20 @@ public class Issue {
     @ElementCollection
     @CollectionTable(name = "label", joinColumns = @JoinColumn(name = "issue_id"))
     private List<Label> labels = new ArrayList<>();
+
+    @Builder
+    protected Issue(String title, String content, boolean status, LocalDate create_time) {
+        this.title = title;
+        this.content = content;
+        this.status = status;
+        this.create_time = create_time;
+    }
+
+    public static Issue of(String title, String content) {
+        return Issue.builder()
+            .title(title)
+            .content(content)
+            .status(true)
+            .build();
+    }
 }
