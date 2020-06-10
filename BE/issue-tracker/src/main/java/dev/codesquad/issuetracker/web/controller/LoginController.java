@@ -1,4 +1,4 @@
-package dev.codesquad.issuetracker.controller;
+package dev.codesquad.issuetracker.web.controller;
 
 import dev.codesquad.issuetracker.common.jwt.JwtService;
 import dev.codesquad.issuetracker.common.oauth.Github;
@@ -49,10 +49,5 @@ public class LoginController {
         response.addCookie(githubImage);
         response.setHeader(HEADER_LOCATION, WEB_REDIRECT_URL);
         return new ResponseEntity(HttpStatus.FOUND);
-    }
-
-    @GetMapping("/")
-    public ResponseEntity main() {
-        return ResponseEntity.ok("");
     }
 }
