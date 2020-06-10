@@ -14,6 +14,7 @@ import javax.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 @Getter
@@ -29,6 +30,7 @@ public class Comment {
     private String content;
 
     @NotNull
+    @CreationTimestamp
     private LocalDate create_time;
 
     @JsonIgnore

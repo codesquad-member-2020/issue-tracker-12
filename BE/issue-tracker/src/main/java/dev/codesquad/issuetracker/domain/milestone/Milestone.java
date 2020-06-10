@@ -13,6 +13,8 @@ import javax.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 @Getter
@@ -30,10 +32,11 @@ public class Milestone {
     @NotNull
     private String description;
 
-    @NotNull
+    @ColumnDefault("true")
     private boolean status;
 
     @NotNull
+    @CreationTimestamp
     private LocalDate dueDate;
 
     @OneToMany(mappedBy = "milestone")
