@@ -1,8 +1,8 @@
-package dev.codesquad.issuetracker.domain;
+package dev.codesquad.issuetracker.domain.issue;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import dev.codesquad.issuetracker.domain.user.User;
 import java.time.LocalDate;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;

@@ -1,10 +1,15 @@
-package dev.codesquad.issuetracker.domain;
+package dev.codesquad.issuetracker.domain.issue;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import dev.codesquad.issuetracker.domain.vo.Label;
+import dev.codesquad.issuetracker.domain.milestone.Milestone;
+import dev.codesquad.issuetracker.domain.user.User;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
+import javax.persistence.CollectionTable;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -61,4 +66,8 @@ public class Issue {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "milestone_id")
     private Milestone milestone;
+
+    @ElementCollection
+    @CollectionTable(name = "label", joinColumns = @JoinColumn(name = "issue_id"))
+    private List<Label> labels = new ArrayList<>();
 }
