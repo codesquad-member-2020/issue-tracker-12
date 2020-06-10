@@ -16,7 +16,7 @@ public class IssueService {
 
     @Transactional(readOnly = true)
     public List<IssueListResponse> viewAll() {
-        return issueRepository.findAll().stream()
+        return issueRepository.findAllWithUserLabel().stream()
             .map(issue -> IssueListResponse.of(issue))
             .collect(Collectors.toList());
     }
