@@ -2,19 +2,25 @@
 import { jsx, css } from '@emotion/core';
 import { ReactNode } from 'react';
 
+export type ButtonTheme = 'primary' | 'secondary' | 'nooutline' | 'subtle' | 'nocolor';
+
+export type ButtonFontSize = 'small' | 'medium' | 'big';
+
 export type ButtonProps = {
   /** 렌더링할 대상 */
   children: ReactNode;
   /** 버튼의 전체적인 테마를 정한다 */
-  theme: 'primary' | 'secondary' | 'nooutline' | 'subtle' | 'nocolor';
+  theme: ButtonTheme;
   /** 글자 크기를 조절한다 */
-  fontSize: 'small' | 'medium' | 'big';
+  fontSize: ButtonFontSize;
   /** 넓이를 조절할 수 있다 */
   width: string | number;
   /** 클릭할 수 없게 만든다 */
   disabled?: boolean;
   /** 클릭용 콜백함수를 등록한다 */
   onClick?: () => void;
+  /** 기본적으로 주어진 패딩을 없앤다 */
+  noPadding?: boolean;
 };
 
 /**
@@ -24,9 +30,12 @@ export type ButtonProps = {
  * - disabled prop에 true를 넘겨주면, Button 컴포넌트는 **비활성화**됩니다.
  */
 
-const Button = ({ children, theme, fontSize, width, disabled, onClick }: ButtonProps) => {
+const Button = ({ children, theme, fontSize, width, disabled, onClick, noPadding }: ButtonProps) => {
   return (
-    <button css={[style, themes[theme], fontSizes[fontSize], { width }]} disabled={disabled} onClick={onClick}>
+    <button
+      css={[style, themes[theme], fontSizes[fontSize], { width }, handleNoPadding(noPadding)]}
+      disabled={disabled}
+      onClick={onClick}>
       {children}
     </button>
   );
@@ -50,6 +59,15 @@ const style = css`
     opacity: 0.4;
   }
 `;
+
+const handleNoPadding = (noPadding: boolean | undefined) => {
+  if (noPadding) {
+    return css`
+      padding: 0;
+    `;
+  }
+  return css``;
+};
 
 const themes = {
   primary: css`
@@ -76,7 +94,6 @@ const themes = {
     background: none;
     color: #484848;
     justify-content: flex-start;
-    text-decoration: underline;
     &:hover:enabled {
       color: #7b7b7b;
     }
@@ -113,7 +130,8 @@ Button.defaultProps = {
   theme: 'primary',
   fontSize: 'medium',
   width: '100%',
-  disabled: false
+  disabled: false,
+  noPadding: false
 };
 
 export default Button;

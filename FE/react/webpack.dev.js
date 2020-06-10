@@ -38,7 +38,8 @@ module.exports = {
     alias: {
       '@': path.resolve(__dirname, 'src/'),
       '@Custom': path.resolve(__dirname, 'src/Custom/'),
-      '@Icon': path.resolve(__dirname, 'src/Icon/')
+      '@Icon': path.resolve(__dirname, 'src/Icon/'),
+      '@Util': path.resolve(__dirname, 'src/util/')
     }
   },
 

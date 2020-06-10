@@ -20,7 +20,8 @@
     "paths": {
       "@/*": ["src/*"],
       "@Custom/*": ["src/Custom/*"],
-      "@Icon/*": ["src/Icon/*"]
+      "@Icon/*": ["src/Icon/*"],
+      "@Util/*": ["src/util/*"]
     }
   },
   "exclude": ["node_modules", "dist", "public"]

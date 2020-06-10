@@ -63,9 +63,10 @@ export const button = () => {
   const theme = select('theme', ['primary', 'secondary', 'nooutline'], 'primary');
   const disabled = boolean('disabled', false);
   const width = text('width', '100%');
+  const noPadding = boolean('noPadding', false);
 
   return (
-    <Button fontSize={fontSize} theme={theme} disabled={disabled} width={width}>
+    <Button fontSize={fontSize} theme={theme} disabled={disabled} width={width} noPadding={noPadding}>
       {label}
     </Button>
   );
