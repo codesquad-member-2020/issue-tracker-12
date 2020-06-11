@@ -1,5 +1,5 @@
 <template>
-  <div>레이블 목록 페이지</div>
+  <fragment> </fragment>
 </template>
 
 <script>
