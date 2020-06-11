@@ -41,7 +41,6 @@ const Flex = ({ children, direction, wrap, align, gap, width, alignItemCenter, c
     wrapStyle(wrap),
     { width }
   ];
-  console.log('customcss', customCSS);
   customCSS && cssArray.push(customCSS);
   return <div css={cssArray}>{children}</div>;
 };

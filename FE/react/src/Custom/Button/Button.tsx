@@ -94,6 +94,7 @@ const themes = {
     background: none;
     color: #484848;
     justify-content: flex-start;
+    appearance: none;
     &:hover:enabled {
       color: #7b7b7b;
     }
