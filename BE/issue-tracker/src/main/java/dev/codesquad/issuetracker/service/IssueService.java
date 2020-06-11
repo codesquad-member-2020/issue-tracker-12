@@ -1,6 +1,6 @@
 package dev.codesquad.issuetracker.service;
 
-import dev.codesquad.issuetracker.domain.vo.Label;
+import dev.codesquad.issuetracker.domain.label.Label;
 import dev.codesquad.issuetracker.repository.IssueRepository;
 import dev.codesquad.issuetracker.repository.LabelRepository;
 import dev.codesquad.issuetracker.repository.UserRepository;

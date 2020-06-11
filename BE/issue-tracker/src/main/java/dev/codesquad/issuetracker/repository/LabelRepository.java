@@ -1,6 +1,6 @@
 package dev.codesquad.issuetracker.repository;
 
-import dev.codesquad.issuetracker.domain.vo.Label;
+import dev.codesquad.issuetracker.domain.label.Label;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

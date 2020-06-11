@@ -1,4 +1,4 @@
-package dev.codesquad.issuetracker.domain.vo;
+package dev.codesquad.issuetracker.domain.label;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import dev.codesquad.issuetracker.domain.issue.Issue;

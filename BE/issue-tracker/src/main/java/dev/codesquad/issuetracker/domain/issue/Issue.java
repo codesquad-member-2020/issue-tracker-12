@@ -1,7 +1,7 @@
 package dev.codesquad.issuetracker.domain.issue;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import dev.codesquad.issuetracker.domain.vo.Label;
+import dev.codesquad.issuetracker.domain.label.Label;
 import dev.codesquad.issuetracker.domain.milestone.Milestone;
 import dev.codesquad.issuetracker.domain.user.User;
 import java.time.LocalDate;
