@@ -2,22 +2,23 @@ package dev.codesquad.issuetracker.web.dto;
 
 import dev.codesquad.issuetracker.domain.issue.Issue;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.Builder;
 import lombok.Data;
 
 @Data
-public class IssueListResponse {
+public class IssueResponse {
 
     private Long issueId;
     private String title;
     private String githubId;
     private LocalDate createTime;
-    private List<LabelDto> labels;
+    private List<LabelDto> labels = new ArrayList<>();
 
     @Builder
-    public IssueListResponse(Long issueId, String title, String githubId,
+    protected IssueResponse(Long issueId, String title, String githubId,
         LocalDate createTime, List<LabelDto> labels) {
         this.issueId = issueId;
         this.title = title;
@@ -26,8 +27,8 @@ public class IssueListResponse {
         this.labels = labels;
     }
 
-    public static IssueListResponse of(Issue issue) {
-        return IssueListResponse.builder()
+    public static IssueResponse of(Issue issue) {
+        return IssueResponse.builder()
             .issueId(issue.getId())
             .title(issue.getTitle())
             .githubId(issue.getUser().getGithubId())
