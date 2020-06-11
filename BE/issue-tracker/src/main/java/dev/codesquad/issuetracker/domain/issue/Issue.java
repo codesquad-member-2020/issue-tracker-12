@@ -1,6 +1,7 @@
 package dev.codesquad.issuetracker.domain.issue;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import dev.codesquad.issuetracker.domain.Status;
 import dev.codesquad.issuetracker.domain.label.Label;
 import dev.codesquad.issuetracker.domain.milestone.Milestone;
 import dev.codesquad.issuetracker.domain.user.User;
@@ -9,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -42,8 +45,8 @@ public class Issue {
     @NotNull
     private String content;
 
-    @ColumnDefault("true")
-    private boolean status;
+    @Enumerated(EnumType.STRING)
+    private Status status;
 
     @CreationTimestamp
     private LocalDate create_time;
@@ -75,7 +78,7 @@ public class Issue {
     private List<Label> labels = new ArrayList<>();
 
     @Builder
-    protected Issue(String title, String content, boolean status, LocalDate create_time) {
+    protected Issue(String title, String content, Status status, LocalDate create_time) {
         this.title = title;
         this.content = content;
         this.status = status;
@@ -86,7 +89,7 @@ public class Issue {
         return Issue.builder()
             .title(title)
             .content(content)
-            .status(true)
+            .status(Status.OPEN)
             .build();
     }
 }
