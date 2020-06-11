@@ -33,6 +33,11 @@ public class IssueService {
             .collect(Collectors.toList());
     }
 
+    /**
+     *
+     * 쿼리 최적화 필요
+     * 메서드 분리 리팩토링 필요
+     */
     @Transactional(readOnly = true)
     public ResultResponse viewAll() {
         List<UserResponse> userResponses = userRepository.findAll().stream()
