@@ -22,9 +22,17 @@ VALUES ('comment content 1', '2020-06-10', 1, 1),
        ('comment content 1', '2020-06-10', 2, 1),
        ('comment content 1', '2020-06-10', 3, 1);
 
-INSERT INTO label (name, description, color_code, issue_id)
-VALUES ('label BE', 'dev BE', 'red 1', '1'),
-       ('label FE', 'dev FE', 'red 2', '1'),
-       ('label OS', 'dev OS', 'red 3', '2'),
-       ('label KM', 'dev KM', 'red 4', '2'),
-       ('label GG', 'dev GG', 'red 5', '3');
+INSERT INTO label (name, description, color_code)
+VALUES ('label BE', 'dev BE', 'red 1'),
+       ('label FE', 'dev FE', 'red 2'),
+       ('label OS', 'dev OS', 'red 3'),
+       ('label KM', 'dev KM', 'red 4'),
+       ('label GG', 'dev GG', 'red 5');
+
+INSERT INTO issue_has_label (issue_id, label_id)
+VALUES (1, 1),
+       (1, 2),
+       (1, 3),
+       (2, 1),
+       (2, 4),
+       (3, 5);
