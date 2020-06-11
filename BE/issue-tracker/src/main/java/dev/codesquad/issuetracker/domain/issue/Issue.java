@@ -1,17 +1,17 @@
 package dev.codesquad.issuetracker.domain.issue;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import dev.codesquad.issuetracker.domain.vo.Label;
+import dev.codesquad.issuetracker.domain.Status;
+import dev.codesquad.issuetracker.domain.label.Label;
 import dev.codesquad.issuetracker.domain.milestone.Milestone;
 import dev.codesquad.issuetracker.domain.user.User;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
-import javax.persistence.CollectionTable;
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,6 +22,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -44,10 +45,9 @@ public class Issue {
     @NotNull
     private String content;
 
-    @ColumnDefault("true")
-    private boolean status;
+    @Enumerated(EnumType.STRING)
+    private Status status;
 
-    @NotNull
     @CreationTimestamp
     private LocalDate create_time;
 
@@ -71,7 +71,25 @@ public class Issue {
     @JoinColumn(name = "milestone_id")
     private Milestone milestone;
 
-    @ElementCollection
-    @CollectionTable(name = "label", joinColumns = @JoinColumn(name = "issue_id"))
+    @ManyToMany
+    @JoinTable(name = "issue_has_label",
+        joinColumns = @JoinColumn(name = "issue_id"),
+        inverseJoinColumns = @JoinColumn(name = "label_id"))
     private List<Label> labels = new ArrayList<>();
+
+    @Builder
+    protected Issue(String title, String content, Status status, LocalDate create_time) {
+        this.title = title;
+        this.content = content;
+        this.status = status;
+        this.create_time = create_time;
+    }
+
+    public static Issue of(String title, String content) {
+        return Issue.builder()
+            .title(title)
+            .content(content)
+            .status(Status.OPEN)
+            .build();
+    }
 }

@@ -39,7 +39,7 @@
 ```
 
  - 이슈 단위로 개발한다.
- - 작업을 완료되면, 작업하던 브랜치에서 개발 브랜치(dev)로 Pull Request를 생성한다. jack은 로컬에서 merge.
+ - 작업을 완료되면, 작업하던 브랜치에서 개발 브랜치(dev)로 Pull Request를 생성한다.
  - 머지를 완료했으면 기능(feature)브랜치는 github과 local git에 모두 삭제한다. 
  - dev에서 master로 pull request 할 때 BE 나 FE 코드에 충돌나는 경우, 코드를 작성한 팀원에게 알린다.
 
@@ -66,7 +66,7 @@
 #### 공유사항
 
  - git ignore는 각자 작성
- - BE가 구현한 API에 대해서는 Spring rest Docs로 작성해 URL 공유
+ - BE가 구현한 API에 대해서는 문서로 작성해 URL 공유
  - API URL는 백엔드가 정하고 데이터 형식은 다같이
 
 ### Project References

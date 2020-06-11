@@ -1,46 +1,39 @@
-package dev.codesquad.issuetracker.domain.milestone;
+package dev.codesquad.issuetracker.domain.label;
 
-import dev.codesquad.issuetracker.domain.Status;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import dev.codesquad.issuetracker.domain.issue.Issue;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.hibernate.annotations.ColumnDefault;
-import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 @Getter
-@ToString
+@ToString(exclude = "issues")
 @NoArgsConstructor
-public class Milestone {
+public class Label {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
-    private String title;
+    private String name;
 
     @NotNull
     private String description;
 
-    @Enumerated(EnumType.STRING)
-    private Status status;
+    @NotNull
+    private String colorCode;
 
-    @CreationTimestamp
-    private LocalDate dueDate;
-
-    @OneToMany(mappedBy = "milestone")
+    @JsonIgnore
+    @ManyToMany(mappedBy = "labels")
     private List<Issue> issues = new ArrayList<>();
 }
