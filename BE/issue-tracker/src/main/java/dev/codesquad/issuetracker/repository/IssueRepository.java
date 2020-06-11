@@ -25,7 +25,7 @@ public class IssueRepository {
     }
 
     public List<Issue> findAllWithUserLabel() {
-        return em.createQuery("select i from Issue i"
+        return em.createQuery("select distinct i from Issue i"
             + " left join fetch i.user u"
             + " left join fetch i.labels l", Issue.class)
             .getResultList();
