@@ -1,9 +1,16 @@
 <template>
-  <div>마일스톤 목록 페이지</div>
+  <div>
+    <RouterBox />
+  </div>
 </template>
 
 <script>
-export default {};
+import RouterBox from '@/components/common/RouterBox';
+export default {
+  components: {
+    RouterBox,
+  },
+};
 </script>
 
 <style></style>

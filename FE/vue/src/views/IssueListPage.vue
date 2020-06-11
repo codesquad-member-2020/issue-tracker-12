@@ -1,30 +1,9 @@
 <template>
-  <fragment>
-    <div>
-      <FilterComponent />
-      <LmButton />
-      <NewCreateButton :title="btnTittle" />
-    </div>
-  </fragment>
+  <div>이슈 목록 페이지</div>
 </template>
 
 <script>
-import FilterComponent from '@/components/issueList/FilterComponent';
-import LmButton from '@/components/mixinContent/LmButton';
-import NewCreateButton from '@/components/button/NewCreateButton';
-
-export default {
-  data() {
-    return {
-      btnTittle: 'New issue',
-    };
-  },
-  components: {
-    FilterComponent,
-    LmButton,
-    NewCreateButton,
-  },
-};
+export default {};
 </script>
 
-<style lang="scss" scoped></style>
+<style></style>

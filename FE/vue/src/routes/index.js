@@ -8,7 +8,7 @@ const router = new VueRouter({
   routes: [
     {
       path: '/',
-      redirect: '/issueList',
+      redirect: '/labelList',
     },
     {
       path: '/login',

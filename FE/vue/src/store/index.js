@@ -7,6 +7,7 @@ const store = new Vuex.Store({
   state: {
     labelCount: 0,
     milestoneCount: 0,
+    toggleColor: false,
   },
   mutations: {},
 });
