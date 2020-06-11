@@ -2,19 +2,27 @@
   <fragment>
     <div>
       <FilterComponent />
-      <LabelsButtonComponent />
+      <LmButton />
+      <NewCreateButton :title="btnTittle" />
     </div>
   </fragment>
 </template>
 
 <script>
 import FilterComponent from '@/components/issueList/FilterComponent';
-import LabelsButtonComponent from '@/components/issueList/LabelsButtonComponent';
+import LmButton from '@/components/mixinContent/LmButton';
+import NewCreateButton from '@/components/button/NewCreateButton';
 
 export default {
+  data() {
+    return {
+      btnTittle: 'New issue',
+    };
+  },
   components: {
     FilterComponent,
-    LabelsButtonComponent,
+    LmButton,
+    NewCreateButton,
   },
 };
 </script>
