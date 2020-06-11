@@ -1,10 +1,13 @@
 package dev.codesquad.issuetracker.service;
 
 import dev.codesquad.issuetracker.domain.label.Label;
+import dev.codesquad.issuetracker.domain.milestone.Milestone;
 import dev.codesquad.issuetracker.repository.IssueRepository;
 import dev.codesquad.issuetracker.repository.LabelRepository;
+import dev.codesquad.issuetracker.repository.MilestoneRepository;
 import dev.codesquad.issuetracker.repository.UserRepository;
 import dev.codesquad.issuetracker.web.dto.IssueResponse;
+import dev.codesquad.issuetracker.web.dto.MilestoneResponse;
 import dev.codesquad.issuetracker.web.dto.ResultResponse;
 import dev.codesquad.issuetracker.web.dto.ResultDto;
 import dev.codesquad.issuetracker.web.dto.UserResponse;
@@ -21,6 +24,7 @@ public class IssueService {
     private final IssueRepository issueRepository;
     private final UserRepository userRepository;
     private final LabelRepository labelRepository;
+    private final MilestoneRepository milestoneRepository;
 
     @Transactional(readOnly = true)
     public List<IssueResponse> viewAllIssue() {
@@ -44,10 +48,16 @@ public class IssueService {
         List<Label> labels = labelRepository.findAll();
         ResultDto label = new ResultDto(labels.size(), labels);
 
+        List<MilestoneResponse> milestones = milestoneRepository.findAll().stream()
+            .map(milestone -> MilestoneResponse.of(milestone))
+            .collect(Collectors.toList());
+        ResultDto milestone = new ResultDto(milestones.size(), milestones);
+
         return ResultResponse.builder()
             .issue(issue)
             .user(user)
             .label(label)
+            .milestone(milestone)
             .build();
     }
 }
