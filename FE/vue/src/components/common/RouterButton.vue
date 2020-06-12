@@ -1,14 +1,14 @@
 <template>
   <wrapper :label="isLabel">
     <img
-      v-if="type == 'label'"
+      v-if="type == 'Labels'"
       src="../../assets/labels.svg"
       :class="{ active: isLabel }"
       class="logo"
       alt=""
     />
     <img
-      v-if="type == 'milestone'"
+      v-if="type == 'Milestones'"
       src="../../assets/milestone.svg"
       :class="{ active: isLabel }"
       class="logo"
@@ -31,8 +31,8 @@ export default {
   },
   created() {
     if (
-      (this.$route.path === '/labelList' && this.type === 'label') ||
-      (this.$route.path === '/milestoneList' && this.type === 'milestone')
+      (this.$route.path === '/labelList' && this.type === 'Labels') ||
+      (this.$route.path === '/milestoneList' && this.type === 'Milestones')
     )
       this.isLabel = !this.isLabel;
   },
@@ -50,7 +50,5 @@ export default {
 }
 .logo {
   vertical-align: text-bottom;
-  border-top-left-radius: 3px;
-  border-bottom-left-radius: 3px;
 }
 </style>
