@@ -2,7 +2,7 @@
 import { jsx, css, SerializedStyles } from '@emotion/core';
 import { ReactNode } from 'react';
 
-type Align = 'left' | 'right' | 'spaceAround' | 'spaceBetween';
+type Align = 'left' | 'right' | 'spaceAround' | 'spaceBetween' | 'center';
 type Direction = 'column' | 'row';
 
 export type FlexProps = {
@@ -77,6 +77,8 @@ const getAlignStyleName = (align: Align) => {
       return 'flex-end';
     case 'left':
       return 'flex-start';
+    case 'center':
+      return 'center';
     case 'spaceAround':
       return 'space-around';
     default:

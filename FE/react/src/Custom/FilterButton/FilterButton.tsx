@@ -63,6 +63,9 @@ FilterButton.defaultProps = {
 };
 
 const styled = css`
+  box-sizing: border-box;
+  border: 1px solid #000000;
+  height: 31px;
   position: relative;
 `;
 
@@ -72,12 +75,12 @@ const bold = css`
 `;
 
 const contentsStyle = css`
-  width: 400px;
   background-color: #ffffff;
   border: 1px solid #eeeeee;
+  box-shadow: 0px 0px 10px rgba(173, 173, 173, 0.3);
   position: absolute;
   top: calc(100% + 10px);
-  box-shadow: 0px 0px 10px rgba(173, 173, 173, 0.3);
+  width: 400px;
 `;
 
 const subjectStyle = css`
@@ -91,7 +94,7 @@ const filterStyle = css`
 
 const borderTopWithChild = css({
   '> *': {
-    'border-top': '1px solid #000000'
+    borderTop: '1px solid #000000'
   }
 });
 

@@ -86,7 +86,7 @@ const filterStyle = css`
 
 const borderTopWithChild = css({
   '> *': {
-    'border-top': '1px solid #000000'
+    borderTop: '1px solid #000000'
   }
 });
 

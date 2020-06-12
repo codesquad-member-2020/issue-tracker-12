@@ -73,13 +73,13 @@ const themes = {
   primary: css`
     background: #2dc250;
     &:hover:enabled {
-      background: #cc373c;
+      background: #0ba030;
     }
   `,
   secondary: css`
     background: #cb2431;
     &:hover:enabled {
-      background: #7b7b7b;
+      background: #a90210;
     }
   `,
   nocolor: css`

@@ -27,7 +27,7 @@ export const example = () => {
 
 export const flexDefault = () => {
   const direction = select('direction', ['column', 'row'], 'row');
-  const align = select('align', ['left', 'right', 'spaceAround', 'spaceBetween'], 'left');
+  const align = select('align', ['left', 'right', 'spaceAround', 'spaceBetween', 'center'], 'left');
   const wrap = boolean('wrap', false);
   const gap = text('gap', '5px');
   const width = text('width', '100%');
