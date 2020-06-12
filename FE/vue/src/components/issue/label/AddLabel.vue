@@ -122,6 +122,8 @@ export default {
         description: this.labelDescription,
         labelName: this.labelName,
       });
+      this.labelName = '';
+      this.labelDescription = '';
     },
   },
 };
