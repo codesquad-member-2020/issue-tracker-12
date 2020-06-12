@@ -42,7 +42,7 @@ public class IssueResponse {
             .status(issue.getStatus())
             .comment(issue.getComments().size())
             .labels(issue.getLabels().stream()
-                .map(label -> LabelDto.of(label.getName(), label.getColorCode()))
+                .map(label -> LabelDto.of(label))
                 .collect(Collectors.toList()))
             .build();
     }
