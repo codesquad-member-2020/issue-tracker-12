@@ -33,28 +33,17 @@ public class IssueService {
     }
 
     /**
-     *
-     * 쿼리 최적화 필요
-     * 메서드 분리 리팩토링 필요
+     * collection 호출 쿼리 최적화 필요
      */
     @Transactional(readOnly = true)
     public ResultResponse viewAll() {
-        List<UserResponse> userResponses = userRepository.findAll().stream()
-            .map(user -> UserResponse.of(user))
-            .collect(Collectors.toList());
+        List<UserResponse> userResponses = getUserResponses();
         ResultDto user = new ResultDto(userResponses.size(), userResponses);
-
-        List<IssueResponse> issueResponses = issueRepository.findAllWithUserLabelMileStone().stream()
-            .map(issue -> IssueResponse.of(issue))
-            .collect(Collectors.toList());
+        List<IssueResponse> issueResponses = getIssueResponses();
         ResultDto issue = new ResultDto(issueResponses.size(), issueResponses);
-
-        List<Label> labels = labelRepository.findAll();
+        List<Label> labels = getLabels();
         ResultDto label = new ResultDto(labels.size(), labels);
-
-        List<MilestoneResponse> milestones = milestoneRepository.findAll().stream()
-            .map(milestone -> MilestoneResponse.of(milestone))
-            .collect(Collectors.toList());
+        List<MilestoneResponse> milestones = getMilestoneResponses();
         ResultDto milestone = new ResultDto(milestones.size(), milestones);
 
         return ResultResponse.builder()
@@ -63,5 +52,31 @@ public class IssueService {
             .label(label)
             .milestone(milestone)
             .build();
+    }
+
+    @Transactional(readOnly = true)
+    public List<UserResponse> getUserResponses() {
+        return userRepository.findAll().stream()
+            .map(user -> UserResponse.of(user))
+            .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public List<IssueResponse> getIssueResponses() {
+        return issueRepository.findAllWithUserLabelMileStone().stream()
+            .map(issue -> IssueResponse.of(issue))
+            .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public List<Label> getLabels() {
+        return labelRepository.findAll();
+    }
+
+    @Transactional(readOnly = true)
+    public List<MilestoneResponse> getMilestoneResponses() {
+        return milestoneRepository.findAll().stream()
+            .map(milestone -> MilestoneResponse.of(milestone))
+            .collect(Collectors.toList());
     }
 }
