@@ -31,12 +31,12 @@ const _ = {
 
     const colorNumber =
       [0.299 * r, 0.587 * g, 0.114 * b].reduce((a, b) => a + b) / 255;
-    return { background: color, number: colorNumber };
+    return { backgroundColor: color, number: colorNumber };
   },
 
-  isWhiteColor: ({ background, number }) => {
-    if (number > 0.5) return { background, fontColor: '#fff' };
-    return { background, fontColor: '#000' };
+  isWhiteColor: ({ backgroundColor, number }) => {
+    if (number > 0.5) return { backgroundColor, textColor: '#fff' };
+    return { backgroundColor, textColor: '#000' };
   },
 
   isDarkColor: RGBColors => {
