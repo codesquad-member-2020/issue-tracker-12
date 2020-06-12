@@ -116,9 +116,9 @@ export const RandomColorButton = styled('button', backgroundColor)`
   margin-right: 5px;
   border-radius: 5px;
   border: 1px solid;
-  border-color: ${props => `${props.background.background}`};
-  background-color: ${props => `${props.background.background}`};
-  color: ${props => `${props.background.fontColor}`};
+  border-color: ${props => `${props.background.backgroundColor}`};
+  background-color: ${props => `${props.background.backgroundColor}`};
+  color: ${props => `${props.background.textColor}`};
 `;
 
 export const LabelItemTitle = styled.div`
@@ -234,9 +234,9 @@ export const previewCreateLabel = styled('div', previewStyle)`
   padding: 4px 8px;
   border-radius: 3px;
   color: ${props =>
-    props.RandomHexColor ? `${props.RandomHexColor.fontColor}` : 'none'};
+    props.RandomHexColor ? `${props.RandomHexColor.textColor}` : 'none'};
   background-color: ${props =>
-    props.RandomHexColor ? `${props.RandomHexColor.background}` : 'none'};
+    props.RandomHexColor ? `${props.RandomHexColor.backgroundColor}` : 'none'};
 `;
 
 export const LabelListWrap = styled.div`
@@ -318,5 +318,49 @@ export const Button = styled.button`
   :hover {
     color: #0366d6;
     text-decoration: underline;
+  }
+`;
+
+export const LabelNameError = styled.div`
+  color: #86181d;
+  background-color: #ffdce0;
+  border-color: #cea0a5;
+  position: absolute;
+  z-index: 10;
+  display: block;
+  max-width: 450px;
+  padding: 5px 8px;
+  margin: 4px 0 0;
+  font-size: 13px;
+  font-weight: 400;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 3px;
+  &:before {
+    margin-left: -1px;
+    border-width: 6px;
+    border-bottom-color: #cea0a5;
+    position: absolute;
+    bottom: 100%;
+    left: 10px;
+    z-index: 15;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+    content: ' ';
+    border: solid transparent;
+  }
+  &:after {
+    border-bottom-color: #ffdce0;
+    border-width: 5px;
+    position: absolute;
+    bottom: 100%;
+    left: 10px;
+    z-index: 15;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+    content: ' ';
+    border: solid transparent;
   }
 `;
