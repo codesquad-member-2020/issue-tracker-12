@@ -12,8 +12,8 @@ import { BtnWrapper } from '@/style/styled';
 export default {
   data() {
     return {
-      labelType: 'label',
-      milestoneType: 'milestone',
+      labelType: 'Labels',
+      milestoneType: 'Milestones',
     };
   },
   components: {
