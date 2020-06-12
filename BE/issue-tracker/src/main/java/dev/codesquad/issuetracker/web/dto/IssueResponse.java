@@ -3,6 +3,7 @@ package dev.codesquad.issuetracker.web.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.codesquad.issuetracker.domain.Status;
 import dev.codesquad.issuetracker.domain.issue.Issue;
+import dev.codesquad.issuetracker.domain.milestone.Milestone;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,17 +20,19 @@ public class IssueResponse {
     private LocalDate createTime;
     private Status status;
     private int comment;
+    private MilestoneDto milestone;
     private List<LabelDto> labels = new ArrayList<>();
 
     @Builder
-    protected IssueResponse(Long id, String title, String githubId,
-        LocalDate createTime, Status status, int comment, List<LabelDto> labels) {
+    protected IssueResponse(Long id, String title, String githubId, LocalDate createTime,
+        Status status, int comment, MilestoneDto milestone, List<LabelDto> labels) {
         this.id = id;
         this.title = title;
         this.githubId = githubId;
         this.createTime = createTime;
         this.status = status;
         this.comment = comment;
+        this.milestone = milestone;
         this.labels = labels;
     }
 
@@ -41,6 +44,7 @@ public class IssueResponse {
             .createTime(issue.getCreate_time())
             .status(issue.getStatus())
             .comment(issue.getComments().size())
+            .milestone(MilestoneDto.of(issue.getMilestone()))
             .labels(issue.getLabels().stream()
                 .map(label -> LabelDto.of(label))
                 .collect(Collectors.toList()))

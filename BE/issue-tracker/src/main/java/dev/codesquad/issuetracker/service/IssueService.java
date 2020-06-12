@@ -1,7 +1,6 @@
 package dev.codesquad.issuetracker.service;
 
 import dev.codesquad.issuetracker.domain.label.Label;
-import dev.codesquad.issuetracker.domain.milestone.Milestone;
 import dev.codesquad.issuetracker.repository.IssueRepository;
 import dev.codesquad.issuetracker.repository.LabelRepository;
 import dev.codesquad.issuetracker.repository.MilestoneRepository;
@@ -28,7 +27,7 @@ public class IssueService {
 
     @Transactional(readOnly = true)
     public List<IssueResponse> viewAllIssue() {
-        return issueRepository.findAllWithUserLabel().stream()
+        return issueRepository.findAllWithUserLabelMileStone().stream()
             .map(issue -> IssueResponse.of(issue))
             .collect(Collectors.toList());
     }
@@ -45,7 +44,7 @@ public class IssueService {
             .collect(Collectors.toList());
         ResultDto user = new ResultDto(userResponses.size(), userResponses);
 
-        List<IssueResponse> issueResponses = issueRepository.findAllWithUserLabel().stream()
+        List<IssueResponse> issueResponses = issueRepository.findAllWithUserLabelMileStone().stream()
             .map(issue -> IssueResponse.of(issue))
             .collect(Collectors.toList());
         ResultDto issue = new ResultDto(issueResponses.size(), issueResponses);
