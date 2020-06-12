@@ -12,6 +12,7 @@ const store = new Vuex.Store({
     labelCount: 0,
     milestoneCount: 0,
     toggleColor: false,
+    labelNameError: false,
     labels: [
       {
         id: 1,
@@ -67,13 +68,14 @@ const store = new Vuex.Store({
     visableCreateLabel(state) {
       state.isCreateLabel = !state.isCreateLabel;
     },
-    addToLabelList(state) {
-      console.log(state.previewStyle);
-      // const obj = {
-      //   id: state.labels.length,
-
-      // }
-      // state.labels.push(obj);
+    addToLabelList(state, payload) {
+      const obj = {
+        id: state.labels.length + 1,
+        ...state.previewStyle,
+        ...payload,
+      };
+      console.log(obj);
+      state.labels.push(obj);
     },
   },
 });
