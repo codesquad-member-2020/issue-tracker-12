@@ -24,10 +24,11 @@ public class IssueRepository {
         return em.createQuery("select i from Issue i", Issue.class).getResultList();
     }
 
-    public List<Issue> findAllWithUserLabel() {
+    public List<Issue> findAllWithUserLabelMileStone() {
         return em.createQuery("select distinct i from Issue i"
-            + " left join fetch i.user u"
-            + " left join fetch i.labels l", Issue.class)
+            + " left outer join fetch i.user u"
+            + " left outer join fetch i.labels l"
+            + " left outer join fetch i.milestone m", Issue.class)
             .getResultList();
     }
 }
