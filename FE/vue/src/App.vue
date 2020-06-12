@@ -1,17 +1,15 @@
 <template>
-  <div id="app">
+  <GlobalContainer id="app">
     <router-view></router-view>
-  </div>
+  </GlobalContainer>
 </template>
 
 <script>
-export default {};
-</script>
+import { GlobalContainer } from '@/style/globalStyle';
 
-<style lang="scss">
-#app {
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial,
-    sans-serif, Apple Color Emoji, Segoe UI Emoji;
-  font-size: 14px;
-}
-</style>
+export default {
+  components: {
+    GlobalContainer,
+  },
+};
+</script>
