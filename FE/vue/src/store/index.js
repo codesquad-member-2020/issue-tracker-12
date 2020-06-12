@@ -77,6 +77,11 @@ const store = new Vuex.Store({
       console.log(obj);
       state.labels.push(obj);
     },
+    deleteLabel(state, labelId) {
+      state.labels = state.labels.filter(
+        label => label.id !== parseInt(labelId),
+      );
+    },
   },
 });
 
