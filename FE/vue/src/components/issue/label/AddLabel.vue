@@ -8,6 +8,9 @@
         placeholder="Label name"
         :value="labelName"
       />
+      <LabelNameError v-if="searchSameName">
+        Name has already been taken
+      </LabelNameError>
     </LabelName>
     <LabelDesc>
       <LabelItemTitle>Description</LabelItemTitle>
@@ -33,8 +36,8 @@
       <SetButtons>
         <CancelButton @click="cancelCreateLabel">Cancel</CancelButton>
         <SaveButton
-          :class="{ active: labelName.length > 0 }"
-          :disabled="labelName.length < 1"
+          :class="{ active: labelName.length > 0 && !searchSameName }"
+          :disabled="labelName.length < 1 || searchSameName"
           @click="createLabel"
           >Create label</SaveButton
         >
@@ -56,6 +59,7 @@ import {
   CancelButton,
   SaveButton,
   ColorSelectTab,
+  LabelNameError,
 } from '@/style/styled';
 import _ from '@/utils/utils';
 
@@ -66,13 +70,27 @@ export default {
       labelName: '',
       hexColor: '',
       labelDescription: '',
+      isErrorLabelName: false,
     };
   },
+  computed: {
+    searchSameName() {
+      if (
+        this.$store.state.labels.filter(
+          label => label.labelName === this.labelName,
+        ).length > 0
+      ) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+  },
   mounted() {
-    this.hexColor = this.RandomHexColor.background;
+    this.hexColor = this.RandomHexColor.backgroundColor;
   },
   updated() {
-    this.hexColor = this.RandomHexColor.background;
+    this.hexColor = this.RandomHexColor.backgroundColor;
   },
   components: {
     LabelContentWrap,
@@ -86,6 +104,7 @@ export default {
     CancelButton,
     SaveButton,
     ColorSelectTab,
+    LabelNameError,
   },
   methods: {
     changeLabelName({ target: { value } }) {
@@ -99,7 +118,10 @@ export default {
       this.$store.commit('visableCreateLabel');
     },
     createLabel() {
-      this.$store.commit('addToLabelList');
+      this.$store.commit('addToLabelList', {
+        description: this.labelDescription,
+        labelName: this.labelName,
+      });
     },
   },
 };
