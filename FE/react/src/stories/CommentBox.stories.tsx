@@ -9,7 +9,7 @@ export default {
   component: CommentBox,
   decorators: [withKnobs],
   parameters: {
-    componentSubtitle: 'Issue Tracker에서 사용할 버튼 컴포넌트'
+    componentSubtitle: 'Issue Tracker에서 사용할 댓글 창 컴포넌트'
   }
 };
 

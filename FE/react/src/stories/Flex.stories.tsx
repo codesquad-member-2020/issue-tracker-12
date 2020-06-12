@@ -1,15 +1,13 @@
 import React from 'react';
 import Flex from '@Custom/Flex/Flex';
 import { withKnobs, text, boolean, select } from '@storybook/addon-knobs';
-import Icon from '@Icon/Icon';
-import { action } from '@storybook/addon-actions';
 
 export default {
   title: 'components|Flex',
   component: Flex,
   decorators: [withKnobs],
   parameters: {
-    componentSubtitle: 'Issue Tracker에서 사용할 버튼 컴포넌트'
+    componentSubtitle: 'Issue Tracker에서 사용할 스타일링 컴포넌트'
   }
 };
 

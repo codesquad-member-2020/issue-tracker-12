@@ -1,6 +1,6 @@
 import React from 'react';
 import LabelButton from '@Custom/LabelButton/LabelButton';
-import { withKnobs, text, boolean, select } from '@storybook/addon-knobs';
+import { withKnobs, text, select } from '@storybook/addon-knobs';
 
 export default {
   title: 'components|LabelButton',
@@ -13,4 +13,18 @@ export default {
 
 export const example = () => {
   return <LabelButton iconType="task" label="filters" />;
+};
+
+export const labelButton = () => {
+  const iconType = select(
+    'direction',
+    ['task', 'arrow', 'check', 'close', 'exclamation', 'github', 'option', 'tag'],
+    'task'
+  );
+  const label = text('label', 'filters');
+  return <LabelButton iconType={iconType} label={label} />;
+};
+
+labelButton.story = {
+  name: 'Default'
 };

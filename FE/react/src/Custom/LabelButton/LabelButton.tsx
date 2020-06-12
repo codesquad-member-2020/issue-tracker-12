@@ -9,6 +9,8 @@ type LabelButtonProp = {
   iconType: IconType;
   /** LabelButton이 나타내고 싶은 Label을 적을 수 있습니다 */
   label: string;
+  /** LabelButton이 차지하는 가로 길이를 정할 수 있습니다 */
+  width?: string | number;
 };
 
 /**
@@ -16,9 +18,9 @@ type LabelButtonProp = {
  *
  */
 
-const LabelButton = ({ iconType, label }: LabelButtonProp) => {
+const LabelButton = ({ iconType, label, width }: LabelButtonProp) => {
   return (
-    <div css={style}>
+    <div css={[style, { width }]}>
       <Button theme="nocolor">
         <Flex alignItemCenter={true}>
           <Icon icon={iconType} size="15px"></Icon>
@@ -34,7 +36,6 @@ const style = css`
   border: 1px solid #000000;
   box-sizing: border-box;
   height: 31px;
-  padding: 0.3rem;
 `;
 
 const circleStyle = css`

@@ -4,7 +4,6 @@ import Flex from '@Custom/Flex/Flex';
 import FilterButton from '@/Custom/FilterButton/FilterButton';
 import Button from '@Custom/Button/Button';
 import LabelButton from '@Custom/LabelButton/LabelButton';
-import TagsInput from '@Custom/TagsInput/TagsInput';
 
 const exampleFilters = [
   'Open Issues',
@@ -26,10 +25,9 @@ const Header = () => {
           filters={exampleFilters}
           contentsBoxSize={'100%'}
         />
-        <TagsInput tags={['is open:', 'is filtered']} />
       </Flex>
       <Flex align="right">
-        <LabelButton iconType="tag" label="Labels" />
+        <LabelButton iconType="tag" label="Labels" width="120px" />
         <LabelButton iconType="task" label="MileStones" />
       </Flex>
 
