@@ -89,6 +89,7 @@ export default {
       editLabelDescription: '',
       isColorChange: false,
       randomStyle: null,
+      islabelChange: false,
     };
   },
   created() {
@@ -125,15 +126,14 @@ export default {
   methods: {
     changeEditLabelName({ target: { value } }) {
       this.editLabelName = value;
-      // console.log(value, this.editLabelName);
       this.$emit('changeLabelName', this.editLabelName);
     },
     changeEditLabelDescription({ target: { value } }) {
       this.editLabelDescription = value;
-      console.log(this.editLabelDescription);
     },
     cancelEditLabel() {
       console.log('cancelEdit');
+      this.$emit('cancelEdit');
     },
     changeEditStyle() {
       this.isColorChange = true;
@@ -154,9 +154,8 @@ export default {
       },
     }) {
       this.$emit('saveLabel');
-
-      // 디스크립션, 스타일도 같이 보내야힘
       let labelInfo = {};
+
       if (this.randomStyle === null) {
         labelInfo = {
           id: parseInt(id),
