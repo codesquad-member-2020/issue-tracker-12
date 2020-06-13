@@ -48,9 +48,11 @@ module.exports = {
     extensions: ['.js', 'jsx', '.ts', '.tsx'],
     alias: {
       '@': path.resolve(__dirname, 'src/'),
+      '@Components': path.resolve(__dirname, 'src/Components/'),
       '@Custom': path.resolve(__dirname, 'src/Custom/'),
       '@Icon': path.resolve(__dirname, 'src/Icon/'),
-      '@Util': path.resolve(__dirname, 'src/util/')
+      '@Page': path.resolve(__dirname, 'src/Page/'),
+      '@Util': path.resolve(__dirname, 'src/Util/')
     }
   },
   plugins: [

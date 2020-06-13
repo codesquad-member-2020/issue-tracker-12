@@ -19,9 +19,11 @@
 
     "paths": {
       "@/*": ["src/*"],
+      "@Components/*": ["src/Components/*"],
       "@Custom/*": ["src/Custom/*"],
       "@Icon/*": ["src/Icon/*"],
-      "@Util/*": ["src/util/*"]
+      "@Page/*": ["src/Page/*"],
+      "@Util/*": ["src/Util/*"]
     }
   },
   "exclude": ["node_modules", "dist", "public"]

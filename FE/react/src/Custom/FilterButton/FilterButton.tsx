@@ -38,7 +38,7 @@ const FilterButton = ({ category, theme, fontSize, subject, filters, width, cont
       <Button theme={theme} fontSize={fontSize} onClick={() => setFocus(true)} noPadding={true}>
         <Flex alignItemCenter={true}>
           <p css={bold}>{category}</p>
-          <Icon icon="arrow" size={'15px'} />
+          <Icon icon="arrow" size={'12px'} />
         </Flex>
       </Button>
       {focus && (
@@ -63,21 +63,24 @@ FilterButton.defaultProps = {
 };
 
 const styled = css`
+  box-sizing: border-box;
+  height: 31px;
   position: relative;
 `;
 
 const bold = css`
-  font-weight: 900;
+  font-size: 0.9rem;
+  font-weight: 500;
   margin-right: 0.3rem;
 `;
 
 const contentsStyle = css`
-  width: 400px;
   background-color: #ffffff;
   border: 1px solid #eeeeee;
+  box-shadow: 0px 0px 10px rgba(173, 173, 173, 0.3);
   position: absolute;
   top: calc(100% + 10px);
-  box-shadow: 0px 0px 10px rgba(173, 173, 173, 0.3);
+  width: 400px;
 `;
 
 const subjectStyle = css`
@@ -91,7 +94,7 @@ const filterStyle = css`
 
 const borderTopWithChild = css({
   '> *': {
-    'border-top': '1px solid #000000'
+    borderTop: '1px solid #000000'
   }
 });
 
