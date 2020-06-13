@@ -15,7 +15,7 @@
     </Info>
     <EditInfo v-else>
       <EditLabelTab>
-        <LabelPreview v-if="!isInputChange" :label="randomStyle">
+        <LabelPreview v-if="!isInputChange" :label="label">
           {{ label.labelName }}
         </LabelPreview>
         <LabelPreview v-else :label="randomStyle">
@@ -28,6 +28,7 @@
         @changeLabelName="changePreview"
         @saveLabel="saveLabel"
         @editRandomStyle="createRandomStyle"
+        @cancelEdit="cancelLabel"
       ></EditLabel>
     </EditInfo>
   </LabelItem>
@@ -99,6 +100,10 @@ export default {
     },
     saveLabel() {
       this.isEdit = !this.isEdit;
+    },
+    cancelLabel() {
+      this.isEdit = !this.isEdit;
+      this.isInputChange = !this.isInputChange;
     },
     createRandomStyle(e) {
       this.randomStyle = e;
