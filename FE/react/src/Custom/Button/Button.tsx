@@ -83,8 +83,8 @@ const themes = {
     }
   `,
   nocolor: css`
-    background: #ffffff;
-    color: #000000;
+    background: rgba(0, 0, 0, 0);
+    color: #586069;
     &:hover:enabled {
       background: #f6f8fa;
     }

@@ -46,9 +46,8 @@ const Header = () => {
 };
 
 const headerStyle = css`
-  margin-top: 10vh;
   box-sizing: border-box;
-  padding: 2rem 12rem;
+  margin-top: 10vh;
 `;
 
 export default Header;

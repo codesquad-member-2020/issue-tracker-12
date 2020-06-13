@@ -38,7 +38,7 @@ const FilterButton = ({ category, theme, fontSize, subject, filters, width, cont
       <Button theme={theme} fontSize={fontSize} onClick={() => setFocus(true)} noPadding={true}>
         <Flex alignItemCenter={true}>
           <p css={bold}>{category}</p>
-          <Icon icon="arrow" size={'15px'} />
+          <Icon icon="arrow" size={'12px'} />
         </Flex>
       </Button>
       {focus && (
@@ -69,6 +69,7 @@ const styled = css`
 `;
 
 const bold = css`
+  font-size: 0.9rem;
   font-weight: 500;
   margin-right: 0.3rem;
 `;

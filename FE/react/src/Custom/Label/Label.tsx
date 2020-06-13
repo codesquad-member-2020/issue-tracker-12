@@ -24,15 +24,18 @@ const pickTextColorBasedOnBgColor = (bgColor: string) => {
 
 const Label = ({ contents, color }: LabelProp) => {
   return (
-    <div css={[labelStyle(color), { 'background-color': color, color: pickTextColorBasedOnBgColor(color) }]}>
+    <div css={[labelStyle(color), { backgroundColor: color, color: pickTextColorBasedOnBgColor(color) }]}>
       {contents}
     </div>
   );
 };
 
 const labelStyle = (color: string) => css`
-  font-size: 0.75rem;
   border: 1px solid ${color};
+  box-sizing: border-box;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.1rem 0.3rem;
 `;
 
 export default Label;
