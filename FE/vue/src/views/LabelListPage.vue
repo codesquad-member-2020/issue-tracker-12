@@ -1,9 +1,20 @@
 <template>
-  <div>레이블 목록 페이지</div>
+  <div>
+    <HeaderComponent></HeaderComponent>
+    <ContentComponent></ContentComponent>
+  </div>
 </template>
 
 <script>
-export default {};
+import HeaderComponent from '@/components/issue/label/HeaderComponent';
+import ContentComponent from '@/components/issue/label/ContentComponent';
+
+export default {
+  components: {
+    HeaderComponent,
+    ContentComponent,
+  },
+};
 </script>
 
 <style></style>

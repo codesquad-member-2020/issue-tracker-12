@@ -1,22 +1,9 @@
 <template>
-  <fragment>
-    <div>
-      <FilterComponent />
-      <LabelsButtonComponent />
-    </div>
-  </fragment>
+  <div>이슈 목록 페이지</div>
 </template>
 
 <script>
-import FilterComponent from '@/components/issueList/FilterComponent';
-import LabelsButtonComponent from '@/components/issueList/LabelsButtonComponent';
-
-export default {
-  components: {
-    FilterComponent,
-    LabelsButtonComponent,
-  },
-};
+export default {};
 </script>
 
-<style lang="scss" scoped></style>
+<style></style>

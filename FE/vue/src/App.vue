@@ -1,11 +1,15 @@
 <template>
-  <div id="app">
+  <GlobalContainer id="app">
     <router-view></router-view>
-  </div>
+  </GlobalContainer>
 </template>
 
 <script>
-export default {};
-</script>
+import { GlobalContainer } from '@/style/globalStyle';
 
-<style></style>
+export default {
+  components: {
+    GlobalContainer,
+  },
+};
+</script>
