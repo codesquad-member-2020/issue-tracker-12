@@ -183,6 +183,13 @@ export const SaveButton = styled.button`
   opacity: 0.5;
 `;
 
+export const ChangeSaveLabel = styled.button`
+  color: #fff;
+  background-color: #28a745;
+  background-image: linear-gradient(-180deg, #34d058, #28a745 90%);
+  opacity: 1;
+`;
+
 export const ColorSelectTab = styled.div`
   display: flex;
   justify-content: space-between;
@@ -223,6 +230,21 @@ export const LabelPreview = styled('div', labelStyle)`
   color: ${props => (props.label ? `${props.label.textColor}` : 'none')};
   background-color: ${props =>
     props.label ? `${props.label.backgroundColor}` : 'none'};
+`;
+
+const changeLabelStyle = { randomStyle: Object };
+
+export const changeLabelPreview = styled('div', changeLabelStyle)`
+  display: inline-block;
+  box-sizing: border-box;
+  font-weight: bold;
+  font-size: 14px;
+  padding: 4px 8px;
+  border-radius: 3px;
+  color: ${props =>
+    props.randomStyle ? `${props.randomStyle.textColor}` : 'none'};
+  background-color: ${props =>
+    props.randomStyle ? `${props.randomStyle.backgroundColor}` : 'none'};
 `;
 
 const previewStyle = { RandomHexColor: Object };
@@ -282,6 +304,12 @@ export const LabelTab = styled.div`
   width: 25%;
 `;
 
+export const EditLabelTab = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+`;
+
 export const Info = styled.div`
   width: 99.9%;
   display: flex;
@@ -290,6 +318,17 @@ export const Info = styled.div`
   border-top: none;
   box-sizing: border-box;
   padding: 16px;
+`;
+
+export const EditInfo = styled.div`
+  width: 99.9%;
+  display: flex;
+  align-items: center;
+  border: 1px solid #d1d5da;
+  border-top: none;
+  box-sizing: border-box;
+  padding: 16px;
+  flex-direction: column;
 `;
 
 export const DescriptionTab = styled.div`
