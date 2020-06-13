@@ -2,7 +2,7 @@
 import { jsx, css } from '@emotion/core';
 import { ReactNode } from 'react';
 
-export type ButtonTheme = 'primary' | 'secondary' | 'nooutline' | 'subtle' | 'nocolor';
+export type ButtonTheme = 'primary' | 'secondary' | 'nooutline' | 'subtle' | 'nocolor' | 'lightgray';
 
 export type ButtonFontSize = 'small' | 'medium' | 'big';
 
@@ -83,13 +83,20 @@ const themes = {
     }
   `,
   nocolor: css`
-    background: #ebeff3;
+    background: #ffffff;
     color: #000000;
     &:hover:enabled {
-      background: #b9bdd1;
+      background: #f6f8fa;
     }
   `,
-
+  lightgray: css`
+    background: #ecf0f4;
+    border: 1px solid #c1c5c7;
+    color: #444d56;
+    &:hover:enabled {
+      background: #ebeff3;
+    }
+  `,
   nooutline: css`
     background: none;
     color: #484848;

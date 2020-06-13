@@ -64,13 +64,12 @@ FilterButton.defaultProps = {
 
 const styled = css`
   box-sizing: border-box;
-  border: 1px solid #000000;
   height: 31px;
   position: relative;
 `;
 
 const bold = css`
-  font-weight: 900;
+  font-weight: 500;
   margin-right: 0.3rem;
 `;
 

@@ -25,7 +25,7 @@ const LabelButton = ({ iconType, label, width }: LabelButtonProp) => {
         <Flex alignItemCenter={true}>
           <Icon icon={iconType} size="15px"></Icon>
           <p>{label}</p>
-          <div css={circleStyle}>8</div>
+          <div css={[circleStyle]}>8</div>
         </Flex>
       </Button>
     </div>
@@ -33,7 +33,7 @@ const LabelButton = ({ iconType, label, width }: LabelButtonProp) => {
 };
 
 const style = css`
-  border: 1px solid #000000;
+  border: 1px solid #c1c5c7;
   box-sizing: border-box;
   height: 31px;
 `;

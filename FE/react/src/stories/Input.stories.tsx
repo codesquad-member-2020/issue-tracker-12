@@ -14,5 +14,5 @@ export default {
 const exampleProp = ['hera', 'supplement', 'facts'];
 
 export const example = () => {
-  return <Input tags={exampleProp} />;
+  return <Input initalValue={'hera'} />;
 };

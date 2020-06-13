@@ -6,7 +6,7 @@ import Icon from '@Icon/Icon';
 
 type InputProp = {
   /** 미리 보여줄 태그들을 명시합니다 */
-  tags: string[];
+  initalValue: string;
   /** Input의 길이를 정할 수 있습니다 */
   width: string | number;
 };
@@ -17,8 +17,8 @@ type InputProp = {
 
 const ENTER = 13;
 
-const Input = ({ tags, width }: InputProp) => {
-  const [contents, setContents] = useState('');
+const Input = ({ initalValue, width }: InputProp) => {
+  const [contents, setContents] = useState(initalValue);
   const handleInput = (e: React.FormEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
     const newValue = value + '';
@@ -52,7 +52,8 @@ Input.defaultProps = {
 };
 
 const wrapperStyle = css`
-  border: 1px solid #000000;
+  border: 1px solid #c1c5c7;
+  border-radius: 0.25rem;
   box-sizing: border-box;
   height: 31px;
   padding: 0.2rem;
