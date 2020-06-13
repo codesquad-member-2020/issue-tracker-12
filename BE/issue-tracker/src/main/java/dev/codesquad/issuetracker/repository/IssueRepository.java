@@ -26,14 +26,14 @@ public class IssueRepository {
     }
 
     public List<Issue> findAllByStatus(Status status) {
-        final int MAX_RESULT = 100;
+        final int PAGE_SIZE = 30;
         return em.createQuery("select distinct i from Issue i"
             + " left outer join fetch i.user u"
             + " left outer join fetch i.labels l"
             + " left outer join fetch i.milestone m"
             + " where i.status = :status", Issue.class)
             .setParameter("status", status)
-            .setMaxResults(MAX_RESULT)
+            .setMaxResults(PAGE_SIZE)
             .getResultList();
     }
 }
