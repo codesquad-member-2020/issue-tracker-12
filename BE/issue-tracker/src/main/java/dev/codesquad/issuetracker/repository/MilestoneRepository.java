@@ -1,5 +1,6 @@
 package dev.codesquad.issuetracker.repository;
 
+import dev.codesquad.issuetracker.domain.Status;
 import dev.codesquad.issuetracker.domain.milestone.Milestone;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -14,5 +15,12 @@ public class MilestoneRepository {
 
     public List<Milestone> findAll() {
         return em.createQuery("select m from Milestone m", Milestone.class).getResultList();
+    }
+
+    public List<Milestone> findAllByStatus(Status status) {
+        return em.createQuery("select m from Milestone m"
+            + " where m.status = :status", Milestone.class)
+            .setParameter("status", status)
+            .getResultList();
     }
 }

@@ -1,7 +1,7 @@
 package dev.codesquad.issuetracker.service;
 
+import dev.codesquad.issuetracker.domain.Status;
 import dev.codesquad.issuetracker.domain.label.Label;
-import dev.codesquad.issuetracker.domain.milestone.Milestone;
 import dev.codesquad.issuetracker.repository.IssueRepository;
 import dev.codesquad.issuetracker.repository.LabelRepository;
 import dev.codesquad.issuetracker.repository.MilestoneRepository;
@@ -28,34 +28,23 @@ public class IssueService {
 
     @Transactional(readOnly = true)
     public List<IssueResponse> viewAllIssue() {
-        return issueRepository.findAllWithUserLabel().stream()
+        return issueRepository.findAllByStatus(Status.OPEN).stream()
             .map(issue -> IssueResponse.of(issue))
             .collect(Collectors.toList());
     }
 
     /**
-     *
-     * 쿼리 최적화 필요
-     * 메서드 분리 리팩토링 필요
+     * collection 호출 쿼리 최적화 필요
      */
     @Transactional(readOnly = true)
     public ResultResponse viewAll() {
-        List<UserResponse> userResponses = userRepository.findAll().stream()
-            .map(user -> UserResponse.of(user))
-            .collect(Collectors.toList());
+        List<UserResponse> userResponses = getUserResponses();
         ResultDto user = new ResultDto(userResponses.size(), userResponses);
-
-        List<IssueResponse> issueResponses = issueRepository.findAllWithUserLabel().stream()
-            .map(issue -> IssueResponse.of(issue))
-            .collect(Collectors.toList());
+        List<IssueResponse> issueResponses = getIssueResponses();
         ResultDto issue = new ResultDto(issueResponses.size(), issueResponses);
-
-        List<Label> labels = labelRepository.findAll();
+        List<Label> labels = getLabels();
         ResultDto label = new ResultDto(labels.size(), labels);
-
-        List<MilestoneResponse> milestones = milestoneRepository.findAll().stream()
-            .map(milestone -> MilestoneResponse.of(milestone))
-            .collect(Collectors.toList());
+        List<MilestoneResponse> milestones = getMilestoneResponses();
         ResultDto milestone = new ResultDto(milestones.size(), milestones);
 
         return ResultResponse.builder()
@@ -64,5 +53,31 @@ public class IssueService {
             .label(label)
             .milestone(milestone)
             .build();
+    }
+
+    @Transactional(readOnly = true)
+    public List<UserResponse> getUserResponses() {
+        return userRepository.findAll().stream()
+            .map(user -> UserResponse.of(user))
+            .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public List<IssueResponse> getIssueResponses() {
+        return issueRepository.findAllByStatus(Status.OPEN).stream()
+            .map(issue -> IssueResponse.of(issue))
+            .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public List<Label> getLabels() {
+        return labelRepository.findAll();
+    }
+
+    @Transactional(readOnly = true)
+    public List<MilestoneResponse> getMilestoneResponses() {
+        return milestoneRepository.findAllByStatus(Status.OPEN).stream()
+            .map(milestone -> MilestoneResponse.of(milestone))
+            .collect(Collectors.toList());
     }
 }

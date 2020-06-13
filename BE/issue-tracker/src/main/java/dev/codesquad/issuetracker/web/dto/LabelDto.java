@@ -1,5 +1,6 @@
 package dev.codesquad.issuetracker.web.dto;
 
+import dev.codesquad.issuetracker.domain.label.Label;
 import lombok.Builder;
 import lombok.Data;
 
@@ -15,10 +16,10 @@ public class LabelDto {
         this.code = code;
     }
 
-    public static LabelDto of(String name, String code) {
+    public static LabelDto of(Label label) {
         return LabelDto.builder()
-            .name(name)
-            .code(code)
+            .name(label.getName())
+            .code(label.getColorCode())
             .build();
     }
 }
