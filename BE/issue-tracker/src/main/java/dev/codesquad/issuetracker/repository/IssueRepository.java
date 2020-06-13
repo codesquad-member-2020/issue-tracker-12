@@ -1,5 +1,6 @@
 package dev.codesquad.issuetracker.repository;
 
+import dev.codesquad.issuetracker.domain.Status;
 import dev.codesquad.issuetracker.domain.issue.Issue;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -24,11 +25,15 @@ public class IssueRepository {
         return em.createQuery("select i from Issue i", Issue.class).getResultList();
     }
 
-    public List<Issue> findAllWithUserLabelMileStone() {
+    public List<Issue> findAllByStatus(Status status) {
+        final int MAX_RESULT = 100;
         return em.createQuery("select distinct i from Issue i"
             + " left outer join fetch i.user u"
             + " left outer join fetch i.labels l"
-            + " left outer join fetch i.milestone m", Issue.class)
+            + " left outer join fetch i.milestone m"
+            + " where i.status = :status", Issue.class)
+            .setParameter("status", status)
+            .setMaxResults(MAX_RESULT)
             .getResultList();
     }
 }
