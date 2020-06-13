@@ -88,7 +88,8 @@ const markdownBoxStyle = css`
   }
   > .markdown {
     margin: 0px;
-    padding: 0px;
+    padding-top: 1rem;
+    padding-left: 1.5rem;
     font-size: 10px;
     overflow-x: hidden;
     overflow-y: hidden;

@@ -34,6 +34,12 @@ const OptionButton = ({ category, subject, filters, width, contentsBoxSize }: Op
         <p css={bold}>{category}</p>
         <Icon icon="option" size={'15px'} onClick={() => setFocus(true)} />
       </Flex>
+      <Flex direction="column" customCSS={selectedStyle} gap="0.4rem">
+        <p>Hello World</p>
+        <p>Hello World</p>
+        <p>Hello World</p>
+        <p>Hello World</p>
+      </Flex>
       {focus && (
         <div css={[contentsStyle, { width: contentsBoxSize }]} ref={wrapperRef}>
           <div css={subjectStyle}>{subject}</div>
@@ -56,8 +62,14 @@ OptionButton.defaultProps = {
 };
 
 const styled = css`
+  border-bottom: 1px solid #e1e4e8;
+  height: 100%;
   position: relative;
   width: 100%;
+`;
+
+const selectedStyle = css`
+  margin: 0.4rem;
 `;
 
 const bold = css`
@@ -66,13 +78,14 @@ const bold = css`
 `;
 
 const contentsStyle = css`
-  width: 200px;
   background-color: #ffffff;
   border: 1px solid #eeeeee;
-  position: absolute;
-  top: calc(100% + 10px);
-  right: 0;
   box-shadow: 0px 0px 10px rgba(173, 173, 173, 0.3);
+  position: absolute;
+  right: 0;
+  top: calc(1rem);
+  width: 200px;
+  z-index: 100;
 `;
 
 const subjectStyle = css`

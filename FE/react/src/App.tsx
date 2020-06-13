@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Switch, Redirect } from 'react-router';
 import { BrowserRouter } from 'react-router-dom';
+import NewIssue from '@Page/NewIssue/NewIssue';
 import Main from '@Page/Main/Main';
 import Label from '@Page/Label/Label';
 import Header from '@Components/Header/Header';
@@ -13,6 +14,7 @@ const App = () => {
       <Header />
       <Switch>
         <Route path="/" exact component={Main} />
+        <Route path="/new-issue" exact component={NewIssue} />
         <Route path="/label" component={Label} />
         <Redirect path="*" to="/" />
       </Switch>
@@ -125,10 +127,6 @@ const resetCSS = css`
   }
   body {
     line-height: 1;
-  }
-  ol,
-  ul {
-    list-style: none;
   }
   blockquote,
   q {
