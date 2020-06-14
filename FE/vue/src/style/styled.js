@@ -48,7 +48,7 @@ export const CreateButton = styled.button`
   appearance: none;
 `;
 
-export const LabelHedaer = styled.div`
+export const Hedaer = styled.div`
   display: flex;
   justify-content: space-between;
   margin: 20px 0px;
