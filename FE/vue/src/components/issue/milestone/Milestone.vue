@@ -52,9 +52,6 @@ import {
 
 export default {
   props: ['milestone', 'state'],
-  created() {
-    console.log(this.state);
-  },
   computed: {
     completeIssue() {
       const arrMileStone = Array.from(this.milestone.linkIssues).length;
