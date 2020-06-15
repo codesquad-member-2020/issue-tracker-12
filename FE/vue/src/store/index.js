@@ -75,9 +75,9 @@ const store = new Vuex.Store({
       },
       {
         id: 2,
-        title: '스프린트2',
-        dueDate: '2020-07-26',
-        description: '이번 배포를 위한 스프린트2',
+        title: '[Vue] 마일스톤 목록 생성',
+        dueDate: '2020-06-26',
+        description: '마일스톤 목록을 추가한다',
         isOpen: true,
         linkIssues: [
           {
@@ -88,6 +88,24 @@ const store = new Vuex.Store({
           },
           {
             isOpen: true,
+          },
+        ],
+      },
+      {
+        id: 3,
+        title: 'Vue component 생성',
+        dueDate: '2020-07-16',
+        description: 'Vue component 추가',
+        isOpen: false,
+        linkIssues: [
+          {
+            isOpen: true,
+          },
+          {
+            isOpen: false,
+          },
+          {
+            isOpen: false,
           },
         ],
       },
