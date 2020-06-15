@@ -19,4 +19,11 @@ public class LabelService {
         List<Label> labels = labelRepository.findAll();
         return new ResultDto(labels.size(), labels);
     }
+
+    @Transactional
+    public Label create(String name, String description, String colorCode) {
+        Label label = Label.of(name, description, colorCode);
+        labelRepository.save(label);
+        return label;
+    }
 }

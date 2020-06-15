@@ -15,4 +15,8 @@ public class LabelRepository {
     public List<Label> findAll() {
         return em.createQuery("select l from Label l", Label.class).getResultList();
     }
+
+    public void save(Label label) {
+        em.persist(label);
+    }
 }
