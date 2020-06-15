@@ -1,16 +1,23 @@
 <template>
-  <div v-if="this.$store.state.isOpenMilestone">
-    open
-  </div>
-  <div v-else>
+  <MilestoneListWrap v-if="this.$store.state.isOpenMilestone">
+    <OpenMilestone></OpenMilestone>
+  </MilestoneListWrap>
+  <MilestoneListWrap v-else>
     close
-  </div>
+  </MilestoneListWrap>
 </template>
 
 <script>
+import OpenMilestone from '@/components/issue/milestone/OpenMilestone';
+import { MilestoneListWrap } from '@/style/styled';
+
 export default {
   updated() {
     // console.log(1);
+  },
+  components: {
+    OpenMilestone,
+    MilestoneListWrap,
   },
 };
 </script>
