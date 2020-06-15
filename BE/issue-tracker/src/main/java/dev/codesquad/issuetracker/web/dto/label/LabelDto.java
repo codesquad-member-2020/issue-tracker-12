@@ -1,4 +1,4 @@
-package dev.codesquad.issuetracker.web.dto;
+package dev.codesquad.issuetracker.web.dto.label;
 
 import dev.codesquad.issuetracker.domain.label.Label;
 import lombok.Builder;

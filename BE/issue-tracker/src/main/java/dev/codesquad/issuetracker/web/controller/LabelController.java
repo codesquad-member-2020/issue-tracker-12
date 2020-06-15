@@ -1,8 +1,7 @@
 package dev.codesquad.issuetracker.web.controller;
 
 import dev.codesquad.issuetracker.service.LabelService;
-import dev.codesquad.issuetracker.web.dto.LabelDto;
-import dev.codesquad.issuetracker.web.dto.LabelRequestDto;
+import dev.codesquad.issuetracker.web.dto.label.LabelRequestDto;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

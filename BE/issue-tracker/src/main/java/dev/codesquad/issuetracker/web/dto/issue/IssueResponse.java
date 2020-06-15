@@ -1,9 +1,9 @@
-package dev.codesquad.issuetracker.web.dto;
+package dev.codesquad.issuetracker.web.dto.issue;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.codesquad.issuetracker.domain.Status;
 import dev.codesquad.issuetracker.domain.issue.Issue;
-import dev.codesquad.issuetracker.domain.milestone.Milestone;
+import dev.codesquad.issuetracker.web.dto.label.LabelDto;
+import dev.codesquad.issuetracker.web.dto.milestone.MilestoneDto;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;

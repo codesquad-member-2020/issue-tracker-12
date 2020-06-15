@@ -1,4 +1,4 @@
-package dev.codesquad.issuetracker.web.dto;
+package dev.codesquad.issuetracker.web.dto.label;
 
 import javax.validation.constraints.NotNull;
 import lombok.Data;
