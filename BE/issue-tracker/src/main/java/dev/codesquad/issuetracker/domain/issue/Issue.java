@@ -92,4 +92,20 @@ public class Issue {
             .status(Status.OPEN)
             .build();
     }
+
+    public void addAssignee(User user) {
+        users.add(user);
+    }
+
+    public void addLabel(Label label) {
+        labels.add(label);
+    }
+
+    public void addMilestone(Milestone milestone) {
+        this.milestone = milestone;
+    }
+
+    public void addUser(User user) {
+        this.user = user;
+    }
 }
