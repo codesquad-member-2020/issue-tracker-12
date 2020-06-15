@@ -20,8 +20,21 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
   props: ['type'],
+  created() {
+    this.$store.state.openMilestoneCount = this.milestonesList.filter(
+      item => item.isOpen === true,
+    ).length;
+    this.$store.state.closeMilestoneCount = this.milestonesList.filter(
+      item => item.isOpen === false,
+    ).length;
+  },
+  computed: {
+    ...mapState(['milestonesList']),
+  },
 };
 </script>
 
