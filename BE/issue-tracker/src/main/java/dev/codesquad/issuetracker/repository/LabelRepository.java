@@ -23,4 +23,8 @@ public class LabelRepository {
     public Label findOne(Long id) {
         return em.find(Label.class, id);
     }
+
+    public void remove(Label label) {
+        em.remove(label);
+    }
 }
