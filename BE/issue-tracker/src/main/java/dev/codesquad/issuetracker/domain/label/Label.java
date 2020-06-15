@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotNull;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -36,4 +37,19 @@ public class Label {
     @JsonIgnore
     @ManyToMany(mappedBy = "labels")
     private List<Issue> issues = new ArrayList<>();
+
+    @Builder
+    protected Label(String name, String description, String colorCode) {
+        this.name = name;
+        this.description = description;
+        this.colorCode = colorCode;
+    }
+
+    public static Label of(String name, String description, String colorCode) {
+        return Label.builder()
+            .name(name)
+            .description(description)
+            .colorCode(colorCode)
+            .build();
+    }
 }
