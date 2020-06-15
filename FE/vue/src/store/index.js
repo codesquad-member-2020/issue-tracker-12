@@ -6,6 +6,9 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
   state: {
+    isOpenMilestone: true,
+    openMilestoneCount: 0,
+    closeMilestoneCount: 0,
     isEdit: false,
     isCreateLabel: false,
     previewStyle: '',
@@ -88,6 +91,12 @@ const store = new Vuex.Store({
     saveLabel(state, labelInfo) {
       let target = state.labels.filter(label => label.id === labelInfo.id);
       Object.assign(target[0], labelInfo);
+    },
+    openMilestone(state) {
+      state.isOpenMilestone = true;
+    },
+    closeMilestone(state) {
+      state.isOpenMilestone = false;
     },
   },
 });
