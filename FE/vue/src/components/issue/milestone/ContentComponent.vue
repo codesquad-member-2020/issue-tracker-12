@@ -3,7 +3,7 @@
     <LabelListWrap>
       <InnerListWrap>
         <MilestoneBox></MilestoneBox>
-        <MileStoneList></MileStoneList>
+        <MilestoneList></MilestoneList>
       </InnerListWrap>
     </LabelListWrap>
   </fragment>
@@ -11,7 +11,7 @@
 
 <script>
 import MilestoneBox from '@/components/issue/milestone/MilestoneBox';
-import MileStoneList from '@/components/issue/milestone/MileStoneList';
+import MilestoneList from '@/components/issue/milestone/MilestoneList';
 import { LabelListWrap, InnerListWrap } from '@/style/styled';
 
 export default {
@@ -19,7 +19,7 @@ export default {
     LabelListWrap,
     InnerListWrap,
     MilestoneBox,
-    MileStoneList,
+    MilestoneList,
   },
 };
 </script>
