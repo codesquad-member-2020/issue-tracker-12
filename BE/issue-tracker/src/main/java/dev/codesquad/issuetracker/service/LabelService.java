@@ -36,4 +36,12 @@ public class LabelService {
         return label.update(labelRequest.getName(), labelRequest.getDescription(),
             labelRequest.getTextColor(), labelRequest.getBackgroundColor());
     }
+
+    @Transactional
+    public Label remove(Long labelId) {
+        Label label = labelRepository.findOne(labelId);
+        label.remove(label);
+        labelRepository.remove(label);
+        return label;
+    }
 }
