@@ -3,12 +3,13 @@
     <OpenMilestone></OpenMilestone>
   </MilestoneListWrap>
   <MilestoneListWrap v-else>
-    close
+    <CloseMilestone></CloseMilestone>
   </MilestoneListWrap>
 </template>
 
 <script>
 import OpenMilestone from '@/components/issue/milestone/OpenMilestone';
+import CloseMilestone from '@/components/issue/milestone/CloseMilestone';
 import { MilestoneListWrap } from '@/style/styled';
 
 export default {
@@ -18,6 +19,7 @@ export default {
   components: {
     OpenMilestone,
     MilestoneListWrap,
+    CloseMilestone,
   },
 };
 </script>
