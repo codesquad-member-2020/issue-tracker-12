@@ -29,7 +29,8 @@
       </Complete>
       <Update>
         <span>Edit</span>
-        <span>Close</span>
+        <span v-if="!state">Close</span>
+        <span v-else>Reopen</span>
         <span>Delete</span>
       </Update>
     </RightContent>
@@ -50,7 +51,10 @@ import {
 } from '@/style/styled';
 
 export default {
-  props: ['milestone'],
+  props: ['milestone', 'state'],
+  created() {
+    console.log(this.state);
+  },
   computed: {
     completeIssue() {
       const arrMileStone = Array.from(this.milestone.linkIssues).length;
