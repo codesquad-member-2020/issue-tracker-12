@@ -32,11 +32,10 @@ export default {
 
 .logo {
   vertical-align: text-bottom;
-  margin-right: 4px;
+  margin-right: 10px;
 }
 .state-container {
-  /* padding: 6px 10px; */
-  width: 100px;
+  width: 90px;
 }
 
 .closeContainer {
