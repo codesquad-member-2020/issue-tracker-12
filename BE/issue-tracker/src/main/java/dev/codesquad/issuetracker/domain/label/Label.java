@@ -57,4 +57,12 @@ public class Label {
             .backgroundColor(backgroundColor)
             .build();
     }
+
+    public Label update(String name, String description, String textColor, String backgroundColor) {
+        this.name = name;
+        this.description = description;
+        this.textColor = textColor;
+        this.backgroundColor = backgroundColor;
+        return this;
+    }
 }
