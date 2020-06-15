@@ -1,20 +1,20 @@
 <template>
-  <LabelHedaer class="headerContainer">
+  <Hedaer class="headerContainer">
     <RouterBox />
     <CreateButton :btnTitle="'New Label'"></CreateButton>
-  </LabelHedaer>
+  </Hedaer>
 </template>
 
 <script>
 import RouterBox from '@/components/common/RouterBox';
 import CreateButton from '@/components/common/CreateButton';
-import { LabelHedaer } from '@/style/styled';
+import { Hedaer } from '@/style/styled';
 
 export default {
   components: {
     RouterBox,
     CreateButton,
-    LabelHedaer,
+    Hedaer,
   },
 };
 </script>

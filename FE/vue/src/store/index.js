@@ -6,6 +6,9 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
   state: {
+    isOpenMilestone: true,
+    openMilestoneCount: 0,
+    closeMilestoneCount: 0,
     isEdit: false,
     isCreateLabel: false,
     previewStyle: '',
@@ -51,6 +54,62 @@ const store = new Vuex.Store({
         labelName: 'question',
       },
     ],
+    milestonesList: [
+      {
+        id: 1,
+        title: '마일스톤 1',
+        dueDate: '2020-06-26',
+        description: '이번 배포를 위한 스프린트1',
+        isOpen: true,
+        linkIssues: [
+          {
+            isOpen: true,
+          },
+          {
+            isOpen: true,
+          },
+          {
+            isOpen: false,
+          },
+        ],
+      },
+      {
+        id: 2,
+        title: '[Vue] 마일스톤 목록 생성',
+        dueDate: '2020-06-26',
+        description: '마일스톤 목록을 추가한다',
+        isOpen: true,
+        linkIssues: [
+          {
+            isOpen: true,
+          },
+          {
+            isOpen: true,
+          },
+          {
+            isOpen: true,
+          },
+        ],
+      },
+      {
+        id: 3,
+        title: 'Vue component 생성',
+        dueDate: '2020-07-16',
+        description: 'Vue component 추가',
+        isOpen: false,
+        linkIssues: [
+          {
+            isOpen: true,
+          },
+          {
+            isOpen: false,
+          },
+          {
+            isOpen: false,
+          },
+        ],
+      },
+    ],
   },
   mutations: {
     changeLabelName(state, labelName) {
@@ -88,6 +147,12 @@ const store = new Vuex.Store({
     saveLabel(state, labelInfo) {
       let target = state.labels.filter(label => label.id === labelInfo.id);
       Object.assign(target[0], labelInfo);
+    },
+    openMilestone(state) {
+      state.isOpenMilestone = true;
+    },
+    closeMilestone(state) {
+      state.isOpenMilestone = false;
     },
   },
 });

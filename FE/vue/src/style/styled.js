@@ -48,7 +48,7 @@ export const CreateButton = styled.button`
   appearance: none;
 `;
 
-export const LabelHedaer = styled.div`
+export const Hedaer = styled.div`
   display: flex;
   justify-content: space-between;
   margin: 20px 0px;
@@ -401,5 +401,104 @@ export const LabelNameError = styled.div`
     pointer-events: none;
     content: ' ';
     border: solid transparent;
+  }
+`;
+
+export const MilestoneListWrap = styled.div`
+  width: 99.9%;
+  border-left: 1px solid #d1d5da;
+  border-right: 1px solid #d1d5da;
+  box-sizing: border-box;
+`;
+
+export const MilestoneItemWrap = styled.div`
+  border-bottom: 1px solid #d1d5da;
+`;
+
+export const MilestoneTitle = styled.div`
+  font-size: 24px;
+`;
+
+export const MilestoneDate = styled.div`
+  font-size: 14px;
+  margin: 5px 0px;
+`;
+
+export const MilestoneDescription = styled.div`
+  font-size: 16px;
+`;
+
+export const ContentContainer = styled.div`
+  padding: 15px 20px;
+`;
+
+export const ItemWrapper = styled.div`
+  display: flex;
+  justify-content: space-around;
+`;
+
+export const LeftContent = styled.div`
+  width: 45%;
+  padding: 15px 20px;
+`;
+
+export const RightContent = styled.div`
+  width: 45%;
+  padding: 15px 20px;
+`;
+
+export const Complete = styled.div`
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: #586069;
+  span {
+    margin-right: 15px;
+    font-weight: 300;
+    span {
+      font-weight: 600;
+      color: #555;
+      margin-right: 3px;
+    }
+  }
+`;
+
+export const Update = styled.div`
+  font-size: 14px;
+
+  color: #0366d6;
+  span {
+    cursor: pointer;
+    margin-right: 8px;
+  }
+  span:hover {
+    text-decoration: underline;
+  }
+  span:last-child {
+    color: #cb2431;
+    text-decoration: none;
+  }
+`;
+
+const complete = { complete: Number };
+export const ProgressBar = styled('div', complete)`
+  line-height: 1.5;
+  color: #6a737d;
+  list-style: none;
+  font-size: 12px;
+  box-sizing: border-box;
+  display: block;
+  overflow: hidden;
+  background-color: #eaecef;
+  border-radius: 3px;
+  height: 10px;
+  margin-top: 7px;
+  margin-bottom: 12px;
+  width: 100%;
+
+  span {
+    display: block;
+    height: 100%;
+    background-color: #2cbe4e;
+    width: ${props => props.complete + `%`};
   }
 `;
