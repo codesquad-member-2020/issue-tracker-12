@@ -2,6 +2,7 @@ package dev.codesquad.issuetracker.repository;
 
 import dev.codesquad.issuetracker.domain.label.Label;
 import java.util.List;
+import java.util.Optional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
@@ -20,8 +21,8 @@ public class LabelRepository {
         em.persist(label);
     }
 
-    public Label findOne(Long id) {
-        return em.find(Label.class, id);
+    public Optional<Label> findOne(Long id) {
+        return Optional.ofNullable(em.find(Label.class, id));
     }
 
     public void remove(Label label) {

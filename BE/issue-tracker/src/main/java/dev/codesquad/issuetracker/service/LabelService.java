@@ -1,5 +1,6 @@
 package dev.codesquad.issuetracker.service;
 
+import dev.codesquad.issuetracker.common.exception.DataNotFoundException;
 import dev.codesquad.issuetracker.domain.label.Label;
 import dev.codesquad.issuetracker.repository.LabelRepository;
 import dev.codesquad.issuetracker.web.dto.ResultDto;
@@ -32,16 +33,20 @@ public class LabelService {
 
     @Transactional
     public Label update(Long labelId, LabelRequest labelRequest) {
-        Label label = labelRepository.findOne(labelId);
+        Label label = findLabel(labelId);
         return label.update(labelRequest.getName(), labelRequest.getDescription(),
             labelRequest.getTextColor(), labelRequest.getBackgroundColor());
     }
 
     @Transactional
     public Label remove(Long labelId) {
-        Label label = labelRepository.findOne(labelId);
+        Label label = findLabel(labelId);
         label.remove(label);
         labelRepository.remove(label);
         return label;
+    }
+
+    private Label findLabel(Long labelId) {
+        return labelRepository.findOne(labelId).orElseThrow(() -> new DataNotFoundException("Label is not exist"));
     }
 }
