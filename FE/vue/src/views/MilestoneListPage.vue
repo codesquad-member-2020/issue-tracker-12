@@ -1,14 +1,18 @@
 <template>
   <div>
-    <RouterBox />
+    <HeaderComponent></HeaderComponent>
+    <ContentComponent></ContentComponent>
   </div>
 </template>
 
 <script>
-import RouterBox from '@/components/common/RouterBox';
+import HeaderComponent from '@/components/issue/milestone/HeaderComponent';
+import ContentComponent from '@/components/issue/milestone/ContentComponent';
+
 export default {
   components: {
-    RouterBox,
+    HeaderComponent,
+    ContentComponent,
   },
 };
 </script>
