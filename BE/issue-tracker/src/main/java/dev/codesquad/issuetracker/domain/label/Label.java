@@ -32,24 +32,29 @@ public class Label {
     private String description;
 
     @NotNull
-    private String colorCode;
+    private String textColor;
+
+    @NotNull
+    private String backgroundColor;
 
     @JsonIgnore
     @ManyToMany(mappedBy = "labels")
     private List<Issue> issues = new ArrayList<>();
 
     @Builder
-    protected Label(String name, String description, String colorCode) {
+    protected Label(String name, String description, String textColor, String backgroundColor) {
         this.name = name;
         this.description = description;
-        this.colorCode = colorCode;
+        this.textColor = textColor;
+        this.backgroundColor = backgroundColor;
     }
 
-    public static Label of(String name, String description, String colorCode) {
+    public static Label of(String name, String description, String textColor, String backgroundColor) {
         return Label.builder()
             .name(name)
             .description(description)
-            .colorCode(colorCode)
+            .textColor(textColor)
+            .backgroundColor(backgroundColor)
             .build();
     }
 }
