@@ -54,6 +54,44 @@ const store = new Vuex.Store({
         labelName: 'question',
       },
     ],
+    milestonesList: [
+      {
+        id: 1,
+        title: '마일스톤 1',
+        dueDate: '2020-06-26',
+        description: '이번 배포를 위한 스프린트1',
+        isOpen: true,
+        linkIssues: [
+          {
+            isOpen: true,
+          },
+          {
+            isOpen: true,
+          },
+          {
+            isOpen: false,
+          },
+        ],
+      },
+      {
+        id: 2,
+        title: '스프린트2',
+        dueDate: '2020-07-26',
+        description: '이번 배포를 위한 스프린트2',
+        isOpen: true,
+        linkIssues: [
+          {
+            isOpen: true,
+          },
+          {
+            isOpen: true,
+          },
+          {
+            isOpen: true,
+          },
+        ],
+      },
+    ],
   },
   mutations: {
     changeLabelName(state, labelName) {
