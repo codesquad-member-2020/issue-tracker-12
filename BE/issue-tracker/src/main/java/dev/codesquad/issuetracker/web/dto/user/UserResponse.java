@@ -1,4 +1,4 @@
-package dev.codesquad.issuetracker.web.dto;
+package dev.codesquad.issuetracker.web.dto.user;
 
 import dev.codesquad.issuetracker.domain.user.User;
 import lombok.Builder;

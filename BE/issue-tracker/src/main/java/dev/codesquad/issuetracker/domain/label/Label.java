@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotNull;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -31,9 +32,47 @@ public class Label {
     private String description;
 
     @NotNull
-    private String colorCode;
+    private String textColor;
+
+    @NotNull
+    private String backgroundColor;
 
     @JsonIgnore
     @ManyToMany(mappedBy = "labels")
     private List<Issue> issues = new ArrayList<>();
+
+    @Builder
+    protected Label(String name, String description, String textColor, String backgroundColor) {
+        this.name = name;
+        this.description = description;
+        this.textColor = textColor;
+        this.backgroundColor = backgroundColor;
+    }
+
+    public static Label of(String name, String description, String textColor, String backgroundColor) {
+        return Label.builder()
+            .name(name)
+            .description(description)
+            .textColor(textColor)
+            .backgroundColor(backgroundColor)
+            .build();
+    }
+
+    public Label update(String name, String description, String textColor, String backgroundColor) {
+        this.name = name;
+        this.description = description;
+        this.textColor = textColor;
+        this.backgroundColor = backgroundColor;
+        return this;
+    }
+
+    /**
+     *
+     * 연관관계의 주인인 issue에서 f.k를 제거한다.
+     */
+    public void remove(Label label) {
+        for (Issue issue : issues) {
+            issue.getLabels().remove(label);
+        }
+    }
 }

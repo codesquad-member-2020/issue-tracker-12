@@ -1,23 +1,23 @@
-package dev.codesquad.issuetracker.web.dto;
+package dev.codesquad.issuetracker.web.dto.milestone;
 
 import dev.codesquad.issuetracker.domain.milestone.Milestone;
 import lombok.Builder;
 import lombok.Data;
 
 @Data
-public class MilestoneDto {
+public class MilestoneResponse {
 
     private Long id;
     private String title;
 
     @Builder
-    protected MilestoneDto(Long id, String title) {
+    protected MilestoneResponse(Long id, String title) {
         this.id = id;
         this.title = title;
     }
 
-    public static MilestoneDto of(Milestone milestone) {
-        return MilestoneDto.builder()
+    public static MilestoneResponse of(Milestone milestone) {
+        return MilestoneResponse.builder()
             .id(milestone.getId())
             .title(milestone.getTitle())
             .build();

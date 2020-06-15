@@ -13,4 +13,10 @@ public class ExceptionAdvice {
     private String catchInvalidTokenException(InvalidTokenException e) {
         return e.getMessage();
     }
+
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    private String catchDataNotFoundException(DataNotFoundException e) {
+        return e.getMessage();
+    }
 }
