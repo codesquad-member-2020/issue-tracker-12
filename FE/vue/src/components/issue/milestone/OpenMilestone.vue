@@ -5,7 +5,7 @@
       v-for="milestone in openMilestoneList"
       :key="milestone.id"
     >
-      <Milestone :milestone="milestone" />
+      <Milestone :milestone="milestone" :state="false" />
     </MilestoneItemWrap>
   </fragment>
 </template>
