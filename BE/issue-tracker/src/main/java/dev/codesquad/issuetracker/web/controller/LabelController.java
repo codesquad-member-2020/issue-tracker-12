@@ -1,7 +1,7 @@
 package dev.codesquad.issuetracker.web.controller;
 
 import dev.codesquad.issuetracker.service.LabelService;
-import dev.codesquad.issuetracker.web.dto.label.LabelRequestDto;
+import dev.codesquad.issuetracker.web.dto.label.LabelRequest;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -23,9 +23,7 @@ public class LabelController {
     }
 
     @PostMapping("/labels")
-    public ResponseEntity creatLabel(@RequestBody @Valid LabelRequestDto request) {
-        return new ResponseEntity(labelService
-            .create(request.getName(), request.getDescription(), request.getColorCode()),
-            HttpStatus.OK);
+    public ResponseEntity creatLabel(@RequestBody @Valid LabelRequest labelRequest) {
+        return new ResponseEntity(labelService.create(labelRequest), HttpStatus.OK);
     }
 }

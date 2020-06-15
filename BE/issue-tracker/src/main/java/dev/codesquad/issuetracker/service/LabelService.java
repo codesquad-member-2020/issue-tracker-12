@@ -3,6 +3,7 @@ package dev.codesquad.issuetracker.service;
 import dev.codesquad.issuetracker.domain.label.Label;
 import dev.codesquad.issuetracker.repository.LabelRepository;
 import dev.codesquad.issuetracker.web.dto.ResultDto;
+import dev.codesquad.issuetracker.web.dto.label.LabelRequest;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,8 +22,10 @@ public class LabelService {
     }
 
     @Transactional
-    public Label create(String name, String description, String colorCode) {
-        Label label = Label.of(name, description, colorCode);
+    public Label create(LabelRequest labelRequest) {
+        Label label = Label
+            .of(labelRequest.getName(), labelRequest.getDescription(), labelRequest.getTextColor(),
+                labelRequest.getBackgroundColor());
         labelRepository.save(label);
         return label;
     }
