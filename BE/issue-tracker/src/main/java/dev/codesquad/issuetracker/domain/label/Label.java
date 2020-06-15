@@ -65,4 +65,14 @@ public class Label {
         this.backgroundColor = backgroundColor;
         return this;
     }
+
+    /**
+     *
+     * 연관관계의 주인인 issue에서 f.k를 제거한다.
+     */
+    public void remove(Label label) {
+        for (Issue issue : issues) {
+            issue.getLabels().remove(label);
+        }
+    }
 }
