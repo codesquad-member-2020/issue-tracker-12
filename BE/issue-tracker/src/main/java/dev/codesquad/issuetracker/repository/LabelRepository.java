@@ -19,4 +19,8 @@ public class LabelRepository {
     public void save(Label label) {
         em.persist(label);
     }
+
+    public Label findOne(Long id) {
+        return em.find(Label.class, id);
+    }
 }

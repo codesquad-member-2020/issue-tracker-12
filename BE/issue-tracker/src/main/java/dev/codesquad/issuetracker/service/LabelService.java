@@ -29,4 +29,11 @@ public class LabelService {
         labelRepository.save(label);
         return label;
     }
+
+    @Transactional
+    public Label update(Long labelId, LabelRequest labelRequest) {
+        Label label = labelRepository.findOne(labelId);
+        return label.update(labelRequest.getName(), labelRequest.getDescription(),
+            labelRequest.getTextColor(), labelRequest.getBackgroundColor());
+    }
 }
