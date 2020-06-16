@@ -502,3 +502,85 @@ export const ProgressBar = styled('div', complete)`
     width: ${props => props.complete + `%`};
   }
 `;
+
+export const SubHeader = styled.div`
+  display: flex;
+  padding-bottom: 8px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid #e1e4e8;
+  flex-flow: row wrap;
+`;
+
+export const SubHeaderTitle = styled.h2`
+  font-size: 24px;
+  font-weight: 400;
+  flex: 1 1 auto;
+`;
+
+export const SubHeaderDescription = styled.p`
+  font-size: 14px;
+  color: #586069;
+  flex: 1 100%;
+  margin-top: 0;
+  margin-bottom: 10px;
+
+  span {
+    color: #0366d6;
+    cursor: pointer;
+    :hover {
+      text-decoration: underline;
+    }
+  }
+`;
+
+export const ContentWrapper = styled.div`
+  width: 100%;
+  padding-bottom: 8px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid #e1e4e8;
+`;
+
+export const FormContainer = styled.div`
+  width: 66.6%;
+  input {
+    width: 440px;
+    padding: 0px 8px;
+    font-size: 14px;
+    border: 1px solid #d1d5da;
+    border-radius: 3px;
+    outline: none;
+    box-shadow: inset 0 1px 2px rgba(27, 31, 35, 0.075);
+    background-color: #fafbfc;
+    min-height: 32px;
+
+    ::placeholder {
+      color: #d1d5da;
+    }
+  }
+
+  textarea {
+    width: 100%;
+    max-width: 100%;
+    height: 200px;
+    min-height: 200px;
+    border: 1px solid #d1d5da;
+    border-radius: 3px;
+    outline: none;
+    box-shadow: inset 0 1px 2px rgba(27, 31, 35, 0.075);
+    background-color: #fafbfc;
+  }
+`;
+
+export const LabelTitle = styled.div`
+  font-weight: 600;
+  margin-bottom: 6px;
+`;
+
+export const ItemContainer = styled.div`
+  margin: 15px 0px;
+`;
+
+export const BtnContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+`;
