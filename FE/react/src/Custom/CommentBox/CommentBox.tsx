@@ -14,7 +14,7 @@ const CommentBox = () => {
   const [isEdit, setIsEdit] = useState(false);
 
   return (
-    <Flex direction="column">
+    <Flex direction="column" width="100%">
       <div css={headerStyle}>
         <Flex alignItemCenter={true} customCSS={headerCustomStyle}>
           <Flex alignItemCenter={true} gap={10}>
