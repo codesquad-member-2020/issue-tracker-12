@@ -1,6 +1,8 @@
 package dev.codesquad.issuetracker.repository;
 
+import dev.codesquad.issuetracker.common.exception.DataNotFoundException;
 import dev.codesquad.issuetracker.domain.label.Label;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import javax.persistence.EntityManager;
@@ -27,5 +29,17 @@ public class LabelRepository {
 
     public void remove(Label label) {
         em.remove(label);
+    }
+
+    public List<Label> findList(List<Long> ids) {
+        List<Label> labels = new ArrayList<>();
+        if (ids.size() == 0) {
+            return labels;
+        }
+        for (Long id : ids) {
+            Label label = findOne(id).orElseThrow(() -> new DataNotFoundException("Label is not exist"));
+            labels.add(label);
+        }
+        return labels;
     }
 }
