@@ -112,6 +112,13 @@ public class IssueService {
         return IssueDetailResponse.of(issue);
     }
 
+    @Transactional
+    public String updateTitle(Long issueId, String title) {
+        Issue issue = findIssue(issueId);
+        issue.updateTitle(title);
+        return issue.getTitle();
+    }
+
     private Issue findIssue(Long issueId) {
         return issueRepository.findOne(issueId)
             .orElseThrow(() -> new DataNotFoundException("Issue is not exist"));
