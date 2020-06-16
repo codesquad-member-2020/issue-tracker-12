@@ -6,6 +6,7 @@ import Button from '@Custom/Button/Button';
 import LabelButton from '@Custom/LabelButton/LabelButton';
 import Input from '@Custom/Input/Input';
 import Icon from '@Icon/Icon';
+import { useHistory } from 'react-router-dom';
 
 const exampleFilters = [
   'Open Issues',
@@ -16,6 +17,11 @@ const exampleFilters = [
 ];
 
 const Header = () => {
+  const history = useHistory();
+  const clickHandler = () => {
+    history.push('/new-issue');
+  };
+
   return (
     <Flex direction="column" customCSS={headerStyle} gap={'2rem'}>
       <Flex align="spaceBetween">
@@ -35,7 +41,9 @@ const Header = () => {
           <LabelButton iconType="tag" label="Labels" width="120px" />
           <LabelButton iconType="task" label="MileStones" width="120px" />
         </Flex>
-        <Button width="100px">New Issue</Button>
+        <Button width="100px" onClick={clickHandler}>
+          New Issue
+        </Button>
       </Flex>
       <Flex align="left" alignItemCenter={true} gap={'0.3rem'}>
         <Icon icon="close" size={'1rem'}></Icon>
