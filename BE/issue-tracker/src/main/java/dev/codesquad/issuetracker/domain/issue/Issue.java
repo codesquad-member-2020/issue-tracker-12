@@ -138,4 +138,8 @@ public class Issue {
     public void updateContent(String content) {
         this.content = content;
     }
+
+    public void updateStatus(Status status) {
+        this.status = status;
+    }
 }

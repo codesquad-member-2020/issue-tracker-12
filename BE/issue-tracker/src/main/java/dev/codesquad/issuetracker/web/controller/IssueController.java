@@ -1,5 +1,6 @@
 package dev.codesquad.issuetracker.web.controller;
 
+import dev.codesquad.issuetracker.domain.Status;
 import dev.codesquad.issuetracker.service.IssueService;
 import dev.codesquad.issuetracker.web.dto.ResultResponse;
 import dev.codesquad.issuetracker.web.dto.issue.IssueCreateResponse;
@@ -53,5 +54,11 @@ public class IssueController {
     public ResponseEntity<String> updateIssueContent(@PathVariable Long id,
         @RequestBody String content) {
         return new ResponseEntity(issueService.updateContent(id, content), HttpStatus.OK);
+    }
+
+    @PatchMapping("/{id}/status")
+    public ResponseEntity<Status> updateStatus(@PathVariable Long id,
+        @RequestBody Status status) {
+        return new ResponseEntity(issueService.updateStatus(id, status), HttpStatus.OK);
     }
 }

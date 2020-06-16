@@ -126,6 +126,13 @@ public class IssueService {
         return issue.getContent();
     }
 
+    @Transactional
+    public Status updateStatus(Long issueId, Status status) {
+        Issue issue = findIssue(issueId);
+        issue.updateStatus(status);
+        return issue.getStatus();
+    }
+
     /**
      * query 최적화 필요
      */
