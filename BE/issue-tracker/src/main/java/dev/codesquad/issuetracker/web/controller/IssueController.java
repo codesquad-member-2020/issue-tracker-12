@@ -44,7 +44,14 @@ public class IssueController {
     }
 
     @PatchMapping("/{id}/title")
-    public ResponseEntity updateIssueTitle(@PathVariable Long id, @RequestBody String title) {
+    public ResponseEntity<String> updateIssueTitle(@PathVariable Long id,
+        @RequestBody String title) {
         return new ResponseEntity(issueService.updateTitle(id, title), HttpStatus.OK);
+    }
+
+    @PatchMapping("/{id}/content")
+    public ResponseEntity<String> updateIssueContent(@PathVariable Long id,
+        @RequestBody String content) {
+        return new ResponseEntity(issueService.updateContent(id, content), HttpStatus.OK);
     }
 }
