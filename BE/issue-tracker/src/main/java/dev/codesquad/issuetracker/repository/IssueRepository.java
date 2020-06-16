@@ -3,6 +3,7 @@ package dev.codesquad.issuetracker.repository;
 import dev.codesquad.issuetracker.domain.Status;
 import dev.codesquad.issuetracker.domain.issue.Issue;
 import java.util.List;
+import java.util.Optional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
@@ -17,8 +18,8 @@ public class IssueRepository {
         em.persist(issue);
     }
 
-    public Issue findOne(Long id) {
-        return em.find(Issue.class, id);
+    public Optional<Issue> findOne(Long id) {
+        return Optional.ofNullable(em.find(Issue.class, id));
     }
 
     public List<Issue> findAll() {
