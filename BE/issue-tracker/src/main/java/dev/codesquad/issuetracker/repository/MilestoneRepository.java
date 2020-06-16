@@ -3,6 +3,7 @@ package dev.codesquad.issuetracker.repository;
 import dev.codesquad.issuetracker.domain.Status;
 import dev.codesquad.issuetracker.domain.milestone.Milestone;
 import java.util.List;
+import java.util.Optional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
@@ -22,5 +23,9 @@ public class MilestoneRepository {
             + " where m.status = :status", Milestone.class)
             .setParameter("status", status)
             .getResultList();
+    }
+
+    public Optional<Milestone> findOne(Long id) {
+        return Optional.ofNullable(em.find(Milestone.class, id));
     }
 }

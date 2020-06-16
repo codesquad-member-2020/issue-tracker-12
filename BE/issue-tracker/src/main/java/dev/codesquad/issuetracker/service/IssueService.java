@@ -1,11 +1,17 @@
 package dev.codesquad.issuetracker.service;
 
+import dev.codesquad.issuetracker.common.exception.DataNotFoundException;
 import dev.codesquad.issuetracker.domain.Status;
+import dev.codesquad.issuetracker.domain.issue.Issue;
 import dev.codesquad.issuetracker.domain.label.Label;
+import dev.codesquad.issuetracker.domain.milestone.Milestone;
+import dev.codesquad.issuetracker.domain.user.User;
 import dev.codesquad.issuetracker.repository.IssueRepository;
 import dev.codesquad.issuetracker.repository.LabelRepository;
 import dev.codesquad.issuetracker.repository.MilestoneRepository;
 import dev.codesquad.issuetracker.repository.UserRepository;
+import dev.codesquad.issuetracker.web.dto.issue.IssueCreateResponse;
+import dev.codesquad.issuetracker.web.dto.issue.IssueRequest;
 import dev.codesquad.issuetracker.web.dto.issue.IssueResponse;
 import dev.codesquad.issuetracker.web.dto.milestone.MilestoneResponse;
 import dev.codesquad.issuetracker.web.dto.ResultResponse;
@@ -55,6 +61,25 @@ public class IssueService {
             .build();
     }
 
+    /**
+     *
+     * user는 oauth 적용 후 token 정보에서 가져오도록 한다.
+     */
+    @Transactional
+    public IssueCreateResponse create(IssueRequest issueRequest) {
+        List<User> assignees = userRepository.findList(issueRequest.getUserId());
+        List<Label> labels = labelRepository.findList(issueRequest.getLabelId());
+        Milestone milestone = findMilestone(issueRequest.getMilestoneId());
+
+        // oauth user 정보로 가져오도록 refactoring 한다.
+        User user = userRepository.findOne(1L).orElseThrow(null);
+
+        Issue issue = Issue.of(issueRequest.getTitle(), issueRequest.getContent());
+        issue.update(user, assignees, labels, milestone);
+        issueRepository.save(issue);
+        return IssueCreateResponse.of(issue);
+    }
+
     @Transactional(readOnly = true)
     public List<UserResponse> getUserResponses() {
         return userRepository.findAll().stream()
@@ -79,5 +104,23 @@ public class IssueService {
         return milestoneRepository.findAllByStatus(Status.OPEN).stream()
             .map(milestone -> MilestoneResponse.of(milestone))
             .collect(Collectors.toList());
+    }
+
+    private User findUser(Long userId) {
+        return userRepository.findOne(userId)
+            .orElseThrow(() -> new DataNotFoundException("User is not exist"));
+    }
+
+    private Label findLabel(Long labelId) {
+        return labelRepository.findOne(labelId)
+            .orElseThrow(() -> new DataNotFoundException("Label is not exist"));
+    }
+
+    private Milestone findMilestone(Long milestoneId) {
+        if (milestoneId == -1) {
+            return null;
+        }
+        return milestoneRepository.findOne(milestoneId)
+            .orElseThrow(() -> new DataNotFoundException("Milestone is not exist"));
     }
 }

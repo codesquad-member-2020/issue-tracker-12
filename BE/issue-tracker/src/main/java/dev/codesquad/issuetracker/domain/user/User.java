@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -39,4 +40,17 @@ public class User {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Issue> issueList = new ArrayList<>();
+
+    @Builder
+    protected User(String githubId, String profileUrl) {
+        this.githubId = githubId;
+        this.profileUrl = profileUrl;
+    }
+
+    public static User of(String githubId, String profileUrl) {
+        return User.builder()
+            .githubId(githubId)
+            .profileUrl(profileUrl)
+            .build();
+    }
 }

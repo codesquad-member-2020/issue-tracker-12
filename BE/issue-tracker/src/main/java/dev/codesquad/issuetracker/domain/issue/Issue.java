@@ -8,6 +8,7 @@ import dev.codesquad.issuetracker.domain.user.User;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -26,7 +27,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
@@ -91,5 +91,43 @@ public class Issue {
             .content(content)
             .status(Status.OPEN)
             .build();
+    }
+
+    public void addAssignee(User user) {
+        users.add(user);
+    }
+
+    public void addLabel(Label label) {
+        labels.add(label);
+    }
+
+    public void addMilestone(Milestone milestone) {
+        if (Objects.isNull(milestone)) {
+            return;
+        }
+        this.milestone = milestone;
+    }
+
+    public void addUser(User user) {
+        this.user = user;
+    }
+
+    public void addLabels(List<Label> labels) {
+        for (Label label : labels) {
+            addLabel(label);
+        }
+    }
+
+    public void addAssignees(List<User> assignees) {
+        for (User assignee : assignees) {
+            users.add(assignee);
+        }
+    }
+
+    public void update(User user, List<User> assignees, List<Label> labels, Milestone milestone) {
+        addUser(user);
+        addAssignees(assignees);
+        addLabels(labels);
+        addMilestone(milestone);
     }
 }
