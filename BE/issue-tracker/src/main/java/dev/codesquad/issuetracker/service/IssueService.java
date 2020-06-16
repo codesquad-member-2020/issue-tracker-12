@@ -10,6 +10,7 @@ import dev.codesquad.issuetracker.repository.IssueRepository;
 import dev.codesquad.issuetracker.repository.LabelRepository;
 import dev.codesquad.issuetracker.repository.MilestoneRepository;
 import dev.codesquad.issuetracker.repository.UserRepository;
+import dev.codesquad.issuetracker.web.dto.issue.IssueCreateResponse;
 import dev.codesquad.issuetracker.web.dto.issue.IssueRequest;
 import dev.codesquad.issuetracker.web.dto.issue.IssueResponse;
 import dev.codesquad.issuetracker.web.dto.milestone.MilestoneResponse;
@@ -62,26 +63,21 @@ public class IssueService {
 
     /**
      *
-     * id가 없거나, 지정 안해주거나, null인 경우는..?
+     * user는 oauth 적용 후 token 정보에서 가져오도록 한다.
      */
     @Transactional
-    public IssueResponse create(IssueRequest issueRequest, Long userId, Long labelId, Long milestoneId) {
-        User assignee = findUser(userId);
-        Label label = findLabel(labelId);
-        Milestone milestone = findMilestone(milestoneId);
+    public IssueCreateResponse create(IssueRequest issueRequest) {
+        List<User> assignees = userRepository.findList(issueRequest.getUserId());
+        List<Label> labels = labelRepository.findList(issueRequest.getLabelId());
+        Milestone milestone = findMilestone(issueRequest.getMilestoneId());
 
         // oauth user 정보로 가져오도록 refactoring 한다.
         User user = userRepository.findOne(1L).orElseThrow(null);
 
         Issue issue = Issue.of(issueRequest.getTitle(), issueRequest.getContent());
-        issue.addAssignee(assignee);
-        issue.addLabel(label);
-        issue.addMilestone(milestone);
-        issue.addUser(user);
-
+        issue.update(user, assignees, labels, milestone);
         issueRepository.save(issue);
-
-        return IssueResponse.of(issue);
+        return IssueCreateResponse.of(issue);
     }
 
     @Transactional(readOnly = true)
@@ -121,6 +117,9 @@ public class IssueService {
     }
 
     private Milestone findMilestone(Long milestoneId) {
+        if (milestoneId == -1) {
+            return null;
+        }
         return milestoneRepository.findOne(milestoneId)
             .orElseThrow(() -> new DataNotFoundException("Milestone is not exist"));
     }

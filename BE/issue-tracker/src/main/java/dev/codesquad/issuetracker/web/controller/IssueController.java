@@ -23,8 +23,13 @@ public class IssueController {
         return new ResponseEntity(issueService.viewAll(), HttpStatus.OK);
     }
 
+    /**
+     *
+     * assignee & label을 지정하지 않으면 empty array
+     * milestone을 지정하지 않으면 -1
+     */
     @PostMapping("/issues")
     public ResponseEntity createIssue(@RequestBody @Valid IssueRequest issueRequest) {
-        return new ResponseEntity(issueService.create(issueRequest, 1L, 1L, 1L), HttpStatus.OK);
+        return new ResponseEntity(issueService.create(issueRequest), HttpStatus.OK);
     }
 }
