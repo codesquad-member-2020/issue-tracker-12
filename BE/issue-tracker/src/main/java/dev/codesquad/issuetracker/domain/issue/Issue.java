@@ -130,4 +130,8 @@ public class Issue {
         addLabels(labels);
         addMilestone(milestone);
     }
+
+    public void updateTitle(String title) {
+        this.title = title;
+    }
 }
