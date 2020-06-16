@@ -23,7 +23,7 @@ public class IssueController {
         return new ResponseEntity(issueService.viewAll(), HttpStatus.OK);
     }
 
-    @PostMapping("/issues/new")
+    @PostMapping("/issues")
     public ResponseEntity createIssue(@RequestBody @Valid IssueRequest issueRequest) {
         return new ResponseEntity(issueService.create(issueRequest, 1L, 1L, 1L), HttpStatus.OK);
     }
