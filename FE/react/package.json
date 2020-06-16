@@ -6,6 +6,8 @@
   "scripts": {
     "start": "webpack-dev-server --env=dev",
     "storybook": "start-storybook -p 6006 -c .storybook",
+    "build-storybook": "build-storybook -c .storybook",
+    "deploy-storybook": "now --prod deploy storybook-static --local-config=now.json && now alias --local-config=now.json",
     "test": "jest -c jest.config.js",
     "build": "webpack --env=prod",
     "cypress": "cypress open"
@@ -21,6 +23,7 @@
     "emotion-theming": "^10.0.27",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-markdown": "^4.3.1",
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.2.0",
     "redux": "^4.0.5",

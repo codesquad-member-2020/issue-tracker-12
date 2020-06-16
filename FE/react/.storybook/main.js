@@ -26,7 +26,12 @@ module.exports = {
     config.resolve.extensions.push('.ts', '.tsx');
 
     config.resolve.alias = {
-      '@': path.resolve(__dirname, '../src/')
+      '@': path.resolve(__dirname, '../src/'),
+      '@Components': path.resolve(__dirname, '../src/Components/'),
+      '@Custom': path.resolve(__dirname, '../src/Custom/'),
+      '@Icon': path.resolve(__dirname, '../src/Icon/'),
+      '@Page': path.resolve(__dirname, '../src/Page/'),
+      '@Util': path.resolve(__dirname, '../src/Util/')
     };
 
     return config;
