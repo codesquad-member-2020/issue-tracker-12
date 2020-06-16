@@ -4,6 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import NewIssue from '@Page/NewIssue/NewIssue';
 import Main from '@Page/Main/Main';
 import Label from '@Page/Label/Label';
+import Detail from '@Page/Detail/Detail';
 import Header from '@Components/Header/Header';
 import { Global, css } from '@emotion/core';
 
@@ -16,6 +17,7 @@ const App = () => {
         <Route path="/" exact component={Main} />
         <Route path="/new-issue" exact component={NewIssue} />
         <Route path="/label" component={Label} />
+        <Route path="/detail" component={Detail} />
         <Redirect path="*" to="/" />
       </Switch>
     </BrowserRouter>
