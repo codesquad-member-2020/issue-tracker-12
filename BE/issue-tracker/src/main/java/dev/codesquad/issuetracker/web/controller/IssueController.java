@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,5 +32,10 @@ public class IssueController {
     @PostMapping("/issues")
     public ResponseEntity createIssue(@RequestBody @Valid IssueRequest issueRequest) {
         return new ResponseEntity(issueService.create(issueRequest), HttpStatus.OK);
+    }
+
+    @GetMapping("/issues/{id}")
+    public ResponseEntity viewIssueDetail(@PathVariable Long id) {
+        return new ResponseEntity(issueService.view(id), HttpStatus.OK);
     }
 }

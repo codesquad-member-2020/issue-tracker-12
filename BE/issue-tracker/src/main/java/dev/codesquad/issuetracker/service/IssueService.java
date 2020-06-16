@@ -11,10 +11,10 @@ import dev.codesquad.issuetracker.repository.LabelRepository;
 import dev.codesquad.issuetracker.repository.MilestoneRepository;
 import dev.codesquad.issuetracker.repository.UserRepository;
 import dev.codesquad.issuetracker.web.dto.issue.IssueCreateResponse;
+import dev.codesquad.issuetracker.web.dto.issue.IssueDetailResponse;
 import dev.codesquad.issuetracker.web.dto.issue.IssueRequest;
 import dev.codesquad.issuetracker.web.dto.issue.IssueResponse;
 import dev.codesquad.issuetracker.web.dto.milestone.MilestoneDto;
-import dev.codesquad.issuetracker.web.dto.milestone.MilestoneResponse;
 import dev.codesquad.issuetracker.web.dto.ResultResponse;
 import dev.codesquad.issuetracker.web.dto.ResultDto;
 import dev.codesquad.issuetracker.web.dto.user.UserResponse;
@@ -63,7 +63,6 @@ public class IssueService {
     }
 
     /**
-     *
      * user는 oauth 적용 후 token 정보에서 가져오도록 한다.
      */
     @Transactional
@@ -105,6 +104,17 @@ public class IssueService {
         return milestoneRepository.findAllByStatus(Status.OPEN).stream()
             .map(milestone -> MilestoneDto.of(milestone))
             .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public IssueDetailResponse view(Long issueId) {
+        Issue issue = findIssue(issueId);
+        return IssueDetailResponse.of(issue);
+    }
+
+    private Issue findIssue(Long issueId) {
+        return issueRepository.findOne(issueId)
+            .orElseThrow(() -> new DataNotFoundException("Issue is not exist"));
     }
 
     private User findUser(Long userId) {
