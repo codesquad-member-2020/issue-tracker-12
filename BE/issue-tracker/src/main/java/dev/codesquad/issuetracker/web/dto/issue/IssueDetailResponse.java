@@ -18,6 +18,7 @@ public class IssueDetailResponse {
 
     private Long id;
     private String title;
+    private String content;
     private String githubId;
     private LocalDate createTime;
     private Status status;
@@ -28,12 +29,12 @@ public class IssueDetailResponse {
     private List<LabelDto> labels = new ArrayList<>();
 
     @Builder
-    public IssueDetailResponse(Long id, String title, String githubId, LocalDate createTime,
-        Status status, int comment, List<Comment> comments,
-        List<User> assignees, MilestoneResponse milestone,
-        List<LabelDto> labels) {
+    public IssueDetailResponse(Long id, String title, String content, String githubId,
+        LocalDate createTime, Status status, int comment, List<Comment> comments,
+        List<User> assignees, MilestoneResponse milestone, List<LabelDto> labels) {
         this.id = id;
         this.title = title;
+        this.content = content;
         this.githubId = githubId;
         this.createTime = createTime;
         this.status = status;
@@ -48,6 +49,7 @@ public class IssueDetailResponse {
         return IssueDetailResponse.builder()
             .id(issue.getId())
             .title(issue.getTitle())
+            .content(issue.getContent())
             .githubId(issue.getUser().getGithubId())
             .createTime(issue.getCreate_time())
             .status(issue.getStatus())
