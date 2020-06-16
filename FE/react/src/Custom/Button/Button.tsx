@@ -52,7 +52,7 @@ const style = css`
   align-items: center;
   justify-content: center;
   color: #ffffff;
-  height: 100%;
+  height: 31px;
   cursor: pointer;
   &:disabled {
     cursor: not-allowed;

@@ -61,7 +61,7 @@ const idStyle = css`
 `;
 
 const headerCustomStyle = css`
-  padding: 0.5rem;
+  padding: 0.5rem 0.8rem;
   box-sizing: border-box;
 `;
 
