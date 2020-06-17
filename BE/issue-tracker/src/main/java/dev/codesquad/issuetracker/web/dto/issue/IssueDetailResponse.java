@@ -3,9 +3,9 @@ package dev.codesquad.issuetracker.web.dto.issue;
 import dev.codesquad.issuetracker.domain.Status;
 import dev.codesquad.issuetracker.domain.issue.Comment;
 import dev.codesquad.issuetracker.domain.issue.Issue;
-import dev.codesquad.issuetracker.domain.user.User;
 import dev.codesquad.issuetracker.web.dto.label.LabelDto;
 import dev.codesquad.issuetracker.web.dto.milestone.MilestoneResponse;
+import dev.codesquad.issuetracker.web.dto.user.UserResponse;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,14 +24,14 @@ public class IssueDetailResponse {
     private Status status;
     private int comment;
     private List<Comment> comments;
-    private List<User> assignees = new ArrayList<>();
+    private List<UserResponse> assignees = new ArrayList<>();
     private MilestoneResponse milestone;
     private List<LabelDto> labels = new ArrayList<>();
 
     @Builder
     public IssueDetailResponse(Long id, String title, String content, String githubId,
         LocalDate createTime, Status status, int comment, List<Comment> comments,
-        List<User> assignees, MilestoneResponse milestone, List<LabelDto> labels) {
+        List<UserResponse> assignees, MilestoneResponse milestone, List<LabelDto> labels) {
         this.id = id;
         this.title = title;
         this.content = content;
@@ -55,7 +55,9 @@ public class IssueDetailResponse {
             .status(issue.getStatus())
             .comment(issue.getComments().size())
             .comments(issue.getComments())
-            .assignees(issue.getUsers())
+            .assignees(issue.getUsers().stream()
+                .map(user -> UserResponse.of(user))
+                .collect(Collectors.toList()))
             .milestone(MilestoneResponse.of(issue.getMilestone()))
             .labels(issue.getLabels().stream()
                 .map(label -> LabelDto.of(label))
