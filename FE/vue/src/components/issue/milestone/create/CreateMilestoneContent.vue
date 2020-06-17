@@ -118,14 +118,22 @@ export default {
       this.milestoneTitle = value;
     },
     dateHandler({ target: { value } }) {
-      console.log(value);
       this.milestoneDate = value;
     },
     descriptionHandler({ target: { value } }) {
       this.milestoneDescription = value;
     },
     changeMilestone() {
-      console.log('change');
+      const obj = {
+        title: this.milestoneTitle,
+        dueDate: this.milestoneDate,
+        description: this.milestoneDescription,
+      };
+      this.$store.commit('saveChangeMilestone', {
+        data: obj,
+        id: this.$route.params.id,
+      });
+      this.$router.push('/milestoneList');
     },
   },
 };
