@@ -154,6 +154,35 @@ const store = new Vuex.Store({
     closeMilestone(state) {
       state.isOpenMilestone = false;
     },
+    createMilestone(state, payload) {
+      state.milestonesList.push(payload);
+    },
+    closedMilestoneItem(state, targetId) {
+      const targetMilestone = state.milestonesList.filter(
+        item => item.id == targetId,
+      );
+      Object.assign(targetMilestone[0], { isOpen: false });
+      state.isOpenMilestone = false;
+    },
+    reopenMilestoneItem(state, targetId) {
+      const targetMilestone = state.milestonesList.filter(
+        item => item.id == targetId,
+      );
+      Object.assign(targetMilestone[0], { isOpen: true });
+      state.isOpenMilestone = true;
+    },
+    deleteMilestoneItem(state, targetId) {
+      const targetMilestone = state.milestonesList.filter(
+        item => item.id != targetId,
+      );
+      state.milestonesList = targetMilestone;
+    },
+    saveChangeMilestone(state, payload) {
+      const targetMilestone = state.milestonesList.filter(
+        item => item.id == payload.id,
+      );
+      Object.assign(targetMilestone[0], payload.data);
+    },
   },
 });
 

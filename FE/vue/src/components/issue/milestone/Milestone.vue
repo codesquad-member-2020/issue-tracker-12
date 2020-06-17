@@ -28,10 +28,14 @@
         </span>
       </Complete>
       <Update>
-        <span>Edit</span>
-        <span v-if="!state">Close</span>
-        <span v-else>Reopen</span>
-        <span>Delete</span>
+        <span @click="editMilestone">Edit</span>
+        <span v-if="!state" :data-id="milestone.id" @click="closeMilestone">
+          Close
+        </span>
+        <span v-else :data-id="milestone.id" @click="openMilestone">
+          Reopen
+        </span>
+        <span :data-id="milestone.id" @click="deleteMilestone">Delete</span>
       </Update>
     </RightContent>
   </ItemWrapper>
@@ -55,7 +59,9 @@ export default {
   computed: {
     completeIssue() {
       const arrMileStone = Array.from(this.milestone.linkIssues).length;
-      return parseInt((this.isOpenCount / arrMileStone) * 100);
+      const completeRating = parseInt((this.isOpenCount / arrMileStone) * 100);
+      if (!completeRating) return 0;
+      return completeRating;
     },
     isOpenCount() {
       const arrMileStone = Array.from(this.milestone.linkIssues);
@@ -78,6 +84,33 @@ export default {
     Complete,
     Update,
     ProgressBar,
+  },
+  methods: {
+    editMilestone() {
+      this.$router.push(`/createMilestone/${this.milestone.id}`);
+    },
+    closeMilestone({
+      target: {
+        dataset: { id },
+      },
+    }) {
+      this.$store.commit('closedMilestoneItem', id);
+    },
+    openMilestone({
+      target: {
+        dataset: { id },
+      },
+    }) {
+      this.$store.commit('reopenMilestoneItem', id);
+    },
+    deleteMilestone({
+      target: {
+        dataset: { id },
+      },
+    }) {
+      var result = confirm('Are you sure?');
+      if (result) return this.$store.commit('deleteMilestoneItem', id);
+    },
   },
 };
 </script>

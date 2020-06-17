@@ -502,3 +502,112 @@ export const ProgressBar = styled('div', complete)`
     width: ${props => props.complete + `%`};
   }
 `;
+
+export const SubHeader = styled.div`
+  display: flex;
+  padding-bottom: 8px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid #e1e4e8;
+  flex-flow: row wrap;
+`;
+
+export const SubHeaderTitle = styled.h2`
+  font-size: 24px;
+  font-weight: 400;
+  flex: 1 1 auto;
+`;
+
+export const SubHeaderDescription = styled.p`
+  font-size: 14px;
+  color: #586069;
+  flex: 1 100%;
+  margin-top: 0;
+  margin-bottom: 10px;
+
+  span {
+    color: #0366d6;
+    cursor: pointer;
+    :hover {
+      text-decoration: underline;
+    }
+  }
+`;
+
+export const ContentWrapper = styled.div`
+  width: 100%;
+  padding-bottom: 8px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid #e1e4e8;
+`;
+
+export const FormContainer = styled.div`
+  width: 66.6%;
+  input {
+    width: 440px;
+    padding: 0px 8px;
+    font-size: 14px;
+    border: 1px solid #d1d5da;
+    border-radius: 3px;
+    outline: none;
+    box-shadow: inset 0 1px 2px rgba(27, 31, 35, 0.075);
+    background-color: #fafbfc;
+    min-height: 32px;
+
+    ::placeholder {
+      color: #d1d5da;
+    }
+  }
+
+  textarea {
+    width: 100%;
+    max-width: 100%;
+    height: 200px;
+    min-height: 200px;
+    border: 1px solid #d1d5da;
+    border-radius: 3px;
+    outline: none;
+    box-shadow: inset 0 1px 2px rgba(27, 31, 35, 0.075);
+    background-color: #fafbfc;
+  }
+`;
+
+export const LabelTitle = styled.div`
+  font-weight: 600;
+  margin-bottom: 6px;
+`;
+
+export const ItemContainer = styled.div`
+  margin: 15px 0px;
+`;
+
+export const BtnContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+`;
+
+export const CloseButton = styled.button`
+  font-family: inherit;
+  box-sizing: border-box;
+  margin: 0;
+  text-transform: none;
+  display: inline-block;
+  padding: 6px 12px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+  background-size: 110% 110%;
+  border: 1px solid rgba(27, 31, 35, 0.2);
+  border-radius: 0.25em;
+  -webkit-appearance: none;
+  color: #24292e;
+  text-decoration: none;
+  background-repeat: repeat-x;
+  background-color: #e6ebf1;
+  background-image: linear-gradient(-180deg, #f0f3f6, #e6ebf1 90%);
+  background-position: -0.5em;
+  margin-right: 5px;
+`;

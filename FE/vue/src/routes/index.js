@@ -38,6 +38,10 @@ const router = new VueRouter({
       path: '/createMilestone',
       component: () => import('@/views/CreateMilestonePage.vue'),
     },
+    {
+      path: '/createMilestone/:id',
+      component: () => import('@/views/CreateMilestonePage.vue'),
+    },
   ],
 });
 

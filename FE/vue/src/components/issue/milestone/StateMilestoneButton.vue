@@ -6,7 +6,7 @@
       :class="{ selected: this.$store.state.isOpenMilestone }"
     >
       <img class="logo" src="../../../assets/milestone.svg" alt="" />
-      <span>{{ this.$store.state.openMilestoneCount }} Open </span>
+      <span>{{ milestonesList.filter(item => item.isOpen).length }} Open </span>
     </div>
     <div
       v-if="type == 'close'"
@@ -14,7 +14,9 @@
       :class="{ selected: !this.$store.state.isOpenMilestone }"
     >
       <img class="logo" src="../../../assets/check.svg" alt="" />
-      <span>{{ this.$store.state.closeMilestoneCount }} Closed</span>
+      <span
+        >{{ milestonesList.filter(item => !item.isOpen).length }} Closed</span
+      >
     </div>
   </div>
 </template>
@@ -24,14 +26,6 @@ import { mapState } from 'vuex';
 
 export default {
   props: ['type'],
-  created() {
-    this.$store.state.openMilestoneCount = this.milestonesList.filter(
-      item => item.isOpen === true,
-    ).length;
-    this.$store.state.closeMilestoneCount = this.milestonesList.filter(
-      item => item.isOpen === false,
-    ).length;
-  },
   computed: {
     ...mapState(['milestonesList']),
   },

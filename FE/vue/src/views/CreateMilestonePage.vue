@@ -1,9 +1,17 @@
 <template>
-  <div>마일스톤 생성 페이지</div>
+  <fragment>
+    <CreateMilestone />
+  </fragment>
 </template>
 
 <script>
-export default {};
+import CreateMilestone from '@/components/issue/milestone/create/CreateMilestone';
+
+export default {
+  components: {
+    CreateMilestone,
+  },
+};
 </script>
 
 <style></style>

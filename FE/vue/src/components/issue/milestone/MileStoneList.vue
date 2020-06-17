@@ -13,9 +13,6 @@ import CloseMilestone from '@/components/issue/milestone/CloseMilestone';
 import { MilestoneListWrap } from '@/style/styled';
 
 export default {
-  updated() {
-    // console.log(1);
-  },
   components: {
     OpenMilestone,
     MilestoneListWrap,
