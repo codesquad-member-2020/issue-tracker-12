@@ -1,7 +1,10 @@
 <template>
   <Hedaer class="headerContainer">
     <RouterBox />
-    <CreateButton :btnTitle="'New milestone'"></CreateButton>
+    <CreateButton
+      :btnTitle="'New milestone'"
+      @click.native="createMilestone"
+    ></CreateButton>
   </Hedaer>
 </template>
 
@@ -15,6 +18,12 @@ export default {
     RouterBox,
     CreateButton,
     Hedaer,
+  },
+
+  methods: {
+    createMilestone() {
+      this.$router.push('/createMilestone');
+    },
   },
 };
 </script>
