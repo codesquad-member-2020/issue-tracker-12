@@ -132,7 +132,6 @@ export default {
       this.editLabelDescription = value;
     },
     cancelEditLabel() {
-      console.log('cancelEdit');
       this.$emit('cancelEdit');
     },
     changeEditStyle() {

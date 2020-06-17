@@ -15,9 +15,6 @@ import { mapState } from 'vuex';
 import Milestone from '@/components/issue/milestone/Milestone';
 import { MilestoneItemWrap } from '@/style/styled';
 export default {
-  updated() {
-    console.log(2);
-  },
   computed: {
     ...mapState(['milestonesList']),
   },
