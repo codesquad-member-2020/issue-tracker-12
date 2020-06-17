@@ -6,6 +6,7 @@ import dev.codesquad.issuetracker.web.dto.ResultResponse;
 import dev.codesquad.issuetracker.web.dto.issue.IssueCreateResponse;
 import dev.codesquad.issuetracker.web.dto.issue.IssueDetailResponse;
 import dev.codesquad.issuetracker.web.dto.issue.IssueRequest;
+import java.util.List;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -60,5 +62,10 @@ public class IssueController {
     public ResponseEntity<Status> updateStatus(@PathVariable Long id,
         @RequestBody Status status) {
         return new ResponseEntity(issueService.updateStatus(id, status), HttpStatus.OK);
+    }
+
+    @PutMapping("/{id}/labels")
+    public ResponseEntity updateLabel(@PathVariable Long id, @RequestBody List<Long> labelIds) {
+        return new ResponseEntity(issueService.updateLabel(id, labelIds), HttpStatus.OK);
     }
 }

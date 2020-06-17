@@ -142,4 +142,9 @@ public class Issue {
     public void updateStatus(Status status) {
         this.status = status;
     }
+
+    public void updateLabel(List<Label> labels) {
+        this.labels.clear();
+        this.labels = labels;
+    }
 }

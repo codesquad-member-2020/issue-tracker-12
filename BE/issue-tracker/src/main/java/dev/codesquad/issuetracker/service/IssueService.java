@@ -158,4 +158,12 @@ public class IssueService {
         return milestoneRepository.findOne(milestoneId)
             .orElseThrow(() -> new DataNotFoundException("Milestone is not exist"));
     }
+
+    @Transactional
+    public List<Label> updateLabel(Long issueId, List<Long> labelIds) {
+        Issue issue = findIssue(issueId);
+        List<Label> labels = labelRepository.findList(labelIds);
+        issue.updateLabel(labels);
+        return issue.getLabels();
+    }
 }
