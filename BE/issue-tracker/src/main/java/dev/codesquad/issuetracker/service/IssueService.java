@@ -133,6 +133,24 @@ public class IssueService {
         return issue.getStatus();
     }
 
+    @Transactional
+    public List<Label> updateLabel(Long issueId, List<Long> labelIds) {
+        Issue issue = findIssue(issueId);
+        List<Label> labels = labelRepository.findList(labelIds);
+        issue.updateLabel(labels);
+        return issue.getLabels();
+    }
+
+    @Transactional
+    public List<UserResponse> updateAssignee(Long issueId, List<Long> assigneeIds) {
+        Issue issue = findIssue(issueId);
+        List<User> users = userRepository.findList(assigneeIds);
+        issue.updateAssignee(users);
+        return issue.getUsers().stream()
+            .map(user -> UserResponse.of(user))
+            .collect(Collectors.toList());
+    }
+
     /**
      * query 최적화 필요
      */
@@ -157,13 +175,5 @@ public class IssueService {
         }
         return milestoneRepository.findOne(milestoneId)
             .orElseThrow(() -> new DataNotFoundException("Milestone is not exist"));
-    }
-
-    @Transactional
-    public List<Label> updateLabel(Long issueId, List<Long> labelIds) {
-        Issue issue = findIssue(issueId);
-        List<Label> labels = labelRepository.findList(labelIds);
-        issue.updateLabel(labels);
-        return issue.getLabels();
     }
 }

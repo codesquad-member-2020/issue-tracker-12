@@ -147,4 +147,9 @@ public class Issue {
         this.labels.clear();
         this.labels = labels;
     }
+
+    public void updateAssignee(List<User> users) {
+        this.users.clear();
+        this.users = users;
+    }
 }

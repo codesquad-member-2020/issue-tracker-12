@@ -1,6 +1,7 @@
 package dev.codesquad.issuetracker.web.controller;
 
 import dev.codesquad.issuetracker.domain.Status;
+import dev.codesquad.issuetracker.domain.label.Label;
 import dev.codesquad.issuetracker.service.IssueService;
 import dev.codesquad.issuetracker.web.dto.ResultResponse;
 import dev.codesquad.issuetracker.web.dto.issue.IssueCreateResponse;
@@ -65,7 +66,12 @@ public class IssueController {
     }
 
     @PutMapping("/{id}/labels")
-    public ResponseEntity updateLabel(@PathVariable Long id, @RequestBody List<Long> labelIds) {
+    public ResponseEntity<List<Label>> updateLabel(@PathVariable Long id, @RequestBody List<Long> labelIds) {
         return new ResponseEntity(issueService.updateLabel(id, labelIds), HttpStatus.OK);
+    }
+
+    @PutMapping("/{id}/assignees")
+    public ResponseEntity updateAssignee(@PathVariable Long id, @RequestBody List<Long> assigneeIds) {
+        return new ResponseEntity(issueService.updateAssignee(id, assigneeIds), HttpStatus.OK);
     }
 }
