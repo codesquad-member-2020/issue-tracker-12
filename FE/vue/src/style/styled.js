@@ -584,3 +584,30 @@ export const BtnContainer = styled.div`
   display: flex;
   justify-content: flex-end;
 `;
+
+export const CloseButton = styled.button`
+  font-family: inherit;
+  box-sizing: border-box;
+  margin: 0;
+  text-transform: none;
+  display: inline-block;
+  padding: 6px 12px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+  background-size: 110% 110%;
+  border: 1px solid rgba(27, 31, 35, 0.2);
+  border-radius: 0.25em;
+  -webkit-appearance: none;
+  color: #24292e;
+  text-decoration: none;
+  background-repeat: repeat-x;
+  background-color: #e6ebf1;
+  background-image: linear-gradient(-180deg, #f0f3f6, #e6ebf1 90%);
+  background-position: -0.5em;
+  margin-right: 5px;
+`;
