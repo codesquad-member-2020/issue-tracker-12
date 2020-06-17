@@ -26,10 +26,18 @@ export default {
   props: ['type'],
   created() {
     this.$store.state.openMilestoneCount = this.milestonesList.filter(
-      item => item.isOpen === true,
+      item => item.isOpen,
     ).length;
     this.$store.state.closeMilestoneCount = this.milestonesList.filter(
-      item => item.isOpen === false,
+      item => !item.isOpen,
+    ).length;
+  },
+  updated() {
+    this.$store.state.openMilestoneCount = this.milestonesList.filter(
+      item => item.isOpen,
+    ).length;
+    this.$store.state.closeMilestoneCount = this.milestonesList.filter(
+      item => !item.isOpen,
     ).length;
   },
   computed: {
