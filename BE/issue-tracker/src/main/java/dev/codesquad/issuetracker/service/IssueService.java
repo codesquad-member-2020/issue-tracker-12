@@ -14,6 +14,7 @@ import dev.codesquad.issuetracker.web.dto.issue.IssueCreateResponse;
 import dev.codesquad.issuetracker.web.dto.issue.IssueDetailResponse;
 import dev.codesquad.issuetracker.web.dto.issue.IssueRequest;
 import dev.codesquad.issuetracker.web.dto.issue.IssueResponse;
+import dev.codesquad.issuetracker.web.dto.label.LabelDto;
 import dev.codesquad.issuetracker.web.dto.milestone.MilestoneDto;
 import dev.codesquad.issuetracker.web.dto.ResultResponse;
 import dev.codesquad.issuetracker.web.dto.ResultDto;
@@ -134,11 +135,13 @@ public class IssueService {
     }
 
     @Transactional
-    public List<Label> updateLabel(Long issueId, List<Long> labelIds) {
+    public List<LabelDto> updateLabel(Long issueId, List<Long> labelIds) {
         Issue issue = findIssue(issueId);
         List<Label> labels = labelRepository.findList(labelIds);
         issue.updateLabel(labels);
-        return issue.getLabels();
+        return issue.getLabels().stream()
+            .map(label -> LabelDto.of(label))
+            .collect(Collectors.toList());
     }
 
     @Transactional
