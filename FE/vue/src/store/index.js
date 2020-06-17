@@ -177,6 +177,12 @@ const store = new Vuex.Store({
       );
       state.milestonesList = targetMilestone;
     },
+    saveChangeMilestone(state, payload) {
+      const targetMilestone = state.milestonesList.filter(
+        item => item.id == payload.id,
+      );
+      Object.assign(targetMilestone[0], payload.data);
+    },
   },
 });
 
