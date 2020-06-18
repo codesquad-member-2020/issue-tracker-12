@@ -272,6 +272,16 @@ export const LabelListWrap = styled.div`
   color: #586069;
 `;
 
+export const IssueListWrap = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  background-color: #fff;
+  font-size: 12px;
+  color: #586069;
+`;
+
 export const InnerListWrap = styled.div`
   box-sizing: border-box;
   display: flex;
@@ -619,7 +629,7 @@ export const SelectWrapper = styled.div`
     min-height: 34px;
     border: 1px solid #d1d5da;
     color: #586069;
-    padding: 6px 8px;
+    padding: 8px 8px 4px 0px;
     padding-left: 30px;
     box-sizing: border-box;
     border-top-right-radius: 3px;
