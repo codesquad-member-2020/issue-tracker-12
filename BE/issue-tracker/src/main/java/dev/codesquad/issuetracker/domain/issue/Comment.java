@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -29,9 +30,8 @@ public class Comment {
     @NotNull
     private String content;
 
-    @NotNull
     @CreationTimestamp
-    private LocalDate create_time;
+    private LocalDate createTime;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
@@ -42,4 +42,27 @@ public class Comment {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "issue_id")
     private Issue issue;
+
+    @Builder
+    protected Comment(String content, Issue issue, User user) {
+        this.content = content;
+        this.issue = issue;
+        this.user = user;
+    }
+
+    public static Comment of(String content, Issue issue, User user) {
+        return Comment.builder()
+            .content(content)
+            .issue(issue)
+            .user(user)
+            .build();
+    }
+
+    public boolean isEqualsId(Long id) {
+        return id.equals(this.id);
+    }
+
+    public void update(String content) {
+        this.content = content;
+    }
 }

@@ -3,6 +3,7 @@ package dev.codesquad.issuetracker.web.dto.milestone;
 import dev.codesquad.issuetracker.domain.Status;
 import dev.codesquad.issuetracker.domain.milestone.Milestone;
 import java.time.LocalDate;
+import java.util.Objects;
 import lombok.Builder;
 import lombok.Data;
 
@@ -25,6 +26,9 @@ public class MilestoneDto {
     }
 
     public static MilestoneDto of(Milestone milestone) {
+        if (Objects.isNull(milestone)) {
+            return null;
+        }
         return MilestoneDto.builder()
             .id(milestone.getId())
             .title(milestone.getTitle())

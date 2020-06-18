@@ -31,7 +31,7 @@ public class IssueCreateResponse {
             .title(issue.getTitle())
             .content(issue.getContent())
             .status(issue.getStatus())
-            .createTime(issue.getCreate_time())
+            .createTime(issue.getCreateTime())
             .build();
     }
 }

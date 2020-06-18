@@ -7,12 +7,14 @@ import lombok.Data;
 @Data
 public class LabelDto {
 
+    private Long id;
     private String name;
     private String textColor;
     private String backgroundColor;
 
     @Builder
-    protected LabelDto(String name, String textColor, String backgroundColor) {
+    protected LabelDto(Long id, String name, String textColor, String backgroundColor) {
+        this.id = id;
         this.name = name;
         this.textColor = textColor;
         this.backgroundColor = backgroundColor;
@@ -20,6 +22,7 @@ public class LabelDto {
 
     public static LabelDto of(Label label) {
         return LabelDto.builder()
+            .id(label.getId())
             .name(label.getName())
             .textColor(label.getTextColor())
             .backgroundColor(label.getBackgroundColor())

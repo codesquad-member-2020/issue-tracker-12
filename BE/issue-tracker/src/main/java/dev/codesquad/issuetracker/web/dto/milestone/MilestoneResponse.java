@@ -1,6 +1,7 @@
 package dev.codesquad.issuetracker.web.dto.milestone;
 
 import dev.codesquad.issuetracker.domain.milestone.Milestone;
+import java.util.Objects;
 import lombok.Builder;
 import lombok.Data;
 
@@ -17,6 +18,9 @@ public class MilestoneResponse {
     }
 
     public static MilestoneResponse of(Milestone milestone) {
+        if (Objects.isNull(milestone)) {
+            return null;
+        }
         return MilestoneResponse.builder()
             .id(milestone.getId())
             .title(milestone.getTitle())

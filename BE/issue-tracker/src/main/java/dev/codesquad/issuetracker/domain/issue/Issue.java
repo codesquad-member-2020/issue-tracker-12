@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -49,7 +50,7 @@ public class Issue {
     private Status status;
 
     @CreationTimestamp
-    private LocalDate create_time;
+    private LocalDate createTime;
 
     @OneToMany(mappedBy = "issue", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> comments = new ArrayList<>();
@@ -78,11 +79,10 @@ public class Issue {
     private List<Label> labels = new ArrayList<>();
 
     @Builder
-    protected Issue(String title, String content, Status status, LocalDate create_time) {
+    protected Issue(String title, String content, Status status) {
         this.title = title;
         this.content = content;
         this.status = status;
-        this.create_time = create_time;
     }
 
     public static Issue of(String title, String content) {
@@ -129,5 +129,50 @@ public class Issue {
         addAssignees(assignees);
         addLabels(labels);
         addMilestone(milestone);
+    }
+
+    public void updateTitle(String title) {
+        this.title = title;
+    }
+
+    public void updateContent(String content) {
+        this.content = content;
+    }
+
+    public void updateStatus(Status status) {
+        this.status = status;
+    }
+
+    public void updateLabel(List<Label> labels) {
+        this.labels.clear();
+        this.labels = labels;
+    }
+
+    public void updateAssignee(List<User> users) {
+        this.users.clear();
+        this.users = users;
+    }
+
+    public void updateMilestone(Milestone milestone) {
+        this.milestone = milestone;
+    }
+
+    public void addComment(Comment comment) {
+        this.comments.add(comment);
+    }
+
+    public void updateComment(Long commentId, String content) {
+        this.comments.stream()
+            .filter(comment -> comment.isEqualsId(commentId))
+            .forEach(comment -> comment.update(content));
+    }
+
+    public void removeComment(Long commentId) {
+        for (Comment comment : this.comments) {
+            if (comment.isEqualsId(commentId)) {
+                this.comments.remove(comment);
+                break;
+            }
+        }
     }
 }
