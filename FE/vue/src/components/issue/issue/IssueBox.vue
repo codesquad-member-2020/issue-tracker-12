@@ -8,6 +8,7 @@
       </ItemWrapper>
       <ItemWrapper>
         <FilterItem :filterTitle="'Author'" />
+        <FilterItem :filterTitle="'Label'" />
       </ItemWrapper>
     </BtnWrapper>
   </ListTopMenu>
