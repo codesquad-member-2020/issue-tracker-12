@@ -57,4 +57,12 @@ public class Comment {
             .user(user)
             .build();
     }
+
+    public boolean isEqualsId(Long id) {
+        return id.equals(this.id);
+    }
+
+    public void update(String content) {
+        this.content = content;
+    }
 }
