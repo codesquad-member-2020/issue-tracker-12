@@ -7,6 +7,7 @@ import dev.codesquad.issuetracker.web.dto.ResultResponse;
 import dev.codesquad.issuetracker.web.dto.issue.IssueCreateResponse;
 import dev.codesquad.issuetracker.web.dto.issue.IssueDetailResponse;
 import dev.codesquad.issuetracker.web.dto.issue.IssueRequest;
+import dev.codesquad.issuetracker.web.dto.milestone.MilestoneDto;
 import dev.codesquad.issuetracker.web.dto.user.UserResponse;
 import java.util.List;
 import javax.validation.Valid;
@@ -79,7 +80,12 @@ public class IssueController {
     }
 
     @PutMapping("/{id}/milestone")
-    public ResponseEntity updateMilestone(@PathVariable Long id, @RequestBody Long milestoneId) {
+    public ResponseEntity<MilestoneDto> updateMilestone(@PathVariable Long id, @RequestBody Long milestoneId) {
         return new ResponseEntity(issueService.updateMilestone(id, milestoneId), HttpStatus.OK);
+    }
+
+    @PostMapping("/{id}/comment")
+    public ResponseEntity addComment(@PathVariable Long id, @RequestBody String comment) {
+        return new ResponseEntity((issueService.addComment(id, comment)), HttpStatus.OK);
     }
 }

@@ -156,4 +156,8 @@ public class Issue {
     public void updateMilestone(Milestone milestone) {
         this.milestone = milestone;
     }
+
+    public void addComment(Comment comment) {
+        this.comments.add(comment);
+    }
 }

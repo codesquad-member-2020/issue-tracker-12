@@ -2,6 +2,7 @@ package dev.codesquad.issuetracker.service;
 
 import dev.codesquad.issuetracker.common.exception.DataNotFoundException;
 import dev.codesquad.issuetracker.domain.Status;
+import dev.codesquad.issuetracker.domain.issue.Comment;
 import dev.codesquad.issuetracker.domain.issue.Issue;
 import dev.codesquad.issuetracker.domain.label.Label;
 import dev.codesquad.issuetracker.domain.milestone.Milestone;
@@ -10,6 +11,7 @@ import dev.codesquad.issuetracker.repository.IssueRepository;
 import dev.codesquad.issuetracker.repository.LabelRepository;
 import dev.codesquad.issuetracker.repository.MilestoneRepository;
 import dev.codesquad.issuetracker.repository.UserRepository;
+import dev.codesquad.issuetracker.web.dto.issue.CommentResponse;
 import dev.codesquad.issuetracker.web.dto.issue.IssueCreateResponse;
 import dev.codesquad.issuetracker.web.dto.issue.IssueDetailResponse;
 import dev.codesquad.issuetracker.web.dto.issue.IssueRequest;
@@ -165,6 +167,22 @@ public class IssueService {
         Milestone milestone = findMilestone(milestoneId);
         issue.updateMilestone(milestone);
         return MilestoneDto.of(issue.getMilestone());
+    }
+
+    /**
+     * user는 oauth 적용 후 token 정보에서 가져오도록 한다.
+     */
+    @Transactional
+    public CommentResponse addComment(Long issueId, String commentContent) {
+        Issue issue = findIssue(issueId);
+
+        // oauth user 정보로 가져오도록 refactoring 한다.
+        User user = userRepository.findOne(1L).orElseThrow(null);
+
+        Comment comment = Comment.of(commentContent, issue, user);
+        issue.addComment(comment);
+        issueRepository.save(issue);
+        return CommentResponse.of(comment);
     }
 
     /**
