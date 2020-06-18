@@ -195,6 +195,15 @@ public class IssueService {
             .collect(Collectors.toList());
     }
 
+    @Transactional
+    public List<CommentResponse> removeComment(Long issueId, Long commentId) {
+        Issue issue = findIssue(issueId);
+        issue.removeComment(commentId);
+        return issue.getComments().stream()
+            .map(comment -> CommentResponse.of(comment))
+            .collect(Collectors.toList());
+    }
+
     /**
      * query 최적화 필요
      */

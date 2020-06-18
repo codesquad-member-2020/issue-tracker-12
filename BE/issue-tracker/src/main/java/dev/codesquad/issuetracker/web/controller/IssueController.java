@@ -16,6 +16,7 @@ import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -96,5 +97,11 @@ public class IssueController {
     public ResponseEntity<List<CommentResponse>> updateComment(@PathVariable Long id,
         @RequestBody CommentRequest commentRequest) {
         return new ResponseEntity((issueService.updateComment(id, commentRequest)), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}/comment")
+    public ResponseEntity<List<CommentResponse>> removeComment(@PathVariable Long id,
+        @RequestBody Long commentId) {
+        return new ResponseEntity((issueService.removeComment(id, commentId)), HttpStatus.OK);
     }
 }

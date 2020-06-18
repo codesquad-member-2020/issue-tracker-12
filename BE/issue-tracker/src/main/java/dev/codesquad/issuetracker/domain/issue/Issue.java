@@ -161,9 +161,18 @@ public class Issue {
         this.comments.add(comment);
     }
 
-    public void updateComment(Long id, String content) {
+    public void updateComment(Long commentId, String content) {
         this.comments.stream()
-            .filter(comment -> comment.isEqualsId(id))
+            .filter(comment -> comment.isEqualsId(commentId))
             .forEach(comment -> comment.update(content));
+    }
+
+    public void removeComment(Long commentId) {
+        for (Comment comment : this.comments) {
+            if (comment.isEqualsId(commentId)) {
+                this.comments.remove(comment);
+                break;
+            }
+        }
     }
 }
