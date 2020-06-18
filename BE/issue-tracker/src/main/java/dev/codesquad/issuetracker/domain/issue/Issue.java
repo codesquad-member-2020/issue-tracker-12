@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -158,5 +159,11 @@ public class Issue {
 
     public void addComment(Comment comment) {
         this.comments.add(comment);
+    }
+
+    public void updateComment(Long id, String content) {
+        this.comments.stream()
+            .filter(comment -> comment.isEqualsId(id))
+            .forEach(comment -> comment.update(content));
     }
 }

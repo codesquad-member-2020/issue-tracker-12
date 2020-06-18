@@ -4,6 +4,8 @@ import dev.codesquad.issuetracker.domain.Status;
 import dev.codesquad.issuetracker.domain.label.Label;
 import dev.codesquad.issuetracker.service.IssueService;
 import dev.codesquad.issuetracker.web.dto.ResultResponse;
+import dev.codesquad.issuetracker.web.dto.issue.CommentRequest;
+import dev.codesquad.issuetracker.web.dto.issue.CommentResponse;
 import dev.codesquad.issuetracker.web.dto.issue.IssueCreateResponse;
 import dev.codesquad.issuetracker.web.dto.issue.IssueDetailResponse;
 import dev.codesquad.issuetracker.web.dto.issue.IssueRequest;
@@ -80,12 +82,19 @@ public class IssueController {
     }
 
     @PutMapping("/{id}/milestone")
-    public ResponseEntity<MilestoneDto> updateMilestone(@PathVariable Long id, @RequestBody Long milestoneId) {
+    public ResponseEntity<MilestoneDto> updateMilestone(@PathVariable Long id,
+        @RequestBody Long milestoneId) {
         return new ResponseEntity(issueService.updateMilestone(id, milestoneId), HttpStatus.OK);
     }
 
     @PostMapping("/{id}/comment")
-    public ResponseEntity addComment(@PathVariable Long id, @RequestBody String comment) {
+    public ResponseEntity<CommentResponse> addComment(@PathVariable Long id, @RequestBody String comment) {
         return new ResponseEntity((issueService.addComment(id, comment)), HttpStatus.OK);
+    }
+
+    @PutMapping("/{id}/comment")
+    public ResponseEntity<List<CommentResponse>> updateComment(@PathVariable Long id,
+        @RequestBody CommentRequest commentRequest) {
+        return new ResponseEntity((issueService.updateComment(id, commentRequest)), HttpStatus.OK);
     }
 }

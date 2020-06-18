@@ -11,6 +11,7 @@ import dev.codesquad.issuetracker.repository.IssueRepository;
 import dev.codesquad.issuetracker.repository.LabelRepository;
 import dev.codesquad.issuetracker.repository.MilestoneRepository;
 import dev.codesquad.issuetracker.repository.UserRepository;
+import dev.codesquad.issuetracker.web.dto.issue.CommentRequest;
 import dev.codesquad.issuetracker.web.dto.issue.CommentResponse;
 import dev.codesquad.issuetracker.web.dto.issue.IssueCreateResponse;
 import dev.codesquad.issuetracker.web.dto.issue.IssueDetailResponse;
@@ -183,6 +184,15 @@ public class IssueService {
         issue.addComment(comment);
         issueRepository.save(issue);
         return CommentResponse.of(comment);
+    }
+
+    @Transactional
+    public List<CommentResponse> updateComment(Long issueId, CommentRequest commentRequest) {
+        Issue issue = findIssue(issueId);
+        issue.updateComment(commentRequest.getId(), commentRequest.getContent());
+        return issue.getComments().stream()
+            .map(comment -> CommentResponse.of(comment))
+            .collect(Collectors.toList());
     }
 
     /**
