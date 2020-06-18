@@ -20,6 +20,7 @@ import dev.codesquad.issuetracker.web.dto.ResultResponse;
 import dev.codesquad.issuetracker.web.dto.ResultDto;
 import dev.codesquad.issuetracker.web.dto.user.UserResponse;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -152,6 +153,18 @@ public class IssueService {
         return issue.getUsers().stream()
             .map(user -> UserResponse.of(user))
             .collect(Collectors.toList());
+    }
+
+    /**
+     *
+     * if milestone null -> response dto 에서 분기 처리
+     */
+    @Transactional
+    public MilestoneDto updateMilestone(Long issueId, Long milestoneId) {
+        Issue issue = findIssue(issueId);
+        Milestone milestone = findMilestone(milestoneId);
+        issue.updateMilestone(milestone);
+        return MilestoneDto.of(issue.getMilestone());
     }
 
     /**

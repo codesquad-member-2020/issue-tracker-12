@@ -152,4 +152,8 @@ public class Issue {
         this.users.clear();
         this.users = users;
     }
+
+    public void updateMilestone(Milestone milestone) {
+        this.milestone = milestone;
+    }
 }

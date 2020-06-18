@@ -77,4 +77,9 @@ public class IssueController {
         @RequestBody List<Long> assigneeIds) {
         return new ResponseEntity(issueService.updateAssignee(id, assigneeIds), HttpStatus.OK);
     }
+
+    @PutMapping("/{id}/milestone")
+    public ResponseEntity updateMilestone(@PathVariable Long id, @RequestBody Long milestoneId) {
+        return new ResponseEntity(issueService.updateMilestone(id, milestoneId), HttpStatus.OK);
+    }
 }
