@@ -1,9 +1,19 @@
 <template>
-  <div>이슈 목록 페이지</div>
+  <div>
+    <HeaderComponent />
+    <ContentComponent />
+  </div>
 </template>
 
 <script>
-export default {};
+import HeaderComponent from '@/components/issue/issue/HeaderComponent';
+import ContentComponent from '@/components/issue/issue/ContentComponent';
+export default {
+  components: {
+    HeaderComponent,
+    ContentComponent,
+  },
+};
 </script>
 
 <style></style>
