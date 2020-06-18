@@ -42,7 +42,7 @@ public class IssueResponse {
             .id(issue.getId())
             .title(issue.getTitle())
             .githubId(issue.getUser().getGithubId())
-            .createTime(issue.getCreate_time())
+            .createTime(issue.getCreateTime())
             .status(issue.getStatus())
             .comment(issue.getComments().size())
             .milestone(MilestoneResponse.of(issue.getMilestone()))

@@ -31,7 +31,7 @@ public class Comment {
     private String content;
 
     @CreationTimestamp
-    private LocalDate create_time;
+    private LocalDate createTime;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)

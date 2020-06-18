@@ -49,7 +49,7 @@ public class Issue {
     private Status status;
 
     @CreationTimestamp
-    private LocalDate create_time;
+    private LocalDate createTime;
 
     @OneToMany(mappedBy = "issue", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> comments = new ArrayList<>();
@@ -78,11 +78,10 @@ public class Issue {
     private List<Label> labels = new ArrayList<>();
 
     @Builder
-    protected Issue(String title, String content, Status status, LocalDate create_time) {
+    protected Issue(String title, String content, Status status) {
         this.title = title;
         this.content = content;
         this.status = status;
-        this.create_time = create_time;
     }
 
     public static Issue of(String title, String content) {

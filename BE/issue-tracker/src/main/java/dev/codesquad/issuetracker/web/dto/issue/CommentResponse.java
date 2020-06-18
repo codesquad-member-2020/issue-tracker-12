@@ -23,7 +23,7 @@ public class CommentResponse {
         return CommentResponse.builder()
             .id(comment.getId())
             .content(comment.getContent())
-            .createTime(comment.getCreate_time())
+            .createTime(comment.getCreateTime())
             .build();
     }
 }

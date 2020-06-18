@@ -51,7 +51,7 @@ public class IssueDetailResponse {
             .title(issue.getTitle())
             .content(issue.getContent())
             .githubId(issue.getUser().getGithubId())
-            .createTime(issue.getCreate_time())
+            .createTime(issue.getCreateTime())
             .status(issue.getStatus())
             .comment(issue.getComments().size())
             .comments(issue.getComments())
