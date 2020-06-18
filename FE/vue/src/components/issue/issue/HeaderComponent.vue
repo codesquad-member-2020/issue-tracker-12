@@ -1,6 +1,6 @@
 <template>
   <Hedaer>
-    <FilterComponent></FilterComponent>
+    <HeaderFilter></HeaderFilter>
     <div class="btn-box">
       <RouterBox></RouterBox>
       <CreateButton :btnTitle="'New issue'"></CreateButton>
@@ -10,13 +10,13 @@
 
 <script>
 import { Hedaer } from '@/style/styled';
-import FilterComponent from '@/components/issue/issue/FilterComponent';
+import HeaderFilter from '@/components/issue/issue/HeaderFilter';
 import RouterBox from '@/components/common/RouterBox';
 import CreateButton from '@/components/common/CreateButton';
 export default {
   components: {
     Hedaer,
-    FilterComponent,
+    HeaderFilter,
     RouterBox,
     CreateButton,
   },
