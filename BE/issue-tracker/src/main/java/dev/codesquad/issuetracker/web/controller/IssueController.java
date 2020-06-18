@@ -52,19 +52,19 @@ public class IssueController {
         return new ResponseEntity(issueService.view(id), HttpStatus.OK);
     }
 
-    @PatchMapping("/{id}/title")
+    @PutMapping("/{id}/title")
     public ResponseEntity<String> updateIssueTitle(@PathVariable Long id,
         @RequestBody String title) {
         return new ResponseEntity(issueService.updateTitle(id, title), HttpStatus.OK);
     }
 
-    @PatchMapping("/{id}/content")
+    @PutMapping("/{id}/content")
     public ResponseEntity<String> updateIssueContent(@PathVariable Long id,
         @RequestBody String content) {
         return new ResponseEntity(issueService.updateContent(id, content), HttpStatus.OK);
     }
 
-    @PatchMapping("/{id}/status")
+    @PutMapping("/{id}/status")
     public ResponseEntity<Status> updateStatus(@PathVariable Long id,
         @RequestBody Status status) {
         return new ResponseEntity(issueService.updateStatus(id, status), HttpStatus.OK);
