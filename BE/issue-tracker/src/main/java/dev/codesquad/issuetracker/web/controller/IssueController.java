@@ -7,6 +7,7 @@ import dev.codesquad.issuetracker.web.dto.ResultResponse;
 import dev.codesquad.issuetracker.web.dto.issue.IssueCreateResponse;
 import dev.codesquad.issuetracker.web.dto.issue.IssueDetailResponse;
 import dev.codesquad.issuetracker.web.dto.issue.IssueRequest;
+import dev.codesquad.issuetracker.web.dto.user.UserResponse;
 import java.util.List;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -66,12 +67,14 @@ public class IssueController {
     }
 
     @PutMapping("/{id}/labels")
-    public ResponseEntity<List<Label>> updateLabel(@PathVariable Long id, @RequestBody List<Long> labelIds) {
+    public ResponseEntity<List<Label>> updateLabel(@PathVariable Long id,
+        @RequestBody List<Long> labelIds) {
         return new ResponseEntity(issueService.updateLabel(id, labelIds), HttpStatus.OK);
     }
 
     @PutMapping("/{id}/assignees")
-    public ResponseEntity updateAssignee(@PathVariable Long id, @RequestBody List<Long> assigneeIds) {
+    public ResponseEntity<List<UserResponse>> updateAssignee(@PathVariable Long id,
+        @RequestBody List<Long> assigneeIds) {
         return new ResponseEntity(issueService.updateAssignee(id, assigneeIds), HttpStatus.OK);
     }
 }
