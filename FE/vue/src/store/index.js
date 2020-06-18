@@ -110,6 +110,149 @@ const store = new Vuex.Store({
         ],
       },
     ],
+    issue: {
+      count: 5,
+      data: [
+        {
+          id: 1,
+          title: 'issue title 1',
+          githubId: 'wooody92',
+          createTime: '2020-06-10',
+          status: 'OPEN',
+          comment: 3,
+          milestone: {
+            id: 1,
+            title: 'milestone title 1',
+          },
+          labels: [
+            {
+              name: 'label BE',
+              textColor: '#fff',
+              backgroundColor: '#CB5CD0',
+            },
+            {
+              name: 'label FE',
+              textColor: '#fff',
+              backgroundColor: '#FA2877',
+            },
+            {
+              name: 'label OS',
+              textColor: '#000',
+              backgroundColor: '#56B92A',
+            },
+          ],
+        },
+        {
+          id: 2,
+          title: 'issue title 2',
+          githubId: 'wooody92',
+          createTime: '2020-06-10',
+          status: 'OPEN',
+          comment: 1,
+          milestone: {
+            id: 1,
+            title: 'milestone title 1',
+          },
+          labels: [
+            {
+              name: 'label BE',
+              textColor: '#fff',
+              backgroundColor: '#CB5CD0',
+            },
+            {
+              name: 'label KM',
+              textColor: '#fff',
+              backgroundColor: '#7694E7',
+            },
+          ],
+        },
+        {
+          id: 3,
+          title: 'issue title 3',
+          githubId: 'wooody92',
+          createTime: '2020-06-10',
+          status: 'OPEN',
+          comment: 1,
+          milestone: {
+            id: 1,
+            title: 'milestone title 1',
+          },
+          labels: [
+            {
+              name: 'label GG',
+              textColor: '#000',
+              backgroundColor: '#80B168',
+            },
+          ],
+        },
+      ],
+    },
+    user: {
+      count: 2,
+      data: [
+        {
+          githubId: 'wooody92',
+          profileUrl: 'www.image1.com',
+        },
+        {
+          githubId: 'henry',
+          profileUrl: 'www.image2.com',
+        },
+      ],
+    },
+    label: {
+      count: 5,
+      data: [
+        {
+          id: 1,
+          name: 'label BE',
+          description: 'dev BE',
+          textColor: '#fff',
+          backgroundColor: '#CB5CD0',
+        },
+        {
+          id: 2,
+          name: 'label FE',
+          description: 'dev FE',
+          textColor: '#fff',
+          backgroundColor: '#FA2877',
+        },
+        {
+          id: 3,
+          name: 'label OS',
+          description: 'dev OS',
+          textColor: '#000',
+          backgroundColor: '#56B92A',
+        },
+        {
+          id: 4,
+          name: 'label KM',
+          description: 'dev KM',
+          textColor: '#fff',
+          backgroundColor: '#7694E7',
+        },
+        {
+          id: 5,
+          name: 'label GG',
+          description: 'dev GG',
+          textColor: '#000',
+          backgroundColor: '#80B168',
+        },
+      ],
+    },
+    milestone: {
+      count: 2,
+      data: [
+        {
+          id: 1,
+          title: 'milestone title 1',
+        },
+        {
+          id: 2,
+          title: 'milestone title 2',
+        },
+      ],
+    },
   },
   mutations: {
     changeLabelName(state, labelName) {
