@@ -191,12 +191,19 @@ const store = new Vuex.Store({
       count: 2,
       data: [
         {
-          githubId: 'wooody92',
-          profileUrl: 'www.image1.com',
+          githubId: 'Hu2y',
+          profileUrl:
+            'https://avatars0.githubusercontent.com/u/48382080?s=40&v=4',
         },
         {
-          githubId: 'henry',
-          profileUrl: 'www.image2.com',
+          githubId: 'sangwon21',
+          profileUrl:
+            'https://avatars0.githubusercontent.com/u/47213425?s=40&v=4',
+        },
+        {
+          githubId: 'woood92',
+          profileUrl:
+            'https://avatars0.githubusercontent.com/u/58318041?s=40&v=4',
         },
       ],
     },
