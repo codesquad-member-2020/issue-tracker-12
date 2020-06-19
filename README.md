@@ -71,6 +71,4 @@
 
 ### Project References
 
-- [배포 업데이트 로그]
-- [API document]
-
+- [API document](https://github.com/codesquad-member-2020/issue-tracker-12/issues/46)
