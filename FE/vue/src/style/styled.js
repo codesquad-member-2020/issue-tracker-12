@@ -20,6 +20,7 @@ export const Wrapper = styled('div', btnType)`
 
 export const BtnWrapper = styled.div`
   display: flex;
+  margin-right: 20px;
 `;
 
 export const Title = styled.span`
@@ -271,6 +272,16 @@ export const LabelListWrap = styled.div`
   color: #586069;
 `;
 
+export const IssueListWrap = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  background-color: #fff;
+  font-size: 12px;
+  color: #586069;
+`;
+
 export const InnerListWrap = styled.div`
   box-sizing: border-box;
   display: flex;
@@ -283,7 +294,7 @@ export const InnerListWrap = styled.div`
 export const ListTopMenu = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 96.5%;
+  width: 99.9%;
   background-color: #f6f8fa;
   margin: -1px -1px 0;
   padding: 16px;
@@ -311,7 +322,7 @@ export const EditLabelTab = styled.div`
 `;
 
 export const Info = styled.div`
-  width: 99.9%;
+  width: 100%;
   display: flex;
   align-items: center;
   border: 1px solid #d1d5da;
@@ -610,4 +621,21 @@ export const CloseButton = styled.button`
   background-image: linear-gradient(-180deg, #f0f3f6, #e6ebf1 90%);
   background-position: -0.5em;
   margin-right: 5px;
+`;
+
+export const SelectWrapper = styled.div`
+  display: inline-block;
+  input {
+    min-height: 34px;
+    border: 1px solid #d1d5da;
+    color: #586069;
+    padding: 8px 8px 4px 0px;
+    padding-left: 30px;
+    box-sizing: border-box;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    line-height: 20px;
+    vertical-align: middle;
+    width: 520px;
+  }
 `;
