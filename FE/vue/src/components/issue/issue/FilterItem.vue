@@ -4,6 +4,7 @@
       class="filter-item-wrap"
       :text="filterTitle"
       floating
+      labeled
       v-model="selectedValue"
       :menu-header="menuHeader"
       :search-in-menu="searchInMenu"
@@ -19,6 +20,11 @@ import { mapState } from 'vuex';
 
 export default {
   props: ['filterTitle'],
+  updated() {
+    console.log(document.querySelectorAll('.empty'));
+
+    document.querySelector('.empty').style.backgroundColor = 'red';
+  },
   data() {
     return {
       menuHeader: {
@@ -44,7 +50,10 @@ export default {
           image: { src: i.profileUrl, avatar: true },
         }));
       } else if (this.filterTitle === 'Label') {
-        this.options = this.$store.state.label.data.map();
+        this.options = this.$store.state.label.data.map(i => ({
+          text: i.name,
+          label: { empty: true, circular: true },
+        }));
       }
     },
   },
