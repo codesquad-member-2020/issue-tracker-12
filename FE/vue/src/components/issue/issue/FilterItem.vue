@@ -21,9 +21,14 @@ import { mapState } from 'vuex';
 export default {
   props: ['filterTitle'],
   updated() {
-    console.log(document.querySelectorAll('.empty'));
-
-    document.querySelector('.empty').style.backgroundColor = 'red';
+    const labelItem = document.querySelectorAll('.empty');
+    const labelColor = Array.from(labelItem);
+    labelColor.map(
+      (i, index) =>
+        (i.style.backgroundColor = this.$store.state.label.data[
+          index
+        ].backgroundColor),
+    );
   },
   data() {
     return {
