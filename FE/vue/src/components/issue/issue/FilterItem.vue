@@ -50,14 +50,23 @@ export default {
   methods: {
     filteredData() {
       if (this.filterTitle === 'Author') {
-        this.options = this.$store.state.user.data.map(i => ({
-          text: i.githubId,
-          image: { src: i.profileUrl, avatar: true },
+        this.options = this.$store.state.user.data.map(user => ({
+          text: user.githubId,
+          image: { src: user.profileUrl, avatar: true },
         }));
       } else if (this.filterTitle === 'Label') {
-        this.options = this.$store.state.label.data.map(i => ({
-          text: i.name,
+        this.options = this.$store.state.label.data.map(label => ({
+          text: label.name,
           label: { empty: true, circular: true },
+        }));
+      } else if (this.filterTitle === 'Milestone') {
+        this.options = this.$store.state.milestone.data.map(milestone => ({
+          text: milestone.title,
+        }));
+      } else {
+        this.options = this.$store.state.user.data.map(user => ({
+          text: user.githubId,
+          image: { src: user.profileUrl, avatar: true },
         }));
       }
     },

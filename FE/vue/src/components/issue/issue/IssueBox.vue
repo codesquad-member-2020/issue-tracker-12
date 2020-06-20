@@ -9,6 +9,8 @@
       <ItemWrapper>
         <FilterItem :filterTitle="'Author'" />
         <FilterItem :filterTitle="'Label'" />
+        <FilterItem :filterTitle="`Milestone`" />
+        <FilterItem :filterTitle="`Assignee`" />
       </ItemWrapper>
     </BtnWrapper>
   </ListTopMenu>
