@@ -1,9 +1,9 @@
 ---
-name: "BE Henry 피쳐 개발 이슈 템플릿"
+name: BE Henry 피쳐 개발 이슈 템플릿
 about: BE Henry 피쳐 개발 이슈 템플릿
-title: '[BE] Title'
-labels: 'BE'
-assignees: 'wooody92'
+title: "[BE] Title"
+labels: BE
+assignees: wooody92
 
 ---
 
