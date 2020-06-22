@@ -9,6 +9,7 @@ import dev.codesquad.issuetracker.web.dto.issue.CommentResponse;
 import dev.codesquad.issuetracker.web.dto.issue.IssueCreateResponse;
 import dev.codesquad.issuetracker.web.dto.issue.IssueDetailResponse;
 import dev.codesquad.issuetracker.web.dto.issue.IssueRequest;
+import dev.codesquad.issuetracker.web.dto.issue.StatusRequest;
 import dev.codesquad.issuetracker.web.dto.milestone.MilestoneDto;
 import dev.codesquad.issuetracker.web.dto.user.UserResponse;
 import java.util.List;
@@ -45,6 +46,13 @@ public class IssueController {
     public ResponseEntity<IssueCreateResponse> createIssue(
         @RequestBody @Valid IssueRequest issueRequest) {
         return new ResponseEntity(issueService.create(issueRequest), HttpStatus.OK);
+    }
+
+    @PutMapping("/status")
+    public ResponseEntity updateStatuses(@RequestBody StatusRequest statusRequest) {
+        return new ResponseEntity(
+            issueService.updateStatuses(statusRequest.getIds(), statusRequest.getStatus()),
+            HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
@@ -89,7 +97,8 @@ public class IssueController {
     }
 
     @PostMapping("/{id}/comment")
-    public ResponseEntity<CommentResponse> addComment(@PathVariable Long id, @RequestBody String comment) {
+    public ResponseEntity<CommentResponse> addComment(@PathVariable Long id,
+        @RequestBody String comment) {
         return new ResponseEntity((issueService.addComment(id, comment)), HttpStatus.OK);
     }
 

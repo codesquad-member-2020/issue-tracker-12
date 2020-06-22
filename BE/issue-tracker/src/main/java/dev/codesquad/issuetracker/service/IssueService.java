@@ -23,7 +23,6 @@ import dev.codesquad.issuetracker.web.dto.ResultResponse;
 import dev.codesquad.issuetracker.web.dto.ResultDto;
 import dev.codesquad.issuetracker.web.dto.user.UserResponse;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -201,6 +200,15 @@ public class IssueService {
         issue.removeComment(commentId);
         return issue.getComments().stream()
             .map(comment -> CommentResponse.of(comment))
+            .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public List<IssueResponse> updateStatuses(List<Long> ids, Status status) {
+        List<Issue> issues = issueRepository.findList(ids);
+        issues.stream().forEach(issue -> issue.updateStatus(status));
+        return issues.stream()
+            .map(issue -> IssueResponse.of(issue))
             .collect(Collectors.toList());
     }
 
