@@ -120,6 +120,9 @@ const store = new Vuex.Store({
           createTime: '2020-06-10',
           status: 'OPEN',
           comment: 3,
+          assignee: [
+            'https://avatars0.githubusercontent.com/u/48382080?s=40&v=4',
+          ],
           milestone: {
             id: 1,
             title: 'milestone title 1',
@@ -149,6 +152,9 @@ const store = new Vuex.Store({
           createTime: '2020-06-10',
           status: 'OPEN',
           comment: 1,
+          assignee: [
+            'https://avatars0.githubusercontent.com/u/47213425?s=40&v=4',
+          ],
           milestone: {
             id: 1,
             title: 'milestone title 1',
@@ -173,6 +179,9 @@ const store = new Vuex.Store({
           createTime: '2020-06-10',
           status: 'OPEN',
           comment: 1,
+          assignee: [
+            'https://avatars0.githubusercontent.com/u/58318041?s=40&v=4',
+          ],
           milestone: {
             id: 1,
             title: 'milestone title 1',
