@@ -3,7 +3,7 @@
     <IssueListWrap>
       <InnerListWrap>
         <IssueBox></IssueBox>
-        <div>test2</div>
+        <IssueList />
       </InnerListWrap>
     </IssueListWrap>
   </fragment>
@@ -12,11 +12,14 @@
 <script>
 import { IssueListWrap, InnerListWrap } from '@/style/styled';
 import IssueBox from '@/components/issue/issue/IssueBox';
+import IssueList from '@/components/issue/issue/IssueList';
+
 export default {
   components: {
     IssueListWrap,
     InnerListWrap,
     IssueBox,
+    IssueList,
   },
 };
 </script>

@@ -233,6 +233,20 @@ export const LabelPreview = styled('div', labelStyle)`
     props.label ? `${props.label.backgroundColor}` : 'none'};
 `;
 
+export const issueLabel = styled('div', labelStyle)`
+  margin-left: 4px;
+  height: 20px;
+  padding: 0.15em 4px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 15px;
+  border-radius: 2px;
+  box-shadow: inset 0 -1px 0 rgba(27, 31, 35, 0.12);
+  color: ${props => (props.label ? `${props.label.textColor}` : 'none')};
+  background-color: ${props =>
+    props.label ? `${props.label.backgroundColor}` : 'none'};
+`;
+
 const changeLabelStyle = { randomStyle: Object };
 
 export const changeLabelPreview = styled('div', changeLabelStyle)`
@@ -280,6 +294,20 @@ export const IssueListWrap = styled.div`
   background-color: #fff;
   font-size: 12px;
   color: #586069;
+`;
+
+export const issueListContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  background-color: #fff;
+  font-size: 12px;
+  color: #586069;
+  border: 1px solid #d1d5da;
+  box-sizing: border-box;
+  border-top: none;
+  padding: 8px 5px;
 `;
 
 export const InnerListWrap = styled.div`
@@ -638,4 +666,61 @@ export const SelectWrapper = styled.div`
     vertical-align: middle;
     width: 520px;
   }
+`;
+
+export const LabelWrap = styled.div`
+  display: inline-block;
+`;
+
+export const CreateIssueWrap = styled.div`
+  position: relative;
+  border: 1px solid #d1d5da;
+  width: 670px;
+  height: 385px;
+  margin-left: 20px;
+  input {
+    margin-left: 10px;
+    margin-top: 10px;
+    border: 1px solid #d1d5da;
+    width: 95%;
+    height: 34px;
+    text-indent: 10px;
+  }
+  :before {
+    transform: rotate(45deg);
+    position: absolute;
+    top: 15px;
+    width: 15px;
+    height: 15px;
+    content: '';
+    border-left: 1px solid #d1d5da;
+    border-bottom: 1px solid #d1d5da;
+    left: -8px;
+    z-index: 10;
+    background: white;
+  }
+`;
+
+export const WriteContainer = styled.div`
+  width: 100%;
+  border-bottom: 1px solid #d1d5da;
+  margin-top: 15px;
+`;
+
+export const WriteBtn = styled.div`
+  margin-bottom: -1px;
+  height: 32px;
+  width: 58px;
+  background: white;
+  margin-left: 10px;
+  border: 1px solid #d1d5da;
+  border-bottom: none;
+  text-align: center;
+  padding: 8px 8px;
+  color: #24292e;
+  background-color: #fff;
+  border-color: #d1d5da;
+  border-radius: 3px 3px 0 0;
+  font-size: 12px;
+  box-sizing: border-box;
 `;
