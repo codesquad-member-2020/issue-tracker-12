@@ -233,6 +233,20 @@ export const LabelPreview = styled('div', labelStyle)`
     props.label ? `${props.label.backgroundColor}` : 'none'};
 `;
 
+export const issueLabel = styled('div', labelStyle)`
+  margin-left: 4px;
+  height: 20px;
+  padding: 0.15em 4px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 15px;
+  border-radius: 2px;
+  box-shadow: inset 0 -1px 0 rgba(27, 31, 35, 0.12);
+  color: ${props => (props.label ? `${props.label.textColor}` : 'none')};
+  background-color: ${props =>
+    props.label ? `${props.label.backgroundColor}` : 'none'};
+`;
+
 const changeLabelStyle = { randomStyle: Object };
 
 export const changeLabelPreview = styled('div', changeLabelStyle)`
@@ -280,6 +294,20 @@ export const IssueListWrap = styled.div`
   background-color: #fff;
   font-size: 12px;
   color: #586069;
+`;
+
+export const issueListContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  background-color: #fff;
+  font-size: 12px;
+  color: #586069;
+  border: 1px solid #d1d5da;
+  box-sizing: border-box;
+  border-top: none;
+  padding: 8px 5px;
 `;
 
 export const InnerListWrap = styled.div`
@@ -638,4 +666,8 @@ export const SelectWrapper = styled.div`
     vertical-align: middle;
     width: 520px;
   }
+`;
+
+export const LabelWrap = styled.div`
+  display: inline-block;
 `;
