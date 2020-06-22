@@ -671,3 +671,56 @@ export const SelectWrapper = styled.div`
 export const LabelWrap = styled.div`
   display: inline-block;
 `;
+
+export const CreateIssueWrap = styled.div`
+  position: relative;
+  border: 1px solid #d1d5da;
+  width: 670px;
+  height: 385px;
+  margin-left: 20px;
+  input {
+    margin-left: 10px;
+    margin-top: 10px;
+    border: 1px solid #d1d5da;
+    width: 95%;
+    height: 34px;
+    text-indent: 10px;
+  }
+  :before {
+    transform: rotate(45deg);
+    position: absolute;
+    top: 15px;
+    width: 15px;
+    height: 15px;
+    content: '';
+    border-left: 1px solid #d1d5da;
+    border-bottom: 1px solid #d1d5da;
+    left: -8px;
+    z-index: 10;
+    background: white;
+  }
+`;
+
+export const WriteContainer = styled.div`
+  width: 100%;
+  border-bottom: 1px solid #d1d5da;
+  margin-top: 15px;
+`;
+
+export const WriteBtn = styled.div`
+  margin-bottom: -1px;
+  height: 32px;
+  width: 58px;
+  background: white;
+  margin-left: 10px;
+  border: 1px solid #d1d5da;
+  border-bottom: none;
+  text-align: center;
+  padding: 8px 8px;
+  color: #24292e;
+  background-color: #fff;
+  border-color: #d1d5da;
+  border-radius: 3px 3px 0 0;
+  font-size: 12px;
+  box-sizing: border-box;
+`;
