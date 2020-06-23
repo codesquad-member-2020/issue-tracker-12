@@ -242,7 +242,7 @@ public class IssueService {
     }
 
     @Transactional(readOnly = true)
-    public List<Issue> viewFiltered(Status status, String author) {
-        return issueQueryRepository.findFilteredIssue(status, author);
+    public List<Issue> viewFiltered(Status status, String author, String labelName) {
+        return issueQueryRepository.findFilteredIssue(status, author, labelName);
     }
 }
