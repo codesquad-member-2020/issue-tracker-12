@@ -38,18 +38,10 @@ public class IssueService {
     private final UserRepository userRepository;
     private final LabelRepository labelRepository;
     private final MilestoneRepository milestoneRepository;
-
     private final IssueQueryRepository issueQueryRepository;
 
     @Transactional(readOnly = true)
-    public List<IssueResponse> viewAllIssue() {
-        return issueRepository.findAllByStatus(Status.OPEN).stream()
-            .map(issue -> IssueResponse.of(issue))
-            .collect(Collectors.toList());
-    }
-
-    @Transactional(readOnly = true)
-    public ResultResponse viewAll() {
+    public ResultResponse viewAll(Status status) {
         List<IssueResponse> issueResponses = getIssueResponses();
         ResultDto issue = new ResultDto(issueResponses.size(), issueResponses);
         List<UserResponse> userResponses = getUserResponses();
@@ -215,16 +207,6 @@ public class IssueService {
     private Issue findIssue(Long issueId) {
         return issueRepository.findOne(issueId)
             .orElseThrow(() -> new DataNotFoundException("Issue is not exist"));
-    }
-
-    private User findUser(Long userId) {
-        return userRepository.findOne(userId)
-            .orElseThrow(() -> new DataNotFoundException("User is not exist"));
-    }
-
-    private Label findLabel(Long labelId) {
-        return labelRepository.findOne(labelId)
-            .orElseThrow(() -> new DataNotFoundException("Label is not exist"));
     }
 
     private Milestone findMilestone(Long milestoneId) {
