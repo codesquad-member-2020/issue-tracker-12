@@ -25,6 +25,7 @@ import dev.codesquad.issuetracker.web.dto.ResultResponse;
 import dev.codesquad.issuetracker.web.dto.ResultDto;
 import dev.codesquad.issuetracker.web.dto.user.UserResponse;
 import java.util.List;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -241,10 +242,17 @@ public class IssueService {
             .orElseThrow(() -> new DataNotFoundException("Milestone is not exist"));
     }
 
+    /**
+     * query 최적화 필요
+     */
     @Transactional(readOnly = true)
-    public List<Issue> viewFiltered(FilterParam filterParam) {
-        return issueQueryRepository.findFilteredIssue(
+    public ResultDto viewFiltered(FilterParam filterParam) {
+        List<Issue> issues = issueQueryRepository.findFilteredIssue(
             filterParam.getStatus(), filterParam.getAuthor(), filterParam.getLabel(),
             filterParam.getMilestone(), filterParam.getAssignee(), filterParam.getCommentAuthor());
+        List<IssueResponse> issueResponses = issues.stream()
+            .map(issue -> IssueResponse.of(issue))
+            .collect(Collectors.toList());
+        return new ResultDto(issueResponses.size(), issueResponses);
     }
 }

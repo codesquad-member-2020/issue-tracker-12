@@ -3,12 +3,14 @@ package dev.codesquad.issuetracker.web.controller;
 import dev.codesquad.issuetracker.domain.Status;
 import dev.codesquad.issuetracker.domain.label.Label;
 import dev.codesquad.issuetracker.service.IssueService;
+import dev.codesquad.issuetracker.web.dto.ResultDto;
 import dev.codesquad.issuetracker.web.dto.ResultResponse;
 import dev.codesquad.issuetracker.web.dto.issue.CommentRequest;
 import dev.codesquad.issuetracker.web.dto.issue.CommentResponse;
 import dev.codesquad.issuetracker.web.dto.issue.IssueCreateResponse;
 import dev.codesquad.issuetracker.web.dto.issue.IssueDetailResponse;
 import dev.codesquad.issuetracker.web.dto.issue.IssueRequest;
+import dev.codesquad.issuetracker.web.dto.issue.IssueResponse;
 import dev.codesquad.issuetracker.web.dto.issue.StatusRequest;
 import dev.codesquad.issuetracker.web.dto.issue.FilterParam;
 import dev.codesquad.issuetracker.web.dto.milestone.MilestoneDto;
@@ -50,7 +52,7 @@ public class IssueController {
     }
 
     @PutMapping("/status")
-    public ResponseEntity updateStatuses(@RequestBody StatusRequest statusRequest) {
+    public ResponseEntity<IssueResponse> updateStatuses(@RequestBody StatusRequest statusRequest) {
         return new ResponseEntity(
             issueService.updateStatuses(statusRequest.getIds(), statusRequest.getStatus()),
             HttpStatus.OK);
@@ -116,7 +118,7 @@ public class IssueController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity viewFilteredIssue(FilterParam filterParam) {
+    public ResponseEntity<ResultDto> viewFilteredIssue(FilterParam filterParam) {
         return new ResponseEntity(issueService.viewFiltered(filterParam), HttpStatus.OK);
     }
 }
