@@ -58,4 +58,10 @@ public class Milestone {
             .dueDate(dueDate)
             .build();
     }
+
+    public void remove(Milestone milestone) {
+        for (Issue issue : issues) {
+            issue.removeMilestone(milestone);
+        }
+    }
 }
