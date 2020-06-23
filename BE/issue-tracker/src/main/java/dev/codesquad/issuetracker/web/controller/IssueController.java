@@ -119,6 +119,6 @@ public class IssueController {
     public ResponseEntity viewFilteredIssue(FilterParam filterParam) {
         return new ResponseEntity(
             issueService.viewFiltered(filterParam.getStatus(), filterParam.getAuthor(),
-                filterParam.getLabel(), filterParam.getMilestone()), HttpStatus.OK);
+                filterParam.getLabel(), filterParam.getMilestone(), filterParam.getAssignee()), HttpStatus.OK);
     }
 }

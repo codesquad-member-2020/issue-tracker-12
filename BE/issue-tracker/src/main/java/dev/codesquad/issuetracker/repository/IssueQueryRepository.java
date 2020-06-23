@@ -8,7 +8,10 @@ import dev.codesquad.issuetracker.domain.issue.QIssue;
 import dev.codesquad.issuetracker.domain.label.QLabel;
 import dev.codesquad.issuetracker.domain.milestone.QMilestone;
 import dev.codesquad.issuetracker.domain.user.QUser;
+import dev.codesquad.issuetracker.domain.user.User;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
@@ -20,7 +23,8 @@ public class IssueQueryRepository {
     @PersistenceContext
     private EntityManager em;
 
-    public List<Issue> findFilteredIssue(Status status, String author, String labelName, String milestoneTitle) {
+    public List<Issue> findFilteredIssue(Status status, String author, String labelName,
+        String milestoneTitle, String assignee) {
         QIssue issue = QIssue.issue;
         QUser user = QUser.user;
         QLabel label = QLabel.label;
@@ -34,7 +38,8 @@ public class IssueQueryRepository {
             .leftJoin(issue.user, user)
             .leftJoin(issue.labels, label)
             .leftJoin(issue.milestone, milestone)
-            .where(statusEq(status), authorEq(author), labelEq(labelName), milestoneEQ(milestoneTitle))
+            .where(statusEq(status), authorEq(author), labelEq(labelName),
+                milestoneEQ(milestoneTitle), assigneeEq(assignee))
             .limit(100)
             .fetch();
     }
@@ -65,5 +70,21 @@ public class IssueQueryRepository {
             return null;
         }
         return QMilestone.milestone.title.like(milestoneTitle);
+    }
+
+    private BooleanExpression assigneeEq(String assignee) {
+        if (StringUtils.isEmpty(assignee)) {
+            return null;
+        }
+        User user = findByGithubId(assignee);
+        if (Objects.isNull(user)) {
+            return null;
+        }
+        return QIssue.issue.users.contains(user);
+    }
+
+    public User findByGithubId(String githubId) {
+        return em.createQuery("select u from User u where u.githubId = :githubId", User.class)
+            .setParameter("githubId", githubId).getResultList().stream().findFirst().orElse(null);
     }
 }
