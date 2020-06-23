@@ -14,6 +14,7 @@ import dev.codesquad.issuetracker.repository.MilestoneRepository;
 import dev.codesquad.issuetracker.repository.UserRepository;
 import dev.codesquad.issuetracker.web.dto.issue.CommentRequest;
 import dev.codesquad.issuetracker.web.dto.issue.CommentResponse;
+import dev.codesquad.issuetracker.web.dto.issue.FilterParam;
 import dev.codesquad.issuetracker.web.dto.issue.IssueCreateResponse;
 import dev.codesquad.issuetracker.web.dto.issue.IssueDetailResponse;
 import dev.codesquad.issuetracker.web.dto.issue.IssueRequest;
@@ -241,9 +242,9 @@ public class IssueService {
     }
 
     @Transactional(readOnly = true)
-    public List<Issue> viewFiltered(Status status, String author, String labelName,
-        String milestoneTitle, String assignee, String commentAuthor) {
-        return issueQueryRepository
-            .findFilteredIssue(status, author, labelName, milestoneTitle, assignee, commentAuthor);
+    public List<Issue> viewFiltered(FilterParam filterParam) {
+        return issueQueryRepository.findFilteredIssue(
+            filterParam.getStatus(), filterParam.getAuthor(), filterParam.getLabel(),
+            filterParam.getMilestone(), filterParam.getAssignee(), filterParam.getCommentAuthor());
     }
 }
