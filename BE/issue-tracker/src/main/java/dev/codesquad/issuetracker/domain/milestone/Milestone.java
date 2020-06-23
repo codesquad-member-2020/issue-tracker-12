@@ -13,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -31,7 +32,6 @@ public class Milestone {
     @NotNull
     private String title;
 
-    @NotNull
     private String description;
 
     @Enumerated(EnumType.STRING)
@@ -42,4 +42,40 @@ public class Milestone {
 
     @OneToMany(mappedBy = "milestone")
     private List<Issue> issues = new ArrayList<>();
+
+    @Builder
+    protected Milestone(String title, String description, LocalDate dueDate) {
+        this.title = title;
+        this.description = description;
+        this.dueDate = dueDate;
+        this.status = Status.OPEN;
+    }
+
+    public static Milestone of(String title, String description, LocalDate dueDate) {
+        return Milestone.builder()
+            .title(title)
+            .description(description)
+            .dueDate(dueDate)
+            .build();
+    }
+
+    public void remove(Milestone milestone) {
+        for (Issue issue : issues) {
+            issue.removeMilestone(milestone);
+        }
+    }
+
+    public void update(String title, String description, LocalDate dueDate) {
+        this.title = title;
+        this.description = description;
+        this.dueDate = dueDate;
+    }
+
+    public void updateStatus(Status status) {
+        this.status = status;
+    }
+
+    public boolean isEqualsStatus(Status status) {
+        return status.equals(this.status);
+    }
 }

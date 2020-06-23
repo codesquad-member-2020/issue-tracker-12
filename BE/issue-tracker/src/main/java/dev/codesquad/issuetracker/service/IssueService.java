@@ -12,6 +12,7 @@ import dev.codesquad.issuetracker.repository.IssueRepository;
 import dev.codesquad.issuetracker.repository.LabelRepository;
 import dev.codesquad.issuetracker.repository.MilestoneRepository;
 import dev.codesquad.issuetracker.repository.UserRepository;
+import dev.codesquad.issuetracker.web.dto.ResultDtoResponse;
 import dev.codesquad.issuetracker.web.dto.issue.CommentRequest;
 import dev.codesquad.issuetracker.web.dto.issue.CommentResponse;
 import dev.codesquad.issuetracker.web.dto.issue.FilterParam;
@@ -38,20 +39,16 @@ public class IssueService {
     private final UserRepository userRepository;
     private final LabelRepository labelRepository;
     private final MilestoneRepository milestoneRepository;
-
     private final IssueQueryRepository issueQueryRepository;
 
     @Transactional(readOnly = true)
-    public List<IssueResponse> viewAllIssue() {
-        return issueRepository.findAllByStatus(Status.OPEN).stream()
-            .map(issue -> IssueResponse.of(issue))
-            .collect(Collectors.toList());
-    }
+    public ResultResponse viewAll(Status status) {
+        List<Issue> issues = getAllIssues();
+        int open = (int) issues.stream().filter(issue -> issue.isEqualsStatus(Status.OPEN)).count();
+        int close = (int) issues.stream().filter(issue -> issue.isEqualsStatus(Status.CLOSE)).count();
+        List<IssueResponse> issueResponses = getIssueResponses(issues, status);
+        ResultDtoResponse issue = new ResultDtoResponse(open, close, issueResponses.size(), issueResponses);
 
-    @Transactional(readOnly = true)
-    public ResultResponse viewAll() {
-        List<IssueResponse> issueResponses = getIssueResponses();
-        ResultDto issue = new ResultDto(issueResponses.size(), issueResponses);
         List<UserResponse> userResponses = getUserResponses();
         ResultDto user = new ResultDto(userResponses.size(), userResponses);
         List<Label> labels = getLabels();
@@ -93,10 +90,8 @@ public class IssueService {
     }
 
     @Transactional(readOnly = true)
-    public List<IssueResponse> getIssueResponses() {
-        return issueRepository.findAllByStatus(Status.OPEN).stream()
-            .map(issue -> IssueResponse.of(issue))
-            .collect(Collectors.toList());
+    public List<Issue> getAllIssues() {
+        return issueRepository.findAll();
     }
 
     @Transactional(readOnly = true)
@@ -217,22 +212,19 @@ public class IssueService {
             .orElseThrow(() -> new DataNotFoundException("Issue is not exist"));
     }
 
-    private User findUser(Long userId) {
-        return userRepository.findOne(userId)
-            .orElseThrow(() -> new DataNotFoundException("User is not exist"));
-    }
-
-    private Label findLabel(Long labelId) {
-        return labelRepository.findOne(labelId)
-            .orElseThrow(() -> new DataNotFoundException("Label is not exist"));
-    }
-
     private Milestone findMilestone(Long milestoneId) {
         if (milestoneId == -1) {
             return null;
         }
         return milestoneRepository.findOne(milestoneId)
             .orElseThrow(() -> new DataNotFoundException("Milestone is not exist"));
+    }
+
+    private List<IssueResponse> getIssueResponses(List<Issue> issues, Status status) {
+        return issues.stream()
+            .filter(issue -> issue.isEqualsStatus(status))
+            .map(issue -> IssueResponse.of(issue))
+            .collect(Collectors.toList());
     }
 
     /**

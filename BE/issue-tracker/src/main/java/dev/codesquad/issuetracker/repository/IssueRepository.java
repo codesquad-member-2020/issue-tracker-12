@@ -30,7 +30,12 @@ public class IssueRepository {
     }
 
     public List<Issue> findAll() {
-        return em.createQuery("select i from Issue i", Issue.class).getResultList();
+        final int PAGE_SIZE = 30;
+        return em.createQuery("select distinct i from Issue i"
+            + " left outer join fetch i.user u"
+            + " left outer join fetch i.milestone m", Issue.class)
+            .setMaxResults(PAGE_SIZE)
+            .getResultList();
     }
 
     public List<Issue> findAllByStatus(Status status) {
