@@ -11,4 +11,5 @@ public class FilterParam {
     private String label;
     private String milestone;
     private String assignee;
+    private String commentAuthor;
 }

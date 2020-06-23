@@ -161,7 +161,6 @@ public class IssueService {
     }
 
     /**
-     *
      * if milestone null -> response dto 에서 분기 처리
      */
     @Transactional
@@ -242,7 +241,9 @@ public class IssueService {
     }
 
     @Transactional(readOnly = true)
-    public List<Issue> viewFiltered(Status status, String author, String labelName, String milestoneTitle, String assignee) {
-        return issueQueryRepository.findFilteredIssue(status, author, labelName, milestoneTitle, assignee);
+    public List<Issue> viewFiltered(Status status, String author, String labelName,
+        String milestoneTitle, String assignee, String commentAuthor) {
+        return issueQueryRepository
+            .findFilteredIssue(status, author, labelName, milestoneTitle, assignee, commentAuthor);
     }
 }
