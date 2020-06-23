@@ -20,7 +20,7 @@ public class IssueQueryRepository {
     @PersistenceContext
     private EntityManager em;
 
-    public List<Issue> findFilteredIssue(Status status, String author, String labelName) {
+    public List<Issue> findFilteredIssue(Status status, String author, String labelName, String milestoneTitle) {
         QIssue issue = QIssue.issue;
         QUser user = QUser.user;
         QLabel label = QLabel.label;
@@ -29,11 +29,12 @@ public class IssueQueryRepository {
 
         return query
             .select(issue)
+            .distinct()
             .from(issue)
-            .join(issue.user, user)
-            .join(issue.labels, label)
-            .join(issue.milestone, milestone)
-            .where(statusEq(status), authorEq(author), labelEq(labelName))
+            .leftJoin(issue.user, user)
+            .leftJoin(issue.labels, label)
+            .leftJoin(issue.milestone, milestone)
+            .where(statusEq(status), authorEq(author), labelEq(labelName), milestoneEQ(milestoneTitle))
             .limit(100)
             .fetch();
     }
@@ -57,5 +58,12 @@ public class IssueQueryRepository {
             return null;
         }
         return QLabel.label.name.like(labelName);
+    }
+
+    private BooleanExpression milestoneEQ(String milestoneTitle) {
+        if (StringUtils.isEmpty(milestoneTitle)) {
+            return null;
+        }
+        return QMilestone.milestone.title.like(milestoneTitle);
     }
 }

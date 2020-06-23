@@ -9,5 +9,6 @@ public class FilterParam {
     private Status status;
     private String author;
     private String label;
+    private String milestone;
     private String assignee;
 }

@@ -118,7 +118,7 @@ public class IssueController {
     @GetMapping("/search")
     public ResponseEntity viewFilteredIssue(FilterParam filterParam) {
         return new ResponseEntity(
-            issueService.viewFiltered(filterParam.getStatus(), filterParam.getAuthor(), filterParam.getLabel()),
-            HttpStatus.OK);
+            issueService.viewFiltered(filterParam.getStatus(), filterParam.getAuthor(),
+                filterParam.getLabel(), filterParam.getMilestone()), HttpStatus.OK);
     }
 }
