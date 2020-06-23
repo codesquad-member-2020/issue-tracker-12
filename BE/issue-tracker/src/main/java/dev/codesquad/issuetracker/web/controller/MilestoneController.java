@@ -1,5 +1,6 @@
 package dev.codesquad.issuetracker.web.controller;
 
+import dev.codesquad.issuetracker.domain.Status;
 import dev.codesquad.issuetracker.service.MilestoneService;
 import dev.codesquad.issuetracker.web.dto.ResultDto;
 import dev.codesquad.issuetracker.web.dto.milestone.MilestoneDto;
@@ -44,5 +45,10 @@ public class MilestoneController {
     public ResponseEntity<MilestoneDto> updateMilestone(@PathVariable Long id,
         @RequestBody @Valid MilestoneRequest milestoneRequest) {
         return new ResponseEntity(milestoneService.update(id, milestoneRequest), HttpStatus.OK);
+    }
+
+    @PutMapping("/{id}/status")
+    public ResponseEntity updateStatus(@PathVariable Long id, @RequestBody Status status) {
+        return new ResponseEntity(milestoneService.updateStatus(id, status), HttpStatus.OK);
     }
 }

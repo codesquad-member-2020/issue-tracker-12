@@ -70,4 +70,8 @@ public class Milestone {
         this.description = description;
         this.dueDate = dueDate;
     }
+
+    public void updateStatus(Status status) {
+        this.status = status;
+    }
 }

@@ -51,6 +51,13 @@ public class MilestoneService {
         return MilestoneDto.of(milestone);
     }
 
+    @Transactional
+    public Status updateStatus(Long id, Status status) {
+        Milestone milestone = findMilestone(id);
+        milestone.updateStatus(status);
+        return milestone.getStatus();
+    }
+
     @Transactional(readOnly = true)
     public List<MilestoneDto> getMilestoneDto() {
         return milestoneRepository.findAllByStatus(Status.OPEN).stream()
@@ -59,7 +66,7 @@ public class MilestoneService {
     }
 
     @Transactional(readOnly = true)
-    private Milestone findMilestone(Long id) {
+    public Milestone findMilestone(Long id) {
         return milestoneRepository.findOne(id)
             .orElseThrow(() -> new DataNotFoundException("Milestone is not exist"));
     }
