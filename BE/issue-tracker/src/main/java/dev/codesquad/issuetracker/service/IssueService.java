@@ -94,20 +94,6 @@ public class IssueService {
         return issueRepository.findAll();
     }
 
-    private List<IssueResponse> getIssueResponses(List<Issue> issues, Status status) {
-        return issues.stream()
-            .filter(issue -> issue.isEqualsStatus(status))
-            .map(issue -> IssueResponse.of(issue))
-            .collect(Collectors.toList());
-    }
-
-    @Transactional(readOnly = true)
-    public List<IssueResponse> getIssueResponsesByStatus(Status status) {
-        return issueRepository.findAllByStatus(status).stream()
-            .map(issue -> IssueResponse.of(issue))
-            .collect(Collectors.toList());
-    }
-
     @Transactional(readOnly = true)
     public List<Label> getLabels() {
         return labelRepository.findAll();
@@ -232,6 +218,13 @@ public class IssueService {
         }
         return milestoneRepository.findOne(milestoneId)
             .orElseThrow(() -> new DataNotFoundException("Milestone is not exist"));
+    }
+
+    private List<IssueResponse> getIssueResponses(List<Issue> issues, Status status) {
+        return issues.stream()
+            .filter(issue -> issue.isEqualsStatus(status))
+            .map(issue -> IssueResponse.of(issue))
+            .collect(Collectors.toList());
     }
 
     /**

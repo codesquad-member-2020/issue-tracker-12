@@ -26,11 +26,8 @@ public class MilestoneService {
             .filter(milestone -> milestone.isEqualsStatus(Status.OPEN)).count();
         int close = (int) milestones.stream()
             .filter(milestone -> milestone.isEqualsStatus(Status.CLOSE)).count();
+        List<MilestoneDto> milestoneDtos = getMilestoneDto(milestones, status);
 
-        List<MilestoneDto> milestoneDtos = milestones.stream()
-            .filter(milestone -> milestone.isEqualsStatus(status))
-            .map(milestone -> MilestoneDto.of(milestone))
-            .collect(Collectors.toList());
         return new ResultDtoResponse(open, close, milestones.size(), milestoneDtos);
     }
 
@@ -81,6 +78,13 @@ public class MilestoneService {
     @Transactional(readOnly = true)
     public List<MilestoneDto> getMilestoneDto(Status status) {
         return milestoneRepository.findAllByStatus(status).stream()
+            .map(milestone -> MilestoneDto.of(milestone))
+            .collect(Collectors.toList());
+    }
+
+    private List<MilestoneDto> getMilestoneDto(List<Milestone> milestones, Status status) {
+        return milestones.stream()
+            .filter(milestone -> milestone.isEqualsStatus(status))
             .map(milestone -> MilestoneDto.of(milestone))
             .collect(Collectors.toList());
     }
