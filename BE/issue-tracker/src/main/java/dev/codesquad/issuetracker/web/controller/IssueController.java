@@ -10,6 +10,7 @@ import dev.codesquad.issuetracker.web.dto.issue.IssueCreateResponse;
 import dev.codesquad.issuetracker.web.dto.issue.IssueDetailResponse;
 import dev.codesquad.issuetracker.web.dto.issue.IssueRequest;
 import dev.codesquad.issuetracker.web.dto.issue.StatusRequest;
+import dev.codesquad.issuetracker.web.dto.issue.FilterParam;
 import dev.codesquad.issuetracker.web.dto.milestone.MilestoneDto;
 import dev.codesquad.issuetracker.web.dto.user.UserResponse;
 import java.util.List;
@@ -25,7 +26,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -116,9 +116,9 @@ public class IssueController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity viewFilteredIssue(
-        @RequestParam(value = "status", required = false) Status status,
-        @RequestParam(value = "author", required = false) String author) {
-        return new ResponseEntity(issueService.viewFiltered(status, author), HttpStatus.OK);
+    public ResponseEntity viewFilteredIssue(FilterParam filterParam) {
+        return new ResponseEntity(
+            issueService.viewFiltered(filterParam.getStatus(), filterParam.getAuthor()),
+            HttpStatus.OK);
     }
 }
