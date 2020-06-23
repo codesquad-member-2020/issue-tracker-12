@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -112,5 +113,12 @@ public class IssueController {
     public ResponseEntity<List<CommentResponse>> removeComment(@PathVariable Long id,
         @RequestBody Long commentId) {
         return new ResponseEntity((issueService.removeComment(id, commentId)), HttpStatus.OK);
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity viewFilteredIssue(
+        @RequestParam(value = "status", required = false) Status status,
+        @RequestParam(value = "author", required = false) String author) {
+        return new ResponseEntity(issueService.viewFiltered(status, author), HttpStatus.OK);
     }
 }

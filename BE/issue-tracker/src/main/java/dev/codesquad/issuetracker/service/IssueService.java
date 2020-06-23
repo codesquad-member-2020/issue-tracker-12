@@ -7,6 +7,7 @@ import dev.codesquad.issuetracker.domain.issue.Issue;
 import dev.codesquad.issuetracker.domain.label.Label;
 import dev.codesquad.issuetracker.domain.milestone.Milestone;
 import dev.codesquad.issuetracker.domain.user.User;
+import dev.codesquad.issuetracker.repository.IssueQueryRepository;
 import dev.codesquad.issuetracker.repository.IssueRepository;
 import dev.codesquad.issuetracker.repository.LabelRepository;
 import dev.codesquad.issuetracker.repository.MilestoneRepository;
@@ -36,6 +37,8 @@ public class IssueService {
     private final UserRepository userRepository;
     private final LabelRepository labelRepository;
     private final MilestoneRepository milestoneRepository;
+
+    private final IssueQueryRepository issueQueryRepository;
 
     @Transactional(readOnly = true)
     public List<IssueResponse> viewAllIssue() {
@@ -236,5 +239,10 @@ public class IssueService {
         }
         return milestoneRepository.findOne(milestoneId)
             .orElseThrow(() -> new DataNotFoundException("Milestone is not exist"));
+    }
+
+    @Transactional(readOnly = true)
+    public List<Issue> viewFiltered(Status status, String author) {
+        return issueQueryRepository.findFilteredIssue(status, author);
     }
 }
