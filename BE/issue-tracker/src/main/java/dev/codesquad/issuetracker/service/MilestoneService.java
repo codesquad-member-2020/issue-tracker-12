@@ -1,5 +1,6 @@
 package dev.codesquad.issuetracker.service;
 
+import dev.codesquad.issuetracker.common.exception.DataNotFoundException;
 import dev.codesquad.issuetracker.domain.Status;
 import dev.codesquad.issuetracker.domain.milestone.Milestone;
 import dev.codesquad.issuetracker.repository.MilestoneRepository;
@@ -33,10 +34,22 @@ public class MilestoneService {
         return MilestoneDto.of(milestone);
     }
 
+    @Transactional
+    public MilestoneDto remove(Long id) {
+        Milestone milestone = findMilestone(id);
+        milestone.remove(milestone);
+        milestoneRepository.remove(milestone);
+        return MilestoneDto.of(milestone);
+    }
+
     @Transactional(readOnly = true)
     public List<MilestoneDto> getMilestoneDto() {
         return milestoneRepository.findAllByStatus(Status.OPEN).stream()
             .map(milestone -> MilestoneDto.of(milestone))
             .collect(Collectors.toList());
+    }
+
+    private Milestone findMilestone(Long id) {
+        return milestoneRepository.findOne(id).orElseThrow(() -> new DataNotFoundException("Milestone is not exist"));
     }
 }

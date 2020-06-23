@@ -33,4 +33,8 @@ public class MilestoneRepository {
     public void save(Milestone milestone) {
         em.persist(milestone);
     }
+
+    public void remove(Milestone milestone) {
+        em.remove(milestone);
+    }
 }
