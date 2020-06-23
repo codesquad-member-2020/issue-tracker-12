@@ -74,4 +74,8 @@ public class Milestone {
     public void updateStatus(Status status) {
         this.status = status;
     }
+
+    public boolean isEqualsStatus(Status status) {
+        return status.equals(this.status);
+    }
 }

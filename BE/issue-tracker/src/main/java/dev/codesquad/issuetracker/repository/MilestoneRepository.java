@@ -1,7 +1,6 @@
 package dev.codesquad.issuetracker.repository;
 
 import dev.codesquad.issuetracker.domain.Status;
-import dev.codesquad.issuetracker.domain.label.Label;
 import dev.codesquad.issuetracker.domain.milestone.Milestone;
 import java.util.List;
 import java.util.Optional;
