@@ -64,4 +64,10 @@ public class Milestone {
             issue.removeMilestone(milestone);
         }
     }
+
+    public void update(String title, String description, LocalDate dueDate) {
+        this.title = title;
+        this.description = description;
+        this.dueDate = dueDate;
+    }
 }

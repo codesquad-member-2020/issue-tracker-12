@@ -42,6 +42,15 @@ public class MilestoneService {
         return MilestoneDto.of(milestone);
     }
 
+    @Transactional
+    public MilestoneDto update(Long id, MilestoneRequest milestoneRequest) {
+        Milestone milestone = findMilestone(id);
+        milestone.update(milestoneRequest.getTitle(), milestoneRequest.getDescription(),
+            milestoneRequest.getDueDate());
+        milestoneRepository.save(milestone);
+        return MilestoneDto.of(milestone);
+    }
+
     @Transactional(readOnly = true)
     public List<MilestoneDto> getMilestoneDto() {
         return milestoneRepository.findAllByStatus(Status.OPEN).stream()
@@ -49,7 +58,9 @@ public class MilestoneService {
             .collect(Collectors.toList());
     }
 
+    @Transactional(readOnly = true)
     private Milestone findMilestone(Long id) {
-        return milestoneRepository.findOne(id).orElseThrow(() -> new DataNotFoundException("Milestone is not exist"));
+        return milestoneRepository.findOne(id)
+            .orElseThrow(() -> new DataNotFoundException("Milestone is not exist"));
     }
 }
