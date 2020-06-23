@@ -3,12 +3,16 @@ package dev.codesquad.issuetracker.web.controller;
 import dev.codesquad.issuetracker.domain.Status;
 import dev.codesquad.issuetracker.domain.label.Label;
 import dev.codesquad.issuetracker.service.IssueService;
+import dev.codesquad.issuetracker.web.dto.ResultDto;
 import dev.codesquad.issuetracker.web.dto.ResultResponse;
 import dev.codesquad.issuetracker.web.dto.issue.CommentRequest;
 import dev.codesquad.issuetracker.web.dto.issue.CommentResponse;
 import dev.codesquad.issuetracker.web.dto.issue.IssueCreateResponse;
 import dev.codesquad.issuetracker.web.dto.issue.IssueDetailResponse;
 import dev.codesquad.issuetracker.web.dto.issue.IssueRequest;
+import dev.codesquad.issuetracker.web.dto.issue.IssueResponse;
+import dev.codesquad.issuetracker.web.dto.issue.StatusRequest;
+import dev.codesquad.issuetracker.web.dto.issue.FilterParam;
 import dev.codesquad.issuetracker.web.dto.milestone.MilestoneDto;
 import dev.codesquad.issuetracker.web.dto.user.UserResponse;
 import java.util.List;
@@ -45,6 +49,13 @@ public class IssueController {
     public ResponseEntity<IssueCreateResponse> createIssue(
         @RequestBody @Valid IssueRequest issueRequest) {
         return new ResponseEntity(issueService.create(issueRequest), HttpStatus.OK);
+    }
+
+    @PutMapping("/status")
+    public ResponseEntity<IssueResponse> updateStatuses(@RequestBody StatusRequest statusRequest) {
+        return new ResponseEntity(
+            issueService.updateStatuses(statusRequest.getIds(), statusRequest.getStatus()),
+            HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
@@ -89,7 +100,8 @@ public class IssueController {
     }
 
     @PostMapping("/{id}/comment")
-    public ResponseEntity<CommentResponse> addComment(@PathVariable Long id, @RequestBody String comment) {
+    public ResponseEntity<CommentResponse> addComment(@PathVariable Long id,
+        @RequestBody String comment) {
         return new ResponseEntity((issueService.addComment(id, comment)), HttpStatus.OK);
     }
 
@@ -103,5 +115,10 @@ public class IssueController {
     public ResponseEntity<List<CommentResponse>> removeComment(@PathVariable Long id,
         @RequestBody Long commentId) {
         return new ResponseEntity((issueService.removeComment(id, commentId)), HttpStatus.OK);
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<ResultDto> viewFilteredIssue(FilterParam filterParam) {
+        return new ResponseEntity(issueService.viewFiltered(filterParam), HttpStatus.OK);
     }
 }

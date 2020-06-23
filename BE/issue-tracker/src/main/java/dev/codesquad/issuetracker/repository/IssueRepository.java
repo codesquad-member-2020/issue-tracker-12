@@ -1,7 +1,9 @@
 package dev.codesquad.issuetracker.repository;
 
+import dev.codesquad.issuetracker.common.exception.DataNotFoundException;
 import dev.codesquad.issuetracker.domain.Status;
 import dev.codesquad.issuetracker.domain.issue.Issue;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import javax.persistence.EntityManager;
@@ -36,5 +38,17 @@ public class IssueRepository {
             .setParameter("status", status)
             .setMaxResults(PAGE_SIZE)
             .getResultList();
+    }
+
+    public List<Issue> findList(List<Long> ids) {
+        List<Issue> issues = new ArrayList<>();
+        if (ids.size() == 0) {
+            return issues;
+        }
+        for (Long id : ids) {
+            Issue issue = findOne(id).orElseThrow(() -> new DataNotFoundException("Issue is not exist"));
+            issues.add(issue);
+        }
+        return issues;
     }
 }
