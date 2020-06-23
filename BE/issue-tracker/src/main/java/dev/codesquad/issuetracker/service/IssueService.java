@@ -25,7 +25,6 @@ import dev.codesquad.issuetracker.web.dto.ResultResponse;
 import dev.codesquad.issuetracker.web.dto.ResultDto;
 import dev.codesquad.issuetracker.web.dto.user.UserResponse;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -49,15 +48,12 @@ public class IssueService {
             .collect(Collectors.toList());
     }
 
-    /**
-     * collection 호출 쿼리 최적화 필요
-     */
     @Transactional(readOnly = true)
     public ResultResponse viewAll() {
-        List<UserResponse> userResponses = getUserResponses();
-        ResultDto user = new ResultDto(userResponses.size(), userResponses);
         List<IssueResponse> issueResponses = getIssueResponses();
         ResultDto issue = new ResultDto(issueResponses.size(), issueResponses);
+        List<UserResponse> userResponses = getUserResponses();
+        ResultDto user = new ResultDto(userResponses.size(), userResponses);
         List<Label> labels = getLabels();
         ResultDto label = new ResultDto(labels.size(), labels);
         List<MilestoneDto> milestones = getMilestoneResponses();
@@ -216,9 +212,6 @@ public class IssueService {
             .collect(Collectors.toList());
     }
 
-    /**
-     * query 최적화 필요
-     */
     private Issue findIssue(Long issueId) {
         return issueRepository.findOne(issueId)
             .orElseThrow(() -> new DataNotFoundException("Issue is not exist"));
@@ -243,7 +236,7 @@ public class IssueService {
     }
 
     /**
-     * query 최적화 필요
+     * QueryDSL query 최적화 필요
      */
     @Transactional(readOnly = true)
     public ResultDto viewFiltered(FilterParam filterParam) {

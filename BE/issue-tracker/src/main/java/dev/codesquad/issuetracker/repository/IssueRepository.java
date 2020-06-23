@@ -21,7 +21,12 @@ public class IssueRepository {
     }
 
     public Optional<Issue> findOne(Long id) {
-        return Optional.ofNullable(em.find(Issue.class, id));
+        return em.createQuery("select distinct i from Issue i"
+            + " left outer join fetch i.user u"
+            + " left outer join fetch i.milestone m"
+            + " where i.id = :id", Issue.class)
+            .setParameter("id", id)
+            .getResultList().stream().findFirst();
     }
 
     public List<Issue> findAll() {
@@ -32,7 +37,6 @@ public class IssueRepository {
         final int PAGE_SIZE = 30;
         return em.createQuery("select distinct i from Issue i"
             + " left outer join fetch i.user u"
-            + " left outer join fetch i.labels l"
             + " left outer join fetch i.milestone m"
             + " where i.status = :status", Issue.class)
             .setParameter("status", status)
