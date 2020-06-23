@@ -12,6 +12,7 @@ import dev.codesquad.issuetracker.repository.IssueRepository;
 import dev.codesquad.issuetracker.repository.LabelRepository;
 import dev.codesquad.issuetracker.repository.MilestoneRepository;
 import dev.codesquad.issuetracker.repository.UserRepository;
+import dev.codesquad.issuetracker.web.dto.ResultDtoResponse;
 import dev.codesquad.issuetracker.web.dto.issue.CommentRequest;
 import dev.codesquad.issuetracker.web.dto.issue.CommentResponse;
 import dev.codesquad.issuetracker.web.dto.issue.FilterParam;
@@ -42,8 +43,12 @@ public class IssueService {
 
     @Transactional(readOnly = true)
     public ResultResponse viewAll(Status status) {
-        List<IssueResponse> issueResponses = getIssueResponses();
-        ResultDto issue = new ResultDto(issueResponses.size(), issueResponses);
+        List<Issue> issues = getAllIssues();
+        int open = (int) issues.stream().filter(issue -> issue.isEqualsStatus(Status.OPEN)).count();
+        int close = (int) issues.stream().filter(issue -> issue.isEqualsStatus(Status.CLOSE)).count();
+        List<IssueResponse> issueResponses = getIssueResponses(issues, status);
+        ResultDtoResponse issue = new ResultDtoResponse(open, close, issueResponses.size(), issueResponses);
+
         List<UserResponse> userResponses = getUserResponses();
         ResultDto user = new ResultDto(userResponses.size(), userResponses);
         List<Label> labels = getLabels();
@@ -85,8 +90,20 @@ public class IssueService {
     }
 
     @Transactional(readOnly = true)
-    public List<IssueResponse> getIssueResponses() {
-        return issueRepository.findAllByStatus(Status.OPEN).stream()
+    public List<Issue> getAllIssues() {
+        return issueRepository.findAll();
+    }
+
+    private List<IssueResponse> getIssueResponses(List<Issue> issues, Status status) {
+        return issues.stream()
+            .filter(issue -> issue.isEqualsStatus(status))
+            .map(issue -> IssueResponse.of(issue))
+            .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public List<IssueResponse> getIssueResponsesByStatus(Status status) {
+        return issueRepository.findAllByStatus(status).stream()
             .map(issue -> IssueResponse.of(issue))
             .collect(Collectors.toList());
     }

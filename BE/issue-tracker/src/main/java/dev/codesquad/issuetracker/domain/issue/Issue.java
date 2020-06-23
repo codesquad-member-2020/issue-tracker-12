@@ -184,4 +184,8 @@ public class Issue {
             this.milestone = null;
         }
     }
+
+    public boolean isEqualsStatus(Status status) {
+        return status.equals(this.status);
+    }
 }
