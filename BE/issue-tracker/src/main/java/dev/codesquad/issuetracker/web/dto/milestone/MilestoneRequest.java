@@ -10,9 +10,6 @@ public class MilestoneRequest {
     @NotNull
     private String title;
 
-    @NotNull
     private String description;
-
-    @NotNull
     private LocalDate dueDate;
 }

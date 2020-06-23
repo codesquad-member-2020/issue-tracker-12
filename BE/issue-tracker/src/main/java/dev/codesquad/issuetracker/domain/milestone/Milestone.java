@@ -32,7 +32,6 @@ public class Milestone {
     @NotNull
     private String title;
 
-    @NotNull
     private String description;
 
     @Enumerated(EnumType.STRING)
