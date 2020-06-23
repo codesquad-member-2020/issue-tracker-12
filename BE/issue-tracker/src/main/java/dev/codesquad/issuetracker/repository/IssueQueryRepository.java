@@ -4,34 +4,32 @@ import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import dev.codesquad.issuetracker.domain.Status;
 import dev.codesquad.issuetracker.domain.issue.Issue;
-import dev.codesquad.issuetracker.domain.issue.QComment;
-import dev.codesquad.issuetracker.domain.issue.QIssue;
-import dev.codesquad.issuetracker.domain.label.QLabel;
-import dev.codesquad.issuetracker.domain.milestone.QMilestone;
-import dev.codesquad.issuetracker.domain.user.QUser;
 import dev.codesquad.issuetracker.domain.user.User;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
+
+import static dev.codesquad.issuetracker.domain.issue.QIssue.*;
+import static dev.codesquad.issuetracker.domain.user.QUser.*;
+import static dev.codesquad.issuetracker.domain.label.QLabel.*;
+import static dev.codesquad.issuetracker.domain.milestone.QMilestone.*;
+import static dev.codesquad.issuetracker.domain.issue.QComment.*;
 
 @Repository
 public class IssueQueryRepository {
 
-    @PersistenceContext
-    private EntityManager em;
+    private final EntityManager em;
+    private final JPAQueryFactory query;
+
+    public IssueQueryRepository(EntityManager em) {
+        this.em = em;
+        this.query = new JPAQueryFactory(em);
+    }
 
     public List<Issue> findFilteredIssue(Status status, String author, String labelName,
         String milestoneTitle, String assignee, String commentAuthor) {
-        QIssue issue = QIssue.issue;
-        QUser user = QUser.user;
-        QLabel label = QLabel.label;
-        QMilestone milestone = QMilestone.milestone;
-        QComment comment = QComment.comment;
-        JPAQueryFactory query = new JPAQueryFactory(em);
-
         return query
             .select(issue)
             .distinct()
@@ -50,28 +48,28 @@ public class IssueQueryRepository {
         if (Objects.isNull(status)) {
             return null;
         }
-        return QIssue.issue.status.eq(status);
+        return issue.status.eq(status);
     }
 
     private BooleanExpression authorEq(String author) {
         if (StringUtils.isEmpty(author)) {
             return null;
         }
-        return QUser.user.githubId.like(author);
+        return user.githubId.like(author);
     }
 
     private BooleanExpression labelEq(String labelName) {
         if (StringUtils.isEmpty(labelName)) {
             return null;
         }
-        return QLabel.label.name.like(labelName);
+        return label.name.like(labelName);
     }
 
     private BooleanExpression milestoneEQ(String milestoneTitle) {
         if (StringUtils.isEmpty(milestoneTitle)) {
             return null;
         }
-        return QMilestone.milestone.title.like(milestoneTitle);
+        return milestone.title.like(milestoneTitle);
     }
 
     private BooleanExpression assigneeEq(String assignee) {
@@ -82,14 +80,14 @@ public class IssueQueryRepository {
         if (Objects.isNull(user)) {
             return null;
         }
-        return QIssue.issue.users.contains(user);
+        return issue.users.contains(user);
     }
 
     private BooleanExpression commentUserEq(String commentAuthor) {
         if (StringUtils.isEmpty(commentAuthor)) {
             return null;
         }
-        return QComment.comment.user.githubId.like(commentAuthor);
+        return comment.user.githubId.like(commentAuthor);
     }
 
     public User findByGithubId(String githubId) {
