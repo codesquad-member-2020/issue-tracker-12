@@ -7,23 +7,29 @@
       <CreateIssueWrap>
         <input type="text" placeholder="Title" />
         <WriteContainer>
-          <WriteBtn>
-            Write
-          </WriteBtn>
+          <WriteBtn>Write</WriteBtn>
         </WriteContainer>
+        <IssueTextArea name="" id="" cols="30" rows="10"></IssueTextArea>
+        <button>test</button>
       </CreateIssueWrap>
     </div>
   </fragment>
 </template>
 
 <script>
-import { CreateIssueWrap, WriteContainer, WriteBtn } from '@/style/styled';
+import {
+  CreateIssueWrap,
+  WriteContainer,
+  WriteBtn,
+  IssueTextArea,
+} from '@/style/styled';
 
 export default {
   components: {
     CreateIssueWrap,
     WriteContainer,
     WriteBtn,
+    IssueTextArea,
   },
 };
 </script>

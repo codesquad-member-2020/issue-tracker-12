@@ -724,3 +724,16 @@ export const WriteBtn = styled.div`
   font-size: 12px;
   box-sizing: border-box;
 `;
+
+export const IssueTextArea = styled.textarea`
+  margin: 10px;
+  border: 1px solid #d1d5da;
+  height: 200px;
+  min-height: 240px;
+  display: block;
+  width: 95%;
+  max-height: 250px;
+  padding: 8px;
+  resize: vertical;
+  background-color: #fafbfc;
+`;
