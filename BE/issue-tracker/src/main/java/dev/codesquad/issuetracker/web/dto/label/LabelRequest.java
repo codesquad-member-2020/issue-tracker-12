@@ -1,9 +1,11 @@
 package dev.codesquad.issuetracker.web.dto.label;
 
 import javax.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
+@AllArgsConstructor
 public class LabelRequest {
 
     @NotNull
