@@ -28,4 +28,12 @@ public class MilestoneRepository {
     public Optional<Milestone> findOne(Long id) {
         return Optional.ofNullable(em.find(Milestone.class, id));
     }
+
+    public void save(Milestone milestone) {
+        em.persist(milestone);
+    }
+
+    public void remove(Milestone milestone) {
+        em.remove(milestone);
+    }
 }

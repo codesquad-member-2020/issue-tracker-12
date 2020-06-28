@@ -3,12 +3,16 @@ package dev.codesquad.issuetracker.web.controller;
 import dev.codesquad.issuetracker.domain.Status;
 import dev.codesquad.issuetracker.domain.label.Label;
 import dev.codesquad.issuetracker.service.IssueService;
+import dev.codesquad.issuetracker.web.dto.ResultDto;
 import dev.codesquad.issuetracker.web.dto.ResultResponse;
 import dev.codesquad.issuetracker.web.dto.issue.CommentRequest;
 import dev.codesquad.issuetracker.web.dto.issue.CommentResponse;
 import dev.codesquad.issuetracker.web.dto.issue.IssueCreateResponse;
 import dev.codesquad.issuetracker.web.dto.issue.IssueDetailResponse;
 import dev.codesquad.issuetracker.web.dto.issue.IssueRequest;
+import dev.codesquad.issuetracker.web.dto.issue.IssueResponse;
+import dev.codesquad.issuetracker.web.dto.issue.StatusRequest;
+import dev.codesquad.issuetracker.web.dto.issue.FilterParam;
 import dev.codesquad.issuetracker.web.dto.milestone.MilestoneDto;
 import dev.codesquad.issuetracker.web.dto.user.UserResponse;
 import java.util.List;
@@ -18,12 +22,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -34,8 +38,9 @@ public class IssueController {
     private final IssueService issueService;
 
     @GetMapping("")
-    public ResponseEntity<ResultResponse> viewIssues() {
-        return new ResponseEntity(issueService.viewAll(), HttpStatus.OK);
+    public ResponseEntity<ResultResponse> viewIssues(
+        @RequestParam(value = "status", required = false, defaultValue = "OPEN") Status status) {
+        return new ResponseEntity(issueService.viewAll(status), HttpStatus.OK);
     }
 
     /**
@@ -45,6 +50,13 @@ public class IssueController {
     public ResponseEntity<IssueCreateResponse> createIssue(
         @RequestBody @Valid IssueRequest issueRequest) {
         return new ResponseEntity(issueService.create(issueRequest), HttpStatus.OK);
+    }
+
+    @PutMapping("/status")
+    public ResponseEntity<IssueResponse> updateStatuses(@RequestBody StatusRequest statusRequest) {
+        return new ResponseEntity(
+            issueService.updateStatuses(statusRequest.getIds(), statusRequest.getStatus()),
+            HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
@@ -89,7 +101,8 @@ public class IssueController {
     }
 
     @PostMapping("/{id}/comment")
-    public ResponseEntity<CommentResponse> addComment(@PathVariable Long id, @RequestBody String comment) {
+    public ResponseEntity<CommentResponse> addComment(@PathVariable Long id,
+        @RequestBody String comment) {
         return new ResponseEntity((issueService.addComment(id, comment)), HttpStatus.OK);
     }
 
@@ -103,5 +116,10 @@ public class IssueController {
     public ResponseEntity<List<CommentResponse>> removeComment(@PathVariable Long id,
         @RequestBody Long commentId) {
         return new ResponseEntity((issueService.removeComment(id, commentId)), HttpStatus.OK);
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<ResultDto> viewFilteredIssue(FilterParam filterParam) {
+        return new ResponseEntity(issueService.viewFiltered(filterParam), HttpStatus.OK);
     }
 }

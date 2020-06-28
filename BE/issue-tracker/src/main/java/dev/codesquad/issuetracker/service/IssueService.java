@@ -7,12 +7,15 @@ import dev.codesquad.issuetracker.domain.issue.Issue;
 import dev.codesquad.issuetracker.domain.label.Label;
 import dev.codesquad.issuetracker.domain.milestone.Milestone;
 import dev.codesquad.issuetracker.domain.user.User;
+import dev.codesquad.issuetracker.repository.IssueQueryRepository;
 import dev.codesquad.issuetracker.repository.IssueRepository;
 import dev.codesquad.issuetracker.repository.LabelRepository;
 import dev.codesquad.issuetracker.repository.MilestoneRepository;
 import dev.codesquad.issuetracker.repository.UserRepository;
+import dev.codesquad.issuetracker.web.dto.ResultDtoResponse;
 import dev.codesquad.issuetracker.web.dto.issue.CommentRequest;
 import dev.codesquad.issuetracker.web.dto.issue.CommentResponse;
+import dev.codesquad.issuetracker.web.dto.issue.FilterParam;
 import dev.codesquad.issuetracker.web.dto.issue.IssueCreateResponse;
 import dev.codesquad.issuetracker.web.dto.issue.IssueDetailResponse;
 import dev.codesquad.issuetracker.web.dto.issue.IssueRequest;
@@ -23,7 +26,6 @@ import dev.codesquad.issuetracker.web.dto.ResultResponse;
 import dev.codesquad.issuetracker.web.dto.ResultDto;
 import dev.codesquad.issuetracker.web.dto.user.UserResponse;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -37,23 +39,18 @@ public class IssueService {
     private final UserRepository userRepository;
     private final LabelRepository labelRepository;
     private final MilestoneRepository milestoneRepository;
+    private final IssueQueryRepository issueQueryRepository;
 
     @Transactional(readOnly = true)
-    public List<IssueResponse> viewAllIssue() {
-        return issueRepository.findAllByStatus(Status.OPEN).stream()
-            .map(issue -> IssueResponse.of(issue))
-            .collect(Collectors.toList());
-    }
+    public ResultResponse viewAll(Status status) {
+        List<Issue> issues = getAllIssues();
+        int open = (int) issues.stream().filter(issue -> issue.isEqualsStatus(Status.OPEN)).count();
+        int close = (int) issues.stream().filter(issue -> issue.isEqualsStatus(Status.CLOSE)).count();
+        List<IssueResponse> issueResponses = getIssueResponses(issues, status);
+        ResultDtoResponse issue = new ResultDtoResponse(open, close, issueResponses.size(), issueResponses);
 
-    /**
-     * collection 호출 쿼리 최적화 필요
-     */
-    @Transactional(readOnly = true)
-    public ResultResponse viewAll() {
         List<UserResponse> userResponses = getUserResponses();
         ResultDto user = new ResultDto(userResponses.size(), userResponses);
-        List<IssueResponse> issueResponses = getIssueResponses();
-        ResultDto issue = new ResultDto(issueResponses.size(), issueResponses);
         List<Label> labels = getLabels();
         ResultDto label = new ResultDto(labels.size(), labels);
         List<MilestoneDto> milestones = getMilestoneResponses();
@@ -93,10 +90,8 @@ public class IssueService {
     }
 
     @Transactional(readOnly = true)
-    public List<IssueResponse> getIssueResponses() {
-        return issueRepository.findAllByStatus(Status.OPEN).stream()
-            .map(issue -> IssueResponse.of(issue))
-            .collect(Collectors.toList());
+    public List<Issue> getAllIssues() {
+        return issueRepository.findAll();
     }
 
     @Transactional(readOnly = true)
@@ -159,7 +154,6 @@ public class IssueService {
     }
 
     /**
-     *
      * if milestone null -> response dto 에서 분기 처리
      */
     @Transactional
@@ -204,22 +198,18 @@ public class IssueService {
             .collect(Collectors.toList());
     }
 
-    /**
-     * query 최적화 필요
-     */
+    @Transactional
+    public List<IssueResponse> updateStatuses(List<Long> ids, Status status) {
+        List<Issue> issues = issueRepository.findList(ids);
+        issues.stream().forEach(issue -> issue.updateStatus(status));
+        return issues.stream()
+            .map(issue -> IssueResponse.of(issue))
+            .collect(Collectors.toList());
+    }
+
     private Issue findIssue(Long issueId) {
         return issueRepository.findOne(issueId)
             .orElseThrow(() -> new DataNotFoundException("Issue is not exist"));
-    }
-
-    private User findUser(Long userId) {
-        return userRepository.findOne(userId)
-            .orElseThrow(() -> new DataNotFoundException("User is not exist"));
-    }
-
-    private Label findLabel(Long labelId) {
-        return labelRepository.findOne(labelId)
-            .orElseThrow(() -> new DataNotFoundException("Label is not exist"));
     }
 
     private Milestone findMilestone(Long milestoneId) {
@@ -228,5 +218,26 @@ public class IssueService {
         }
         return milestoneRepository.findOne(milestoneId)
             .orElseThrow(() -> new DataNotFoundException("Milestone is not exist"));
+    }
+
+    private List<IssueResponse> getIssueResponses(List<Issue> issues, Status status) {
+        return issues.stream()
+            .filter(issue -> issue.isEqualsStatus(status))
+            .map(issue -> IssueResponse.of(issue))
+            .collect(Collectors.toList());
+    }
+
+    /**
+     * QueryDSL query 최적화 필요
+     */
+    @Transactional(readOnly = true)
+    public ResultDto viewFiltered(FilterParam filterParam) {
+        List<Issue> issues = issueQueryRepository.findFilteredIssue(
+            filterParam.getStatus(), filterParam.getAuthor(), filterParam.getLabel(),
+            filterParam.getMilestone(), filterParam.getAssignee(), filterParam.getCommentAuthor());
+        List<IssueResponse> issueResponses = issues.stream()
+            .map(issue -> IssueResponse.of(issue))
+            .collect(Collectors.toList());
+        return new ResultDto(issueResponses.size(), issueResponses);
     }
 }

@@ -9,7 +9,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -174,5 +173,19 @@ public class Issue {
                 break;
             }
         }
+    }
+
+    public boolean isEqualsMilestone(Milestone milestone) {
+        return milestone.equals(this.milestone);
+    }
+
+    public void removeMilestone(Milestone milestone) {
+        if (isEqualsMilestone(milestone)) {
+            this.milestone = null;
+        }
+    }
+
+    public boolean isEqualsStatus(Status status) {
+        return status.equals(this.status);
     }
 }
